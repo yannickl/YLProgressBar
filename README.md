@@ -8,7 +8,7 @@ It has been implemented using the Core Graphics framework, it is so resolution a
   
 License
 ====================
-Copyright 2012 Yannick Loriot.
+Copyright 2012 Yannick Loriot.<br />
 http://yannickloriot.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
