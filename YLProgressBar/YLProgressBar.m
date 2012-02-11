@@ -240,11 +240,10 @@
         CGContextSetBlendMode(context, kCGBlendModeOverlay);
         CGContextBeginTransparencyLayerWithRect(context, CGRectMake(rect.origin.x, rect.origin.y + floorf(rect.size.height) / 2, rect.size.width, floorf(rect.size.height) / 2), NULL);
         {
-            const CGFloat glossGradientComponents[] = {1.0f, 1.0f, 1.0f, 0.47f,
-                0.0f, 0.0f, 0.0f, 0.0f};
+            const CGFloat glossGradientComponents[] = {1.0f, 1.0f, 1.0f, 0.47f, 0.0f, 0.0f, 0.0f, 0.0f};
             const CGFloat glossGradientLocations[] = {1.0, 0.0};
-            CGGradientRef glossGradient = CGGradientCreateWithColorComponents(colorSpace, glossGradientComponents, glossGradientLocations, 2);
-            CGContextDrawLinearGradient(context, glossGradient, CGPointMake(0, 0), CGPointMake(0, CGRectGetMaxY(rect)), 0);
+            CGGradientRef glossGradient = CGGradientCreateWithColorComponents(colorSpace, glossGradientComponents, glossGradientLocations, (kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation));
+            CGContextDrawLinearGradient(context, glossGradient, CGPointMake(0, 0), CGPointMake(0, rect.size.width), 0);
             CGGradientRelease(glossGradient);
         }
         CGContextEndTransparencyLayer(context);
@@ -253,12 +252,10 @@
         CGContextSetBlendMode(context, kCGBlendModeSoftLight);
         CGContextBeginTransparencyLayer(context, NULL);
         {
-            
-            const CGFloat glossDropShadowComponents[] = {0.0f, 0.0f, 0.0f, 0.56f,
-                0.0f, 0.0f, 0.0f, 0.0f};
-            CGColorRef glossDropShadowColor = CGColorCreate(colorSpace, glossDropShadowComponents);
-            
             CGRect fillRect = CGRectMake(rect.origin.x, rect.origin.y + floorf(rect.size.height / 2), rect.size.width, floorf(rect.size.height / 2));
+            
+            const CGFloat glossDropShadowComponents[] = {0.0f, 0.0f, 0.0f, 0.56f, 0.0f, 0.0f, 0.0f, 0.0f};
+            CGColorRef glossDropShadowColor = CGColorCreate(colorSpace, glossDropShadowComponents);
             
             CGContextSaveGState(context);
             {
@@ -267,7 +264,8 @@
                 CGColorRelease(glossDropShadowColor);
             }
             CGContextRestoreGState(context);
-            CGContextSetBlendMode(context, kCGBlendModeClear);
+            
+            CGContextSetBlendMode(context, kCGBlendModeClear);   
             CGContextFillRect(context, fillRect);
         }
         CGContextEndTransparencyLayer(context);
