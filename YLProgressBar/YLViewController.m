@@ -106,6 +106,31 @@
     [progressView setProgress:progressValue];
 }
 
+- (IBAction)colorButtonTapped:(id)sender
+{
+    UISegmentedControl *seg = (UISegmentedControl*)sender;
+    switch (seg.selectedSegmentIndex) {
+        case 0:
+            progressView.progressTintColor = [UIColor purpleColor];
+            break;
+        case 1:
+            progressView.progressTintColor = [UIColor redColor];
+            break;
+        case 2:
+            progressView.progressTintColor = [UIColor cyanColor];
+            break;
+        case 3:
+            progressView.progressTintColor = [UIColor greenColor];
+            break;
+        case 4:
+            progressView.progressTintColor = [UIColor yellowColor];
+            break;
+            
+        default:
+            break;
+    }
+}
+
 #pragma mark YLViewController Private Methods
 
 @end

@@ -30,6 +30,7 @@
 {
 @public
     BOOL        animated;
+    UIColor*    progressTintColor;
     
 @protected
     double      progressOffset;
@@ -38,6 +39,7 @@
 }
 /** Run the animation of the progress bar. YES by default. */
 @property (nonatomic, getter = isAnimated) BOOL animated;
+@property (nonatomic, retain) UIColor *progressTintColor;
 
 #pragma mark Constructors - Initializers
 
