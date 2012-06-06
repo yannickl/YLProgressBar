@@ -24,4 +24,6 @@
 
 #pragma mark Public Methods
 
+- (IBAction)colorButtonTapped:(id)sender;
+
 @end
