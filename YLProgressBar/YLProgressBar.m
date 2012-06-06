@@ -36,10 +36,11 @@
 #define YLProgressBarColorBackground        [UIColor colorWithRed:0.0980f green:0.1137f blue:0.1294f alpha:1.0f]
 #define YLProgressBarColorBackgroundGlow    [UIColor colorWithRed:0.0666f green:0.0784f blue:0.0901f alpha:1.0f]
 
-// Gradient
-#define YLProgressBarGradientProgress       {0.2824f, 0.1961f, 0.4431f, 1.000f, 0.7569f, 0.2706f, 0.7608f, 1.000f}
-
 @interface YLProgressBar ()
+{
+    UIColor* _progressTintColor;
+    UIColor* _progressTintColorDark;
+}
 @property (nonatomic, assign)               double      progressOffset;
 @property (nonatomic, assign)               CGFloat     cornerRadius;
 @property (nonatomic, SAFE_ARC_PROP_RETAIN) NSTimer*    animationTimer;
@@ -73,6 +74,8 @@
     }
     
     SAFE_ARC_RELEASE (animationTimer);
+    SAFE_ARC_RELEASE (_progressTintColor);
+    SAFE_ARC_RELEASE (_progressTintColorDark);
     
     SAFE_ARC_SUPER_DEALLOC ();
 }
@@ -115,6 +118,26 @@
         [self drawStripesWithRect:innerRect];
         [self drawGlossWithRect:innerRect];
     }
+}
+
+- (void)setProgressTintColor:(UIColor *)aProgressTintColor
+{
+    SAFE_ARC_RELEASE(_progressTintColor);
+    _progressTintColor = SAFE_ARC_RETAIN(aProgressTintColor);
+    const CGFloat* components = CGColorGetComponents(_progressTintColor.CGColor);
+    _progressTintColorDark = SAFE_ARC_RETAIN([UIColor colorWithRed:components[0] / 4.0f
+                                                             green:components[1] / 4.0f
+                                                              blue:components[2] / 4.0f
+                                                             alpha:CGColorGetAlpha(_progressTintColor.CGColor)]);
+}
+
+- (UIColor*)progressTintColor
+{
+    if (!_progressTintColor)
+    {
+        [self setProgressTintColor:[UIColor purpleColor]];
+    }
+    return _progressTintColor;
 }
 
 #pragma mark -
@@ -214,10 +237,13 @@
         CGContextAddPath(context, [progressBounds CGPath]);
         CGContextClip(context);
 
-        size_t num_locations            = 2;
+//        size_t num_locations            = 2;
         CGFloat locations[]             = {0.0, 1.0};
-        CGFloat progressComponents[]    = YLProgressBarGradientProgress;
-        CGGradientRef gradient          = CGGradientCreateWithColorComponents (colorSpace, progressComponents, locations, num_locations);
+        CFArrayRef colors = (CFArrayRef) [NSArray arrayWithObjects:(id)_progressTintColorDark.CGColor,
+                                          (id)self.progressTintColor.CGColor, 
+                                          nil];
+        
+        CGGradientRef gradient          = CGGradientCreateWithColors (colorSpace, colors, locations);
         
         CGContextDrawLinearGradient(context, gradient, CGPointMake(rect.origin.x, rect.origin.y), CGPointMake(rect.origin.x + rect.size.width, rect.origin.y), (kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation));
         
