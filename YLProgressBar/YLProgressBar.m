@@ -109,13 +109,10 @@
     {
         // Compute the indeterminateOffset for the animation
         double progressWidthTotal = rect.size.width - 2 * YLProgressBarSizeInset;
-        indeterminateOffset = (indeterminateOffset >= progressWidthTotal - 5) ? (progressWidthTotal * -0.25) + 5 : indeterminateOffset + 5;
-        /*
-        // Compute the progressOffset for the animation
-        self.progressOffset = (self.progressOffset > 2 * YLProgressBarSizeStripeWidth - 7) ? 0 : self.progressOffset + 7;
-        NSLog(@"%f", progressOffset);
-         */
+        indeterminateOffset = (indeterminateOffset >= progressWidthTotal - 3) ? (progressWidthTotal * -0.25) + 3 : indeterminateOffset + 3;
         
+        // Compute the progressOffset for the animation
+        self.progressOffset = (self.progressOffset > 2 * YLProgressBarSizeStripeWidth - 4) ? 0 : self.progressOffset + 4;
         
         
         double progressWidthWhenAtMid = progressWidthTotal * 0.25;
