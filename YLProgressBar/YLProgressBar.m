@@ -42,6 +42,7 @@
     UIColor* _progressTintColorDark;
 }
 @property (nonatomic, assign)               double      progressOffset;
+@property (nonatomic, assign)               double      indeterminateOffset;
 @property (nonatomic, assign)               CGFloat     cornerRadius;
 @property (nonatomic, SAFE_ARC_PROP_RETAIN) NSTimer*    animationTimer;
 
@@ -63,7 +64,7 @@
 @end
 
 @implementation YLProgressBar
-@synthesize progressOffset, cornerRadius, animationTimer;
+@synthesize progressOffset, indeterminateOffset, cornerRadius, animationTimer;
 @synthesize animated;
 
 - (void)dealloc
@@ -100,15 +101,46 @@
 {
     // Refresh the corner radius value
     self.cornerRadius   = rect.size.height / 2;
-
-    // Compute the progressOffset for the animation
-    self.progressOffset = (self.progressOffset > 2 * YLProgressBarSizeStripeWidth - 1) ? 0 : ++self.progressOffset;
     
     // Draw the background track
     [self drawBackgroundWithRect:rect];
     
-    if (self.progress > 0)
+    if (indeterminate) 
     {
+        // Compute the indeterminateOffset for the animation
+        double progressWidthTotal = rect.size.width - 2 * YLProgressBarSizeInset;
+        indeterminateOffset = (indeterminateOffset >= progressWidthTotal - 5) ? (progressWidthTotal * -0.25) + 5 : indeterminateOffset + 5;
+        /*
+        // Compute the progressOffset for the animation
+        self.progressOffset = (self.progressOffset > 2 * YLProgressBarSizeStripeWidth - 7) ? 0 : self.progressOffset + 7;
+        NSLog(@"%f", progressOffset);
+         */
+        
+        
+        
+        double progressWidthWhenAtMid = progressWidthTotal * 0.25;
+        double progressWidthWhenAtBeg = progressWidthWhenAtMid + indeterminateOffset;
+        double progressWidthWhenAtEnd = progressWidthTotal - indeterminateOffset;
+        
+        
+        double progressWidth = MIN(MIN(progressWidthWhenAtBeg, progressWidthWhenAtMid), progressWidthWhenAtEnd); 
+        
+        //NSLog(@"Offset: %f Total Width: %f Progress Width: %f", indeterminateOffset, rect.size.width, progressWidth);
+        
+        CGRect innerRect = CGRectMake(MAX(YLProgressBarSizeInset, indeterminateOffset),
+                                      YLProgressBarSizeInset, 
+                                      progressWidth, 
+                                      rect.size.height - 2 * YLProgressBarSizeInset);
+        
+        [self drawProgressBarWithRect:innerRect];
+        [self drawStripesWithRect:innerRect];
+        [self drawGlossWithRect:innerRect];
+        
+    } else if (self.progress > 0)
+    {
+        // Compute the progressOffset for the animation
+        self.progressOffset = (self.progressOffset > 2 * YLProgressBarSizeStripeWidth - 1) ? 0 : ++self.progressOffset;
+        
         CGRect innerRect = CGRectMake(YLProgressBarSizeInset,
                                       YLProgressBarSizeInset, 
                                       rect.size.width * self.progress - 2 * YLProgressBarSizeInset, 
@@ -146,8 +178,27 @@
 - (void)setAnimated:(BOOL)_animated
 {
     animated = _animated;
-    
-    if (animated)
+    [self setupTimer];
+}
+
+- (void)setIndeterminate:(BOOL) _indeterminate 
+{
+    indeterminate = _indeterminate;
+    [self setupTimer];
+}
+
+#pragma mark YLProgressBar Private Methods
+
+- (void)initializeProgressBar
+{
+    self.progressOffset     = 0;
+    self.indeterminateOffset = 0;
+    self.animationTimer     = nil;
+    self.animated           = YES;
+}
+
+- (void)setupTimer {
+    if (animated || indeterminate)
     {
         if (self.animationTimer == nil)
         {
@@ -166,15 +217,7 @@
         
         self.animationTimer = nil;
     }
-}
-
-#pragma mark YLProgressBar Private Methods
-
-- (void)initializeProgressBar
-{
-    self.progressOffset     = 0;
-    self.animationTimer     = nil;
-    self.animated           = YES;
+    
 }
 
 - (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame

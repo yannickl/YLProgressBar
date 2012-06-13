@@ -19,11 +19,13 @@
 }
 @property (nonatomic, SAFE_ARC_PROP_RETAIN) IBOutlet YLProgressBar* progressView;
 @property (nonatomic, SAFE_ARC_PROP_RETAIN) IBOutlet UILabel*       progressValueLabel;
+@property (retain, nonatomic) IBOutlet UISegmentedControl *typeButton;
 
 #pragma mark Constructors - Initializers
 
 #pragma mark Public Methods
 
 - (IBAction)colorButtonTapped:(id)sender;
+- (IBAction)typeButtonTapped:(UISegmentedControl *)sender;
 
 @end

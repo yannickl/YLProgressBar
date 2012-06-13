@@ -30,6 +30,7 @@
 {
 @public
     BOOL        animated;
+    BOOL        indeterminate;
     UIColor*    progressTintColor;
     
 @protected
@@ -44,5 +45,6 @@
 #pragma mark Constructors - Initializers
 
 #pragma mark Public Methods
+- (void)setIndeterminate:(BOOL) _indeterminate;
 
 @end
