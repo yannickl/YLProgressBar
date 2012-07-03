@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name      = 'YLProgressBar'
-  s.version   = '0.0.1'
+  s.version   = '1.0.0'
   s.platform  = :ios
   s.license   = 'MIT'
   s.summary   = 'Custom progress bar for iOS (4.0 or over) with an animated background'
