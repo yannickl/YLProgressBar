@@ -41,10 +41,13 @@
 /** Run the animation of the progress bar. YES by default. */
 @property (nonatomic, getter = isAnimated) BOOL animated;
 @property (nonatomic, retain) UIColor *progressTintColor;
+@property (nonatomic, assign) BOOL isRound;
+@property (nonatomic, assign) BOOL usesGradient;
 
 #pragma mark Constructors - Initializers
 
 #pragma mark Public Methods
 - (void)setIndeterminate:(BOOL) _indeterminate;
+- (void)setShowsStripes:(BOOL) _showsStripes;
 
 @end
