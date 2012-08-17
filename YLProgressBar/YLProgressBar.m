@@ -209,7 +209,7 @@
     {
         if (self.animationTimer == nil)
         {
-            self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/50
+            self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30
                                                                    target:self 
                                                                  selector:@selector(setNeedsDisplay)
                                                                  userInfo:nil
