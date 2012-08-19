@@ -111,10 +111,10 @@
         // Compute the indeterminateOffset for the animation
         double progressWidthTotal = rect.size.width - 2 * YLProgressBarSizeInset;
         indeterminateOffset = (indeterminateOffset >= progressWidthTotal - 3) ? (progressWidthTotal * -0.25) + 3 : indeterminateOffset + 3;
-        
-        // Compute the progressOffset for the animation
-        self.progressOffset = (self.progressOffset > 2 * YLProgressBarSizeStripeWidth - 4) ? 0 : self.progressOffset + 4;
-        
+
+        // Compute the progressOffset for the animation. Total offset effectively is always 4. At Mid/End, IndeterminateOffsetDelta + Delta = 4. At Beg, IndeterminateOffset is ignored, so Delta = 4.
+        double progressOffsetDelta = (indeterminateOffset < YLProgressBarSizeInset) ? 4 : 1; 
+        self.progressOffset = (self.progressOffset > 2 * YLProgressBarSizeStripeWidth - progressOffsetDelta) ? 0 : self.progressOffset + progressOffsetDelta;
         
         double progressWidthWhenAtMid = progressWidthTotal * 0.25;
         double progressWidthWhenAtBeg = progressWidthWhenAtMid + indeterminateOffset;
@@ -137,7 +137,8 @@
     } else if (self.progress > 0)
     {
         // Compute the progressOffset for the animation
-        self.progressOffset = (self.progressOffset > 2 * YLProgressBarSizeStripeWidth - 1) ? 0 : ++self.progressOffset;
+        if (animated)
+            self.progressOffset = (self.progressOffset > 2 * YLProgressBarSizeStripeWidth - 1) ? 0 : ++self.progressOffset;
         
         CGRect innerRect = CGRectMake(YLProgressBarSizeInset,
                                       YLProgressBarSizeInset, 
@@ -378,9 +379,9 @@
     {
         UIBezierPath *allStripes = [UIBezierPath bezierPath];
     
-        for (int i = 0; i <= rect.size.width / (2 * YLProgressBarSizeStripeWidth) + (2 * YLProgressBarSizeStripeWidth); i++)
+        for (int i = 0; i <= rect.size.width / (2 * YLProgressBarSizeStripeWidth); i++)
         {
-            UIBezierPath* stripe = [self stripeWithOrigin:CGPointMake(i * 2 * YLProgressBarSizeStripeWidth + self.progressOffset, YLProgressBarSizeInset)
+            UIBezierPath* stripe = [self stripeWithOrigin:CGPointMake(i * 2 * YLProgressBarSizeStripeWidth + self.progressOffset + rect.origin.x, rect.origin.y)
                                                    bounds:rect];
             [allStripes appendPath:stripe];
         }
