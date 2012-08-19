@@ -164,6 +164,28 @@
     }
 }
 
+- (IBAction)parameterButtonTapped:(id)sender {
+    switch ([(UISegmentedControl*)sender selectedSegmentIndex]) {
+        case 0:
+            self.progressView.isRound = NO;
+            self.progressView.usesGradient = YES;
+            [self.progressView setShowsStripes:YES];
+            break;
+        case 1:
+            self.progressView.isRound = YES;
+            self.progressView.usesGradient = YES;
+            [self.progressView setShowsStripes:NO];
+            break;
+        case 2:
+            self.progressView.isRound =YES;
+            self.progressView.usesGradient = NO;
+            [self.progressView setShowsStripes:YES];
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark YLViewController Private Methods
 
 @end

@@ -192,6 +192,11 @@
     }
 }
 
+- (void)setUsesGradient:(BOOL)usesGradient {
+    _usesGradient = usesGradient;
+    [self setProgressTintColor:[self progressTintColor]];
+}
+
 #pragma mark YLProgressBar Private Methods
 
 - (void)initializeProgressBar
@@ -290,7 +295,7 @@
 
 //        size_t num_locations            = 2;
         CGFloat locations[]             = {0.0, 1.0};
-        CFArrayRef colors = (__bridge CFArrayRef) [NSArray arrayWithObjects:(id)_progressTintColorDark.CGColor,
+        CFArrayRef colors = ( CFArrayRef) [NSArray arrayWithObjects:(id)_progressTintColorDark.CGColor,
                                           (id)self.progressTintColor.CGColor, 
                                           nil];
         

@@ -20,6 +20,7 @@
 @property (nonatomic, SAFE_ARC_PROP_RETAIN) IBOutlet YLProgressBar* progressView;
 @property (nonatomic, SAFE_ARC_PROP_RETAIN) IBOutlet UILabel*       progressValueLabel;
 @property (retain, nonatomic) IBOutlet UISegmentedControl *typeButton;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *parameterButton;
 
 #pragma mark Constructors - Initializers
 
@@ -27,5 +28,6 @@
 
 - (IBAction)colorButtonTapped:(id)sender;
 - (IBAction)typeButtonTapped:(UISegmentedControl *)sender;
+- (IBAction)parameterButtonTapped:(id)sender;
 
 @end
