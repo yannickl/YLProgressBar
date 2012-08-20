@@ -42,8 +42,10 @@
     UIColor* _progressTintColorDark;
 }
 @property (nonatomic, assign)               double      progressOffset;
+@property (nonatomic, assign)               double      indeterminateOffset;
 @property (nonatomic, assign)               CGFloat     cornerRadius;
 @property (nonatomic, SAFE_ARC_PROP_RETAIN) NSTimer*    animationTimer;
+@property (nonatomic, assign)               CGFloat     stripesAlpha;
 
 /** Init the progress bar. */
 - (void)initializeProgressBar;
@@ -63,8 +65,8 @@
 @end
 
 @implementation YLProgressBar
-@synthesize progressOffset, cornerRadius, animationTimer;
-@synthesize animated;
+@synthesize progressOffset, indeterminateOffset, cornerRadius, animationTimer;
+@synthesize animated, progressTintColor, isRound, stripesAlpha, usesGradient;
 
 - (void)dealloc
 {
@@ -99,16 +101,47 @@
 - (void)drawRect:(CGRect)rect
 {
     // Refresh the corner radius value
-    self.cornerRadius   = rect.size.height / 2;
-
-    // Compute the progressOffset for the animation
-    self.progressOffset = (self.progressOffset > 2 * YLProgressBarSizeStripeWidth - 1) ? 0 : ++self.progressOffset;
+    self.cornerRadius = self.isRound ? rect.size.height / 2 : 0;
     
     // Draw the background track
     [self drawBackgroundWithRect:rect];
     
-    if (self.progress > 0)
+    if (indeterminate) 
     {
+        // Compute the indeterminateOffset for the animation
+        double progressWidthTotal = rect.size.width - 2 * YLProgressBarSizeInset;
+        indeterminateOffset = (indeterminateOffset >= progressWidthTotal - 3) ? (progressWidthTotal * -0.25) + 3 : indeterminateOffset + 3;
+
+        // Compute the progressOffset for the animation. Total offset effectively is always 4. At Mid/End, IndeterminateOffsetDelta + Delta = 4. At Beg, IndeterminateOffset is ignored, so Delta = 4.
+        double progressOffsetDelta = (indeterminateOffset < YLProgressBarSizeInset) ? 3 : 0; 
+        if (animated)
+            progressOffsetDelta++;
+        self.progressOffset = (self.progressOffset > 2 * YLProgressBarSizeStripeWidth - progressOffsetDelta) ? 0 : self.progressOffset + progressOffsetDelta;
+        
+        double progressWidthWhenAtMid = progressWidthTotal * 0.25;
+        double progressWidthWhenAtBeg = progressWidthWhenAtMid + indeterminateOffset;
+        double progressWidthWhenAtEnd = progressWidthTotal - indeterminateOffset;
+        
+        
+        double progressWidth = MIN(MIN(progressWidthWhenAtBeg, progressWidthWhenAtMid), progressWidthWhenAtEnd); 
+        
+        //NSLog(@"Offset: %f Total Width: %f Progress Width: %f", indeterminateOffset, rect.size.width, progressWidth);
+        
+        CGRect innerRect = CGRectMake(MAX(YLProgressBarSizeInset, indeterminateOffset),
+                                      YLProgressBarSizeInset, 
+                                      progressWidth, 
+                                      rect.size.height - 2 * YLProgressBarSizeInset);
+        
+        [self drawProgressBarWithRect:innerRect];
+        [self drawStripesWithRect:innerRect];
+        [self drawGlossWithRect:innerRect];
+        
+    } else if (self.progress > 0)
+    {
+        // Compute the progressOffset for the animation
+        if (animated)
+            self.progressOffset = (self.progressOffset > 2 * YLProgressBarSizeStripeWidth - 1) ? 0 : ++self.progressOffset;
+        
         CGRect innerRect = CGRectMake(YLProgressBarSizeInset,
                                       YLProgressBarSizeInset, 
                                       rect.size.width * self.progress - 2 * YLProgressBarSizeInset, 
@@ -125,10 +158,8 @@
     SAFE_ARC_RELEASE(_progressTintColor);
     _progressTintColor = SAFE_ARC_RETAIN(aProgressTintColor);
     const CGFloat* components = CGColorGetComponents(_progressTintColor.CGColor);
-    _progressTintColorDark = SAFE_ARC_RETAIN([UIColor colorWithRed:components[0] / 4.0f
-                                                             green:components[1] / 4.0f
-                                                              blue:components[2] / 4.0f
-                                                             alpha:CGColorGetAlpha(_progressTintColor.CGColor)]);
+    _progressTintColorDark = self.usesGradient ? SAFE_ARC_RETAIN([UIColor colorWithRed:components[0] / 4.0f green:components[1] / 4.0f blue:components[2] / 4.0f alpha:CGColorGetAlpha(_progressTintColor.CGColor)]) : _progressTintColor;
+    [self setNeedsDisplay];
 }
 
 - (UIColor*)progressTintColor
@@ -146,12 +177,55 @@
 - (void)setAnimated:(BOOL)_animated
 {
     animated = _animated;
-    
-    if (animated)
+    [self setupTimer];
+}
+
+- (void)setIndeterminate:(BOOL) _indeterminate
+{
+    indeterminate = _indeterminate;
+    [self setupTimer];
+    [self setNeedsDisplay];
+}
+
+- (void)setShowsStripes:(BOOL) _showsStripes
+{
+    if (_showsStripes) {
+        self.stripesAlpha = 0.28;
+    } else {
+        self.stripesAlpha = 0;
+    }
+    [self setNeedsDisplay];
+}
+
+- (void)setUsesGradient:(BOOL) _usesGradient {
+    usesGradient = _usesGradient;
+    [self setProgressTintColor:[self progressTintColor]];
+}
+
+- (void)setIsRound:(BOOL)_isRound {
+    isRound = _isRound;
+    [self setNeedsDisplay];
+}
+
+#pragma mark YLProgressBar Private Methods
+
+- (void)initializeProgressBar
+{
+    self.progressOffset     = 0;
+    self.indeterminateOffset = 0;
+    self.animationTimer     = nil;
+    self.animated           = YES;
+    self.stripesAlpha       = 0.28;
+    self.isRound            = YES;
+    self.usesGradient       = YES;
+}
+
+- (void)setupTimer {
+    if (animated || indeterminate)
     {
         if (self.animationTimer == nil)
         {
-            self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30 
+            self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30
                                                                    target:self 
                                                                  selector:@selector(setNeedsDisplay)
                                                                  userInfo:nil
@@ -166,15 +240,7 @@
         
         self.animationTimer = nil;
     }
-}
-
-#pragma mark YLProgressBar Private Methods
-
-- (void)initializeProgressBar
-{
-    self.progressOffset     = 0;
-    self.animationTimer     = nil;
-    self.animated           = YES;
+    
 }
 
 - (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame
@@ -239,15 +305,15 @@
 
 //        size_t num_locations            = 2;
         CGFloat locations[]             = {0.0, 1.0};
-        CFArrayRef colors = (CFArrayRef) [NSArray arrayWithObjects:(id)_progressTintColorDark.CGColor,
+        CFArrayRef colors = ( CFArrayRef) [NSArray arrayWithObjects:(id)_progressTintColorDark.CGColor,
                                           (id)self.progressTintColor.CGColor, 
                                           nil];
         
-        CGGradientRef gradient          = CGGradientCreateWithColors (colorSpace, colors, locations);
+            CGGradientRef gradient          = CGGradientCreateWithColors (colorSpace, colors, locations);
         
-        CGContextDrawLinearGradient(context, gradient, CGPointMake(rect.origin.x, rect.origin.y), CGPointMake(rect.origin.x + rect.size.width, rect.origin.y), (kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation));
+            CGContextDrawLinearGradient(context, gradient, CGPointMake(rect.origin.x, rect.origin.y), CGPointMake(rect.origin.x + rect.size.width, rect.origin.y), (kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation));
         
-        CGGradientRelease(gradient);
+            CGGradientRelease(gradient);
     }
     CGContextRestoreGState(context);
     
@@ -328,9 +394,10 @@
     {
         UIBezierPath *allStripes = [UIBezierPath bezierPath];
     
-        for (int i = 0; i <= rect.size.width / (2 * YLProgressBarSizeStripeWidth) + (2 * YLProgressBarSizeStripeWidth); i++)
+        //We start one before so first stripe is partial and doesn't appear suddenly
+        for (int i = -1; i <= (rect.size.width / (2 * YLProgressBarSizeStripeWidth)); i++)
         {
-            UIBezierPath* stripe = [self stripeWithOrigin:CGPointMake(i * 2 * YLProgressBarSizeStripeWidth + self.progressOffset, YLProgressBarSizeInset)
+            UIBezierPath* stripe = [self stripeWithOrigin:CGPointMake(i * 2 * YLProgressBarSizeStripeWidth + self.progressOffset + rect.origin.x, rect.origin.y)
                                                    bounds:rect];
             [allStripes appendPath:stripe];
         }
@@ -347,7 +414,7 @@
             CGContextAddPath(context, [allStripes CGPath]);
             CGContextClip(context);
             
-            const CGFloat stripesColorComponents[] = { 0.0f, 0.0f, 0.0f, 0.28f };
+            const CGFloat stripesColorComponents[] = { 0.0f, 0.0f, 0.0f, self.stripesAlpha };
             CGColorRef stripesColor = CGColorCreate(colorSpace, stripesColorComponents);
             
             CGContextSetFillColorWithColor(context, stripesColor);
