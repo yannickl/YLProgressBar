@@ -19,10 +19,12 @@
 @synthesize progressView;
 @synthesize progressValueLabel;
 @synthesize typeButton;
+@synthesize stripeButton;
 @synthesize progressTimer;
 
 - (void)dealloc
 {
+    [stripeButton release];
     [typeButton release];
     if (progressTimer && [progressTimer isValid])
     {
@@ -42,6 +44,7 @@
 {
     [super viewDidLoad];
     [self typeButtonTapped:typeButton];
+    [self stripeButtonTapped:stripeButton];
 }
 
 - (void)viewDidUnload
@@ -49,6 +52,7 @@
     [self setProgressValueLabel:nil];
     [self setProgressView:nil];
     [self setTypeButton:nil];
+    [self setStripeButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -140,7 +144,6 @@
             break;
         case 1:
             [progressView setIndeterminate:NO];
-            [progressView setAnimated:NO];
             if (self.progressTimer == nil) {
                 self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.3f 
                                                                       target:self 
@@ -151,39 +154,36 @@
             break;
         case 2:
             [progressView setIndeterminate:NO];
-            [progressView setAnimated:YES];
-            if (self.progressTimer == nil) {
-                self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.3f 
-                                                                      target:self 
-                                                                    selector:@selector(changeProgressValue)
-                                                                    userInfo:nil
-                                                                     repeats:YES];
-            }
+            [self.progressTimer invalidate];
+            self.progressTimer = nil;
             break;            
             
     }
 }
 
-- (IBAction)parameterButtonTapped:(id)sender {
+- (IBAction)stripeButtonTapped:(UISegmentedControl *)sender {
     switch ([(UISegmentedControl*)sender selectedSegmentIndex]) {
         case 0:
-            self.progressView.isRound = NO;
-            self.progressView.usesGradient = YES;
-            [self.progressView setShowsStripes:YES];
+            progressView.showsStripes = YES;
+            progressView.animated = NO;
             break;
         case 1:
-            self.progressView.isRound = YES;
-            self.progressView.usesGradient = YES;
-            [self.progressView setShowsStripes:NO];
+            progressView.showsStripes = YES;
+            progressView.animated = YES;
             break;
         case 2:
-            self.progressView.isRound =YES;
-            self.progressView.usesGradient = NO;
-            [self.progressView setShowsStripes:YES];
-            break;
-        default:
+            progressView.showsStripes = NO;
+            progressView.animated = NO;
             break;
     }
+}
+
+- (IBAction)roundedChanged:(UISwitch *)sender {
+    progressView.isRound = sender.on;
+}
+
+- (IBAction)gradientChanged:(UISwitch *)sender {
+    progressView.usesGradient = sender.on;
 }
 
 #pragma mark YLViewController Private Methods

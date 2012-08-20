@@ -32,6 +32,7 @@
     BOOL        animated;
     BOOL        indeterminate;
     UIColor*    progressTintColor;
+    BOOL        showsStripes;
     
 @protected
     double      progressOffset;
