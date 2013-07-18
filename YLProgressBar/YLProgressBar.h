@@ -30,16 +30,16 @@
 {
 @public
     BOOL        animated;
-    UIColor*    progressTintColor;
+    UIColor     *progressTintColor;
     
 @protected
     double      progressOffset;
     CGFloat     cornerRadius;
-    NSTimer*    animationTimer;
+    NSTimer     *animationTimer;
 }
 /** Run the animation of the progress bar. YES by default. */
 @property (nonatomic, getter = isAnimated) BOOL animated;
-@property (nonatomic, retain) UIColor *progressTintColor;
+@property (nonatomic, retain) UIColor           *progressTintColor;
 
 #pragma mark Constructors - Initializers
 
