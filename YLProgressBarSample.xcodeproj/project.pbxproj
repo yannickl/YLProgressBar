@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		C2C1E37514DEDD630047737B /* noise.png in Resources */ = {isa = PBXBuildFile; fileRef = C2C1E37414DEDD630047737B /* noise.png */; };
 		C2C1E37814DEDDB60047737B /* YLBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C1E37714DEDDB60047737B /* YLBackgroundView.m */; };
-		C2C1E38414DEE1230047737B /* YLProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C1E38314DEE1230047737B /* YLProgressBar.m */; };
 		C2D59EFB14DED6B9009394A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2D59EFA14DED6B9009394A0 /* UIKit.framework */; };
 		C2D59EFD14DED6B9009394A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2D59EFC14DED6B9009394A0 /* Foundation.framework */; };
 		C2D59EFF14DED6B9009394A0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2D59EFE14DED6B9009394A0 /* CoreGraphics.framework */; };
@@ -20,23 +19,21 @@
 		C2D59F1114DED6B9009394A0 /* YLViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2D59F0F14DED6B9009394A0 /* YLViewController_iPhone.xib */; };
 		C2D59F1414DED6B9009394A0 /* YLViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2D59F1214DED6B9009394A0 /* YLViewController_iPad.xib */; };
 		F49F762E17988EF00035A8F1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F49F762D17988EF00035A8F1 /* Default-568h@2x.png */; };
+		F49F7638179896760035A8F1 /* YLProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F49F7637179896760035A8F1 /* YLProgressBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C2C1E37014DEDB4D0047737B /* ARCMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCMacro.h; sourceTree = "<group>"; };
 		C2C1E37414DEDD630047737B /* noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noise.png; sourceTree = "<group>"; };
 		C2C1E37614DEDDB60047737B /* YLBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLBackgroundView.h; sourceTree = "<group>"; };
 		C2C1E37714DEDDB60047737B /* YLBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLBackgroundView.m; sourceTree = "<group>"; };
-		C2C1E38214DEE1230047737B /* YLProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLProgressBar.h; sourceTree = "<group>"; };
-		C2C1E38314DEE1230047737B /* YLProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLProgressBar.m; sourceTree = "<group>"; };
-		C2D59EF614DED6B9009394A0 /* YLProgressBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YLProgressBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2D59EF614DED6B9009394A0 /* YLProgressBarSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YLProgressBarSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2D59EFA14DED6B9009394A0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C2D59EFC14DED6B9009394A0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C2D59EFE14DED6B9009394A0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		C2D59F0214DED6B9009394A0 /* YLProgressBar-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YLProgressBar-Info.plist"; sourceTree = "<group>"; };
+		C2D59F0214DED6B9009394A0 /* YLProgressBarSample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YLProgressBarSample-Info.plist"; sourceTree = "<group>"; };
 		C2D59F0414DED6B9009394A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C2D59F0614DED6B9009394A0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C2D59F0814DED6B9009394A0 /* YLProgressBar-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YLProgressBar-Prefix.pch"; sourceTree = "<group>"; };
+		C2D59F0814DED6B9009394A0 /* YLProgressBarSample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YLProgressBarSample-Prefix.pch"; sourceTree = "<group>"; };
 		C2D59F0914DED6B9009394A0 /* YLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLAppDelegate.h; sourceTree = "<group>"; };
 		C2D59F0A14DED6B9009394A0 /* YLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLAppDelegate.m; sourceTree = "<group>"; };
 		C2D59F0C14DED6B9009394A0 /* YLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLViewController.h; sourceTree = "<group>"; };
@@ -44,6 +41,9 @@
 		C2D59F1014DED6B9009394A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/YLViewController_iPhone.xib; sourceTree = "<group>"; };
 		C2D59F1314DED6B9009394A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/YLViewController_iPad.xib; sourceTree = "<group>"; };
 		F49F762D17988EF00035A8F1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		F49F7635179896760035A8F1 /* ARCMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCMacro.h; sourceTree = "<group>"; };
+		F49F7636179896760035A8F1 /* YLProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLProgressBar.h; sourceTree = "<group>"; };
+		F49F7637179896760035A8F1 /* YLProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLProgressBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +73,6 @@
 		C2C1E36F14DEDB280047737B /* Mains */ = {
 			isa = PBXGroup;
 			children = (
-				C2C1E37114DEDB540047737B /* Utils */,
 				C2C1E37914DEDDBD0047737B /* Views */,
 				C2D59F0C14DED6B9009394A0 /* YLViewController.h */,
 				C2D59F0D14DED6B9009394A0 /* YLViewController.m */,
@@ -83,14 +82,6 @@
 			name = Mains;
 			sourceTree = "<group>";
 		};
-		C2C1E37114DEDB540047737B /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				C2C1E37014DEDB4D0047737B /* ARCMacro.h */,
-			);
-			name = Utils;
-			sourceTree = "<group>";
-		};
 		C2C1E37214DEDD630047737B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,7 +89,7 @@
 				F49F762D17988EF00035A8F1 /* Default-568h@2x.png */,
 			);
 			name = Resources;
-			path = YLProgressBar/Resources;
+			path = YLProgressBarSample/Resources;
 			sourceTree = "<group>";
 		};
 		C2C1E37314DEDD630047737B /* Images */ = {
@@ -114,8 +105,6 @@
 			children = (
 				C2C1E37614DEDDB60047737B /* YLBackgroundView.h */,
 				C2C1E37714DEDDB60047737B /* YLBackgroundView.m */,
-				C2C1E38214DEE1230047737B /* YLProgressBar.h */,
-				C2C1E38314DEE1230047737B /* YLProgressBar.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -123,7 +112,8 @@
 		C2D59EEB14DED6B8009394A0 = {
 			isa = PBXGroup;
 			children = (
-				C2D59F0014DED6B9009394A0 /* YLProgressBar */,
+				F49F7634179896760035A8F1 /* YLProgressBar */,
+				C2D59F0014DED6B9009394A0 /* YLProgressBarSample */,
 				C2C1E37214DEDD630047737B /* Resources */,
 				C2D59EF914DED6B9009394A0 /* Frameworks */,
 				C2D59EF714DED6B9009394A0 /* Products */,
@@ -133,7 +123,7 @@
 		C2D59EF714DED6B9009394A0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C2D59EF614DED6B9009394A0 /* YLProgressBar.app */,
+				C2D59EF614DED6B9009394A0 /* YLProgressBarSample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -148,32 +138,42 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C2D59F0014DED6B9009394A0 /* YLProgressBar */ = {
+		C2D59F0014DED6B9009394A0 /* YLProgressBarSample */ = {
 			isa = PBXGroup;
 			children = (
 				C2C1E36E14DEDB010047737B /* Roots */,
 				C2C1E36F14DEDB280047737B /* Mains */,
 			);
-			path = YLProgressBar;
+			path = YLProgressBarSample;
 			sourceTree = "<group>";
 		};
 		C2D59F0114DED6B9009394A0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C2D59F0214DED6B9009394A0 /* YLProgressBar-Info.plist */,
+				C2D59F0214DED6B9009394A0 /* YLProgressBarSample-Info.plist */,
 				C2D59F0314DED6B9009394A0 /* InfoPlist.strings */,
 				C2D59F0614DED6B9009394A0 /* main.m */,
-				C2D59F0814DED6B9009394A0 /* YLProgressBar-Prefix.pch */,
+				C2D59F0814DED6B9009394A0 /* YLProgressBarSample-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F49F7634179896760035A8F1 /* YLProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				F49F7635179896760035A8F1 /* ARCMacro.h */,
+				F49F7636179896760035A8F1 /* YLProgressBar.h */,
+				F49F7637179896760035A8F1 /* YLProgressBar.m */,
+			);
+			path = YLProgressBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C2D59EF514DED6B9009394A0 /* YLProgressBar */ = {
+		C2D59EF514DED6B9009394A0 /* YLProgressBarSample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C2D59F1714DED6B9009394A0 /* Build configuration list for PBXNativeTarget "YLProgressBar" */;
+			buildConfigurationList = C2D59F1714DED6B9009394A0 /* Build configuration list for PBXNativeTarget "YLProgressBarSample" */;
 			buildPhases = (
 				C2D59EF214DED6B9009394A0 /* Sources */,
 				C2D59EF314DED6B9009394A0 /* Frameworks */,
@@ -183,9 +183,9 @@
 			);
 			dependencies = (
 			);
-			name = YLProgressBar;
+			name = YLProgressBarSample;
 			productName = YLProgressBar;
-			productReference = C2D59EF614DED6B9009394A0 /* YLProgressBar.app */;
+			productReference = C2D59EF614DED6B9009394A0 /* YLProgressBarSample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -197,7 +197,7 @@
 				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Yannick Loriot";
 			};
-			buildConfigurationList = C2D59EF014DED6B8009394A0 /* Build configuration list for PBXProject "YLProgressBar" */;
+			buildConfigurationList = C2D59EF014DED6B8009394A0 /* Build configuration list for PBXProject "YLProgressBarSample" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -209,7 +209,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C2D59EF514DED6B9009394A0 /* YLProgressBar */,
+				C2D59EF514DED6B9009394A0 /* YLProgressBarSample */,
 			);
 		};
 /* End PBXProject section */
@@ -238,7 +238,7 @@
 				C2D59F0B14DED6B9009394A0 /* YLAppDelegate.m in Sources */,
 				C2D59F0E14DED6B9009394A0 /* YLViewController.m in Sources */,
 				C2C1E37814DEDDB60047737B /* YLBackgroundView.m in Sources */,
-				C2C1E38414DEE1230047737B /* YLProgressBar.m in Sources */,
+				F49F7638179896760035A8F1 /* YLProgressBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,9 +327,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "YLProgressBar/YLProgressBar-Prefix.pch";
-				INFOPLIST_FILE = "YLProgressBar/YLProgressBar-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "YLProgressBarSample/YLProgressBarSample-Prefix.pch";
+				INFOPLIST_FILE = "YLProgressBarSample/YLProgressBarSample-Info.plist";
+				PRODUCT_NAME = YLProgressBarSample;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -338,9 +338,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "YLProgressBar/YLProgressBar-Prefix.pch";
-				INFOPLIST_FILE = "YLProgressBar/YLProgressBar-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "YLProgressBarSample/YLProgressBarSample-Prefix.pch";
+				INFOPLIST_FILE = "YLProgressBarSample/YLProgressBarSample-Info.plist";
+				PRODUCT_NAME = YLProgressBarSample;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -348,7 +348,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C2D59EF014DED6B8009394A0 /* Build configuration list for PBXProject "YLProgressBar" */ = {
+		C2D59EF014DED6B8009394A0 /* Build configuration list for PBXProject "YLProgressBarSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C2D59F1514DED6B9009394A0 /* Debug */,
@@ -357,7 +357,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C2D59F1714DED6B9009394A0 /* Build configuration list for PBXNativeTarget "YLProgressBar" */ = {
+		C2D59F1714DED6B9009394A0 /* Build configuration list for PBXNativeTarget "YLProgressBarSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C2D59F1814DED6B9009394A0 /* Debug */,

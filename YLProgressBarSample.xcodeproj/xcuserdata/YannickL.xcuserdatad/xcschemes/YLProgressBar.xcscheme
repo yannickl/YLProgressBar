@@ -14,9 +14,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C2D59EF514DED6B9009394A0"
-               BuildableName = "YLProgressBar.app"
-               BlueprintName = "YLProgressBar"
-               ReferencedContainer = "container:YLProgressBar.xcodeproj">
+               BuildableName = "YLProgressBarSample.app"
+               BlueprintName = "YLProgressBarSample"
+               ReferencedContainer = "container:YLProgressBarSample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,9 +32,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C2D59EF514DED6B9009394A0"
-            BuildableName = "YLProgressBar.app"
-            BlueprintName = "YLProgressBar"
-            ReferencedContainer = "container:YLProgressBar.xcodeproj">
+            BuildableName = "YLProgressBarSample.app"
+            BlueprintName = "YLProgressBarSample"
+            ReferencedContainer = "container:YLProgressBarSample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -51,9 +51,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C2D59EF514DED6B9009394A0"
-            BuildableName = "YLProgressBar.app"
-            BlueprintName = "YLProgressBar"
-            ReferencedContainer = "container:YLProgressBar.xcodeproj">
+            BuildableName = "YLProgressBarSample.app"
+            BlueprintName = "YLProgressBarSample"
+            ReferencedContainer = "container:YLProgressBarSample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -69,9 +69,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C2D59EF514DED6B9009394A0"
-            BuildableName = "YLProgressBar.app"
-            BlueprintName = "YLProgressBar"
-            ReferencedContainer = "container:YLProgressBar.xcodeproj">
+            BuildableName = "YLProgressBarSample.app"
+            BlueprintName = "YLProgressBarSample"
+            ReferencedContainer = "container:YLProgressBarSample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
