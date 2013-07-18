@@ -115,8 +115,8 @@
                                       rect.size.height - 2 * YLProgressBarSizeInset);
         
         [self drawProgressBarWithRect:innerRect];
-        [self drawStripesWithRect:innerRect];
-        [self drawGlossWithRect:innerRect];
+        //[self drawStripesWithRect:innerRect];
+        //[self drawGlossWithRect:innerRect];
     }
 }
 
@@ -199,6 +199,9 @@
     
     CGContextSaveGState(context);
     {
+        CGContextSetAllowsAntialiasing(context, YES);
+        CGContextSetShouldAntialias(context, YES);
+        
         // Draw the white shadow
         [[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.2] set];
         

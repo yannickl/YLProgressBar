@@ -40,11 +40,12 @@
 {
     [super viewDidLoad];
 	
-    self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.3f 
-                                                           target:self 
+    self.progressTimer  = [NSTimer scheduledTimerWithTimeInterval:0.3f
+                                                           target:self
                                                          selector:@selector(changeProgressValue)
                                                          userInfo:nil
                                                           repeats:YES];
+    
 }
 
 - (void)viewDidUnload
@@ -76,6 +77,19 @@
 	[super viewDidDisappear:animated];
 }
 
+// For iOS6 and newer
+- (NSUInteger)supportedInterfaceOrientations
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        return UIInterfaceOrientationPortraitUpsideDown;
+    } else
+    {
+        return UIInterfaceOrientationMaskAll;
+    }
+}
+
+// For iOS5 and older
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
@@ -93,37 +107,38 @@
 
 - (void)changeProgressValue
 {
-    float progressValue = progressView.progress;
+    float progressValue     = progressView.progress;
     
-    progressValue       += 0.01f;
+    progressValue           += 0.01f;
     if (progressValue > 1)
     {
         progressValue = 0;
     }
     
     
-    [progressValueLabel setText:[NSString stringWithFormat:@"%.0f%%", (progressValue * 100)]];
-    [progressView setProgress:progressValue];
+    progressValueLabel.text = [NSString stringWithFormat:@"%.0f%%", (progressValue * 100)];
+    progressView.progress   = progressValue;
 }
 
 - (IBAction)colorButtonTapped:(id)sender
 {
     UISegmentedControl *seg = (UISegmentedControl*)sender;
-    switch (seg.selectedSegmentIndex) {
+    switch (seg.selectedSegmentIndex)
+    {
         case 0:
-            progressView.progressTintColor = [UIColor purpleColor];
+            progressView.progressTintColor  = [UIColor purpleColor];
             break;
         case 1:
-            progressView.progressTintColor = [UIColor redColor];
+            progressView.progressTintColor  = [UIColor redColor];
             break;
         case 2:
-            progressView.progressTintColor = [UIColor cyanColor];
+            progressView.progressTintColor  = [UIColor cyanColor];
             break;
         case 3:
-            progressView.progressTintColor = [UIColor greenColor];
+            progressView.progressTintColor  = [UIColor greenColor];
             break;
         case 4:
-            progressView.progressTintColor = [UIColor yellowColor];
+            progressView.progressTintColor  = [UIColor yellowColor];
             break;
             
         default:

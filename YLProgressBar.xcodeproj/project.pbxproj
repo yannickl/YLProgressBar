@@ -19,6 +19,7 @@
 		C2D59F0E14DED6B9009394A0 /* YLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D59F0D14DED6B9009394A0 /* YLViewController.m */; };
 		C2D59F1114DED6B9009394A0 /* YLViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2D59F0F14DED6B9009394A0 /* YLViewController_iPhone.xib */; };
 		C2D59F1414DED6B9009394A0 /* YLViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2D59F1214DED6B9009394A0 /* YLViewController_iPad.xib */; };
+		F49F762E17988EF00035A8F1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F49F762D17988EF00035A8F1 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		C2D59F0D14DED6B9009394A0 /* YLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLViewController.m; sourceTree = "<group>"; };
 		C2D59F1014DED6B9009394A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/YLViewController_iPhone.xib; sourceTree = "<group>"; };
 		C2D59F1314DED6B9009394A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/YLViewController_iPad.xib; sourceTree = "<group>"; };
+		F49F762D17988EF00035A8F1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				C2C1E37314DEDD630047737B /* Images */,
+				F49F762D17988EF00035A8F1 /* Default-568h@2x.png */,
 			);
 			name = Resources;
 			path = YLProgressBar/Resources;
@@ -220,6 +223,7 @@
 				C2D59F1114DED6B9009394A0 /* YLViewController_iPhone.xib in Resources */,
 				C2D59F1414DED6B9009394A0 /* YLViewController_iPad.xib in Resources */,
 				C2C1E37514DEDD630047737B /* noise.png in Resources */,
+				F49F762E17988EF00035A8F1 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
