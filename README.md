@@ -5,10 +5,15 @@ The YLProgressBar is a custom progress bar for iOS (4.0 or over) with an animate
 ![](https://github.com/lexrus/YLProgressBar/raw/master/YLProgressBar/Resources/Images/Screenshot.png)
 
 It has been implemented using the Core Graphics framework, it is so resolution and color independent.
+
+Installation
+============
+
+YLProgressBar can be added to a project using [CocoaPods](https://github.com/CocoaPods/CocoaPods) or by copying the YLProgressBar folder into your project.
   
 License
 ====================
-Copyright 2012 Yannick Loriot.<br />
+Copyright 2013 Yannick Loriot.<br />
 http://yannickloriot.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy<br />
