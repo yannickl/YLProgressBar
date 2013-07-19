@@ -29,13 +29,12 @@
 @interface YLProgressBar : UIProgressView
 {
 @public
-    BOOL        animated;
-    UIColor     *progressTintColor;
+    BOOL        _animated;
     
 @protected
-    double      progressOffset;
-    CGFloat     cornerRadius;
-    NSTimer     *animationTimer;
+    double      _progressOffset;
+    CGFloat     _cornerRadius;
+    NSTimer     *_animationTimer;
 }
 /** Run the animation of the progress bar. YES by default. */
 @property (nonatomic, getter = isAnimated) BOOL animated;

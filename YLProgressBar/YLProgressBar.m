@@ -38,8 +38,8 @@
 
 @interface YLProgressBar ()
 {
-    UIColor* _progressTintColor;
-    UIColor* _progressTintColorDark;
+    UIColor *_progressTintColor;
+    UIColor *_progressTintColorDark;
 }
 @property (nonatomic, assign)               double      progressOffset;
 @property (nonatomic, assign)               CGFloat     cornerRadius;
@@ -63,17 +63,19 @@
 @end
 
 @implementation YLProgressBar
-@synthesize progressOffset, cornerRadius, animationTimer;
-@synthesize animated;
+@synthesize progressOffset  = _progressOffset;
+@synthesize cornerRadius    = _cornerRadius;
+@synthesize animationTimer  = _animationTimer;
+@synthesize animated        = _animated;
 
 - (void)dealloc
 {
-    if (animationTimer && [animationTimer isValid])
+    if (_animationTimer && [_animationTimer isValid])
     {
-        [animationTimer invalidate];
+        [_animationTimer invalidate];
     }
     
-    SAFE_ARC_RELEASE (animationTimer);
+    SAFE_ARC_RELEASE (_animationTimer);
     SAFE_ARC_RELEASE (_progressTintColor);
     SAFE_ARC_RELEASE (_progressTintColorDark);
     
@@ -123,12 +125,12 @@
 - (void)setProgressTintColor:(UIColor *)aProgressTintColor
 {
     SAFE_ARC_RELEASE(_progressTintColor);
-    _progressTintColor = SAFE_ARC_RETAIN(aProgressTintColor);
-    const CGFloat* components = CGColorGetComponents(_progressTintColor.CGColor);
-    _progressTintColorDark = SAFE_ARC_RETAIN([UIColor colorWithRed:components[0] / 4.0f
-                                                             green:components[1] / 4.0f
-                                                              blue:components[2] / 4.0f
-                                                             alpha:CGColorGetAlpha(_progressTintColor.CGColor)]);
+    _progressTintColor          = SAFE_ARC_RETAIN(aProgressTintColor);
+    const CGFloat* components   = CGColorGetComponents(_progressTintColor.CGColor);
+    _progressTintColorDark      = SAFE_ARC_RETAIN([UIColor colorWithRed:components[0] / 4.0f
+                                                                  green:components[1] / 4.0f
+                                                                   blue:components[2] / 4.0f
+                                                                  alpha:CGColorGetAlpha(_progressTintColor.CGColor)]);
 }
 
 - (UIColor *)progressTintColor
@@ -143,9 +145,9 @@
 #pragma mark -
 #pragma mark YLProgressBar Public Methods
 
-- (void)setAnimated:(BOOL)_animated
+- (void)setAnimated:(BOOL)animated
 {
-    animated = _animated;
+    _animated   = animated;
     
     if (animated)
     {
@@ -159,9 +161,9 @@
         }
     } else
     {
-        if (self.animationTimer && [animationTimer isValid])
+        if (_animationTimer && [_animationTimer isValid])
         {
-            [animationTimer invalidate];
+            [_animationTimer invalidate];
         }
         
         self.animationTimer = nil;
@@ -198,29 +200,29 @@
     
     // Define the progress bar pattern to clip all the content inside
     UIBezierPath *roundedRect   = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, rect.size.width, rect.size.height)
-                                                             cornerRadius:cornerRadius];
+                                                             cornerRadius:_cornerRadius];
     [roundedRect addClip];
     
     CGContextSaveGState(context);
     {
         // Draw the track
         [YLProgressBarColorBackground set];
-
+        
         CGContextFillRect(context, rect);
         
         // Draw the white shadow
         [[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.2] set];
         
         UIBezierPath *shadow    = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.5, 0, rect.size.width - 1, rect.size.height - 1)
-                                                             cornerRadius:cornerRadius];
+                                                             cornerRadius:_cornerRadius];
         [shadow stroke];
-
+        
         // Draw the inner glow
         [YLProgressBarColorBackgroundGlow set];
         
         CGMutablePathRef glow   = CGPathCreateMutable();
-        CGPathMoveToPoint(glow, NULL, cornerRadius, 0);
-        CGPathAddLineToPoint(glow, NULL, rect.size.width - cornerRadius, 0);
+        CGPathMoveToPoint(glow, NULL, _cornerRadius, 0);
+        CGPathAddLineToPoint(glow, NULL, rect.size.width - _cornerRadius, 0);
         CGContextAddPath(context, glow);
         CGContextDrawPath(context, kCGPathStroke);
         CGPathRelease(glow);
@@ -235,7 +237,7 @@
     
     CGContextSaveGState(context);
     {
-        UIBezierPath *progressBounds    = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius];
+        UIBezierPath *progressBounds    = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:_cornerRadius];
         CGContextAddPath(context, [progressBounds CGPath]);
         CGContextClip(context);
         
@@ -247,11 +249,11 @@
         CGGradientRef gradient          = CGGradientCreateWithColors (colorSpace, colors, locations);
         
         CGContextDrawLinearGradient(context, gradient, CGPointMake(rect.origin.x, rect.origin.y), CGPointMake(rect.origin.x + rect.size.width, rect.origin.y), (kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation));
-
+        
         CGGradientRelease(gradient);
     }
     CGContextRestoreGState(context);
-
+    
     CGColorSpaceRelease(colorSpace);
 }
 
@@ -298,7 +300,7 @@
     }
     CGContextRestoreGState(context);
     
-    UIBezierPath *progressBounds    = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius];
+    UIBezierPath *progressBounds    = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:_cornerRadius];
     
     // Draw progress bar glow
     CGContextSaveGState(context);
@@ -335,7 +337,7 @@
         }
         
         // Clip the progress frame
-        UIBezierPath *clipPath = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius];
+        UIBezierPath *clipPath = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:_cornerRadius];
         
         CGContextAddPath(context, [clipPath CGPath]);
         CGContextClip(context);
