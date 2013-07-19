@@ -98,6 +98,13 @@
     [self initializeProgressBar];
 }
 
+- (void)setHidden:(BOOL)hidden
+{
+    [super setHidden:hidden];
+    
+    [self setAnimated:(_animated && !hidden)];
+}
+
 - (void)drawRect:(CGRect)rect
 {
     // Refresh the corner radius value
@@ -153,7 +160,7 @@
     {
         if (self.animationTimer == nil)
         {
-            self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30
+            self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f/30.0f
                                                                    target:self
                                                                  selector:@selector(setNeedsDisplay)
                                                                  userInfo:nil

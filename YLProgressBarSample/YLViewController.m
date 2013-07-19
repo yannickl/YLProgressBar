@@ -112,7 +112,7 @@
     {
         progressValue = 0;
     }
-    
+
     progressValueLabel.text = [NSString stringWithFormat:@"%.0f%%", (progressValue * 100)];
     progressView.progress   = progressValue;
 }
