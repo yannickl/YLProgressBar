@@ -195,7 +195,7 @@
 - (void)drawBackgroundWithRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
-
+    
     // Define the progress bar pattern to clip all the content inside
     UIBezierPath *roundedRect   = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, rect.size.width, rect.size.height)
                                                              cornerRadius:cornerRadius];
@@ -251,7 +251,7 @@
         CGGradientRelease(gradient);
     }
     CGContextRestoreGState(context);
-    CGContextClip(context);
+
     CGColorSpaceRelease(colorSpace);
 }
 

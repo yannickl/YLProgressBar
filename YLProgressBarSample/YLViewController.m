@@ -80,7 +80,7 @@
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
-        return UIInterfaceOrientationPortraitUpsideDown;
+        return UIInterfaceOrientationPortrait|UIInterfaceOrientationMaskLandscape;
     } else
     {
         return UIInterfaceOrientationMaskAll;
