@@ -107,14 +107,14 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    // Refresh the corner radius value
-    self.cornerRadius   = rect.size.height / 2;
-    
     // Compute the progressOffset for the animation
     self.progressOffset = (self.progressOffset > 2 * YLProgressBarSizeStripeWidth - 1) ? 0 : ++self.progressOffset;
     
     // Draw the background track
-    [self drawBackgroundWithRect:rect];
+    if (_shouldDrawBackground)
+    {
+        [self drawBackgroundWithRect:rect];
+    }
     
     if (self.progress > 0)
     {
@@ -125,7 +125,10 @@
         
         [self drawProgressBarWithRect:innerRect];
         [self drawStripesWithRect:innerRect];
-        [self drawGlossWithRect:innerRect];
+        if (_usesGlossyStyle)
+        {
+            [self drawGlossWithRect:innerRect];
+        }
     }
 }
 
@@ -152,6 +155,21 @@
 #pragma mark -
 #pragma mark YLProgressBar Public Methods
 
+- (void)setShouldDrawBackground:(BOOL)shouldDrawBackground
+{
+    _shouldDrawBackground = shouldDrawBackground;
+    if (shouldDrawBackground)
+    {
+        [self setOpaque:YES];
+        [self setClearsContextBeforeDrawing:YES];
+    }
+    else
+    {
+        [self setOpaque:NO];
+        [self setClearsContextBeforeDrawing:NO];
+    }
+}
+
 - (void)setAnimated:(BOOL)animated
 {
     _animated   = animated;
@@ -177,6 +195,14 @@
     }
 }
 
+- (void)setCornerRoundRatio:(CGFloat)cornerRoundRatio
+{
+    NSParameterAssert(cornerRoundRatio >= 0.0 && cornerRoundRatio <= 1.0);
+    _cornerRoundRatio = cornerRoundRatio;
+    [self setNeedsLayout];
+}
+
+
 #pragma mark YLProgressBar Private Methods
 
 - (void)initializeProgressBar
@@ -184,6 +210,16 @@
     self.progressOffset     = 0;
     self.animationTimer     = nil;
     self.animated           = YES;
+    self.cornerRoundRatio   = .1;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    CGFloat radious = CGRectGetHeight([self frame]) * _cornerRoundRatio;
+    [self setCornerRadius:radious];
+    [self setNeedsDisplay];
 }
 
 - (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame
