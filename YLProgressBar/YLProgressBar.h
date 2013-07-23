@@ -40,6 +40,7 @@
 @property (nonatomic, getter = isAnimated) BOOL animated;
 @property (nonatomic, retain) UIColor           *progressTintColor;
 @property (nonatomic, assign)              BOOL shouldDrawBackground;
+@property (nonatomic, assign)              BOOL usesGlossyStyle;
 
 #pragma mark Constructors - Initializers
 

@@ -128,7 +128,10 @@
         
         [self drawProgressBarWithRect:innerRect];
         [self drawStripesWithRect:innerRect];
-        [self drawGlossWithRect:innerRect];
+        if (_usesGlossyStyle)
+        {
+            [self drawGlossWithRect:innerRect];
+        }
     }
 }
 
