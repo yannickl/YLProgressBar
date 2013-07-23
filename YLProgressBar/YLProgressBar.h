@@ -41,6 +41,7 @@
 @property (nonatomic, retain) UIColor           *progressTintColor;
 @property (nonatomic, assign)              BOOL shouldDrawBackground;
 @property (nonatomic, assign)              BOOL usesGlossyStyle;
+@property (nonatomic, assign) CGFloat      cornerRoundRatio;
 
 #pragma mark Constructors - Initializers
 

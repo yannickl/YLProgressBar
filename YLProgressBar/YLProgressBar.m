@@ -107,9 +107,6 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    // Refresh the corner radius value
-    self.cornerRadius   = rect.size.height / 2;
-    
     // Compute the progressOffset for the animation
     self.progressOffset = (self.progressOffset > 2 * YLProgressBarSizeStripeWidth - 1) ? 0 : ++self.progressOffset;
     
@@ -198,6 +195,14 @@
     }
 }
 
+- (void)setCornerRoundRatio:(CGFloat)cornerRoundRatio
+{
+    NSParameterAssert(cornerRoundRatio >= 0.0 && cornerRoundRatio <= 1.0);
+    _cornerRoundRatio = cornerRoundRatio;
+    [self setNeedsLayout];
+}
+
+
 #pragma mark YLProgressBar Private Methods
 
 - (void)initializeProgressBar
@@ -205,6 +210,16 @@
     self.progressOffset     = 0;
     self.animationTimer     = nil;
     self.animated           = YES;
+    self.cornerRoundRatio   = .1;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    CGFloat radious = CGRectGetHeight([self frame]) * _cornerRoundRatio;
+    [self setCornerRadius:radious];
+    [self setNeedsDisplay];
 }
 
 - (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame
