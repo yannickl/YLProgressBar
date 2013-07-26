@@ -1,7 +1,7 @@
 /*
  * YLProgressBar.h
  *
- * Copyright 2012 Yannick Loriot.
+ * Copyright 2012-2013 Yannick Loriot.
  * http://yannickloriot.com
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,18 +27,10 @@
 #import <UIKit/UIKit.h>
 
 @interface YLProgressBar : UIProgressView
-{
-@public
-    BOOL        _animated;
-    
-@protected
-    double      _progressOffset;
-    CGFloat     _cornerRadius;
-    NSTimer     *_animationTimer;
-}
+
 /** Run the animation of the progress bar. YES by default. */
 @property (nonatomic, getter = isAnimated) BOOL animated;
-@property (nonatomic, retain) UIColor           *progressTintColor;
+@property (nonatomic, retain) NSArray           *progressTintColors;
 
 #pragma mark Constructors - Initializers
 

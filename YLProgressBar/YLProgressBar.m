@@ -1,7 +1,7 @@
 /*
  * YLProgressBar.m
  *
- * Copyright 2012 Yannick Loriot.
+ * Copyright 2012-2013 Yannick Loriot.
  * http://yannickloriot.com
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,18 +32,11 @@
 #define YLProgressBarSizeInset              1
 #define YLProgressBarSizeStripeWidth        7
 
-// Colors
-#define YLProgressBarColorBackground        [UIColor colorWithRed:0.0980f green:0.1137f blue:0.1294f alpha:1.0f]
-#define YLProgressBarColorBackgroundGlow    [UIColor colorWithRed:0.0666f green:0.0784f blue:0.0901f alpha:1.0f]
-
 @interface YLProgressBar ()
-{
-    UIColor *_progressTintColor;
-    UIColor *_progressTintColorDark;
-}
 @property (nonatomic, assign)               double      progressOffset;
 @property (nonatomic, assign)               CGFloat     cornerRadius;
-@property (nonatomic, SAFE_ARC_PROP_RETAIN) NSTimer*    animationTimer;
+@property (nonatomic, SAFE_ARC_PROP_RETAIN) NSTimer     *animationTimer;
+@property (nonatomic, SAFE_ARC_PROP_RETAIN) NSArray     *colors;
 
 /** Init the progress bar. */
 - (void)initializeProgressBar;
@@ -52,7 +45,7 @@
 - (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame;
 
 /** Draw the background (track) of the slider. */
-- (void)drawBackgroundWithRect:(CGRect)rect;
+- (void)drawTrackWithRect:(CGRect)rect;
 /** Draw the progress bar. */
 - (void)drawProgressBarWithRect:(CGRect)rect;
 /** Draw the gloss into the given rect. */
@@ -63,10 +56,6 @@
 @end
 
 @implementation YLProgressBar
-@synthesize progressOffset  = _progressOffset;
-@synthesize cornerRadius    = _cornerRadius;
-@synthesize animationTimer  = _animationTimer;
-@synthesize animated        = _animated;
 
 - (void)dealloc
 {
@@ -76,8 +65,7 @@
     }
     
     SAFE_ARC_RELEASE (_animationTimer);
-    SAFE_ARC_RELEASE (_progressTintColor);
-    SAFE_ARC_RELEASE (_progressTintColorDark);
+    SAFE_ARC_RELEASE(_progressTintColors);
     
     SAFE_ARC_SUPER_DEALLOC ();
 }
@@ -114,7 +102,7 @@
     self.progressOffset = (self.progressOffset > 2 * YLProgressBarSizeStripeWidth - 1) ? 0 : ++self.progressOffset;
     
     // Draw the background track
-    [self drawBackgroundWithRect:rect];
+    [self drawTrackWithRect:rect];
     
     if (self.progress > 0)
     {
@@ -129,24 +117,34 @@
     }
 }
 
-- (void)setProgressTintColor:(UIColor *)aProgressTintColor
+- (void)setProgressTintColor:(UIColor *)progressTintColor
 {
-    SAFE_ARC_RELEASE(_progressTintColor);
-    _progressTintColor          = SAFE_ARC_RETAIN(aProgressTintColor);
-    const CGFloat* components   = CGColorGetComponents(_progressTintColor.CGColor);
-    _progressTintColorDark      = SAFE_ARC_RETAIN([UIColor colorWithRed:components[0] / 3.0f
-                                                                  green:components[1] / 3.0f
-                                                                   blue:components[2] / 3.0f
-                                                                  alpha:CGColorGetAlpha(_progressTintColor.CGColor)]);
+    progressTintColor  = (progressTintColor) ? progressTintColor : [UIColor blueColor];
+    
+    [super setProgressTintColor:progressTintColor];
+    
+    const CGFloat *c    = CGColorGetComponents(progressTintColor.CGColor);
+    UIColor *leftColor  = [UIColor colorWithRed:(c[0] / 3.0f) green:(c[1] / 3.0f) blue:(c[2] / 3.0f) alpha:(c[3])];
+    UIColor *rightColor = progressTintColor;
+    NSArray *colors     = [NSArray arrayWithObjects:(id)leftColor, (id)rightColor, nil];
+    
+    [self setProgressTintColors:colors];
 }
 
-- (UIColor *)progressTintColor
+- (void)setProgressTintColors:(NSArray *)progressTintColors
 {
-    if (!_progressTintColor)
+    if (_progressTintColors)
     {
-        [self setProgressTintColor:[UIColor purpleColor]];
+        SAFE_ARC_RELEASE(self.progressTintColors);
     }
-    return _progressTintColor;
+    _progressTintColors = SAFE_ARC_RETAIN(progressTintColors);
+    
+    NSMutableArray *colors  = [NSMutableArray arrayWithCapacity:[progressTintColors count]];
+    for (UIColor *color in progressTintColors)
+    {
+        [colors addObject:(id)color.CGColor];
+    }
+    self.colors             = colors;
 }
 
 #pragma mark -
@@ -181,6 +179,7 @@
 
 - (void)initializeProgressBar
 {
+    self.progressTintColor  = self.progressTintColor;
     self.progressOffset     = 0;
     self.animationTimer     = nil;
     self.animated           = YES;
@@ -201,7 +200,7 @@
     return rect;
 }
 
-- (void)drawBackgroundWithRect:(CGRect)rect
+- (void)drawTrackWithRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
@@ -213,26 +212,23 @@
     CGContextSaveGState(context);
     {
         // Draw the track
-        [YLProgressBarColorBackground set];
-        
-        CGContextFillRect(context, rect);
+        [self.trackTintColor set];
+        UIBezierPath* roundedRect   = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, rect.size.width, rect.size.height-1) cornerRadius:_cornerRadius];
+        [roundedRect fill];
         
         // Draw the white shadow
         [[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.2] set];
         
-        UIBezierPath *shadow    = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.5, 0, rect.size.width - 1, rect.size.height - 1)
-                                                             cornerRadius:_cornerRadius];
+        UIBezierPath *shadow        = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.5f, 0, rect.size.width - 1, rect.size.height - 1)
+                                                                 cornerRadius:_cornerRadius];
         [shadow stroke];
         
         // Draw the inner glow
-        [YLProgressBarColorBackgroundGlow set];
+        [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4f] set];
         
-        CGMutablePathRef glow   = CGPathCreateMutable();
-        CGPathMoveToPoint(glow, NULL, _cornerRadius, 0);
-        CGPathAddLineToPoint(glow, NULL, rect.size.width - _cornerRadius, 0);
-        CGContextAddPath(context, glow);
-        CGContextDrawPath(context, kCGPathStroke);
-        CGPathRelease(glow);
+        UIBezierPath *glow          = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(_cornerRadius, 0, rect.size.width - _cornerRadius * 2, 1)
+                                                                 cornerRadius:0];
+        [glow stroke];
     }
     CGContextRestoreGState(context);
 }
@@ -248,12 +244,17 @@
         CGContextAddPath(context, [progressBounds CGPath]);
         CGContextClip(context);
         
-        CGFloat locations[] = {0.0, 1.0};
-        CFArrayRef colors   = (CFArrayRef)[NSArray arrayWithObjects:(id)_progressTintColorDark.CGColor,
-                                           (id)self.progressTintColor.CGColor,
-                                           nil];
+        CFArrayRef colorRefs = (CFArrayRef)_colors;
         
-        CGGradientRef gradient          = CGGradientCreateWithColors (colorSpace, colors, locations);
+        float delta          = 1.0f / [_colors count];
+        float semi_delta     = delta / 2.0f;
+        CGFloat locations[[_colors count]];
+        for (int i = 0; i < [_colors count]; i++)
+        {
+            locations[i] = delta * i + semi_delta;
+        }
+        
+        CGGradientRef gradient  = CGGradientCreateWithColors (colorSpace, colorRefs, locations);
         
         CGContextDrawLinearGradient(context, gradient, CGPointMake(rect.origin.x, rect.origin.y), CGPointMake(rect.origin.x + rect.size.width, rect.origin.y), (kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation));
         

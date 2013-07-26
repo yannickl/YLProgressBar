@@ -13,12 +13,10 @@
 @class YLProgressBar;
 
 @interface YLViewController : UIViewController
-{
-@protected
-    NSTimer*    progressTimer;
-}
-@property (nonatomic, SAFE_ARC_PROP_RETAIN) IBOutlet YLProgressBar* progressView;
-@property (nonatomic, SAFE_ARC_PROP_RETAIN) IBOutlet UILabel*       progressValueLabel;
+
+@property (nonatomic, SAFE_ARC_PROP_RETAIN) IBOutlet YLProgressBar      *progressView;
+@property (nonatomic, SAFE_ARC_PROP_RETAIN) IBOutlet UISegmentedControl *colorsSegmented;
+@property (nonatomic, SAFE_ARC_PROP_RETAIN) IBOutlet UILabel            *progressValueLabel;
 
 #pragma mark Constructors - Initializers
 
