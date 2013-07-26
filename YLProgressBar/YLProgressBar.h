@@ -26,10 +26,27 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ * Custom UIProgressView for iOS (5.0 or over) with a customizable and animated
+ * progress bar.
+ */
 @interface YLProgressBar : UIProgressView
 
-/** Run the animation of the progress bar. YES by default. */
+/**
+ * @abstract The animated vs. nonanimated repeat stripes of the
+ * progress bar.
+ * @discussion If YES, the stripes over the progress bar is moving
+ * from the left to the right side.
+ *
+ * The default value for this property is YES.
+ */
 @property (nonatomic, getter = isAnimated) BOOL animated;
+
+/**
+ * @abstract The colors shown for the portion of the progress bar
+ * that is filled. All the colors available in the array are drawn
+ * as a gradient of equal size.
+ */
 @property (nonatomic, retain) NSArray           *progressTintColors;
 
 #pragma mark Constructors - Initializers
