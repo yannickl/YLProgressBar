@@ -1,6 +1,6 @@
 YLProgressBar
 =================
-The YLProgressBar is a custom UIProgressView for iOS (5.0 or over) with a customizable and animated progress bar.
+The YLProgressBar v2 is a custom UIProgressView for iOS (5.0 or over) with a customizable and animated progress bar.
 
 ![](https://github.com/YannickL/YLProgressBar/raw/master/YLProgressBarSample/Resources/Images/Screenshot.png)
 
@@ -12,7 +12,18 @@ Installation
 ============
 
 YLProgressBar can be added to a project using [CocoaPods](https://github.com/CocoaPods/CocoaPods) or by copying the YLProgressBar folder into your project.
-  
+
+### Using CocoaPods
+
+```
+// Podfile
+pod 'YLProgressBar'
+```
+and
+```
+pod install
+```
+
 License
 ====================
 Copyright 2013 Yannick Loriot.<br />
