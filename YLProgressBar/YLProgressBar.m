@@ -98,7 +98,7 @@
     self.cornerRadius   = rect.size.height / 2;
     
     // Compute the progressOffset for the stripe's animation
-    self.progressOffset = (self.progressOffset > 2 * _progressStripeWidth - 1) ? 0 : ++self.progressOffset;
+    self.progressOffset = (!_animated || self.progressOffset > 2 * _progressStripeWidth - 1) ? 0 : ++self.progressOffset;
     
     // Draw the background track
     [self drawTrackWithRect:rect];
