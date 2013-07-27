@@ -27,7 +27,7 @@
 #import <UIKit/UIKit.h>
 
 // Global
-#define YLProgressBarDefaultStripeWidth     7
+#define YLProgressBarDefaultStripeWidth     7 //px
 
 typedef enum
 {
