@@ -29,7 +29,8 @@
 #import "ARCMacro.h"
 
 // Sizes
-#define YLProgressBarSizeInset              1
+#define YLProgressBarSizeInset      1
+#define YLProgressBarStripesDelta   8
 
 @interface YLProgressBar ()
 @property (nonatomic, assign)               double      progressOffset;
@@ -40,8 +41,8 @@
 /** Init the progress bar. */
 - (void)initializeProgressBar;
 
-/** Build the stripes. */
-- (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame;
+/** Build the stripes using the given parameters. */
+- (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame orientation:(YLProgressBarStripeOrientation)orientation;
 
 /** Draw the background (track) of the slider. */
 - (void)drawTrackWithRect:(CGRect)rect;
@@ -184,22 +185,33 @@
 
 - (void)initializeProgressBar
 {
-    self.progressTintColor      = self.progressTintColor;
-    self.progressOffset         = 0;
-    self.animationTimer         = nil;
-    self.progressStripeAnimated = YES;
-    self.progressStripeWidth    = YLProgressBarDefaultStripeWidth;
+    self.progressTintColor          = self.progressTintColor;
+    self.progressOffset             = 0;
+    self.animationTimer             = nil;
+    self.progressStripeAnimated     = YES;
+    self.progressStripeOrientation  = YLProgressBarStripeOrientationRight;
+    self.progressStripeWidth        = YLProgressBarDefaultStripeWidth;
 }
 
-- (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame
+- (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame orientation:(YLProgressBarStripeOrientation)orientation
 {
     float height        = frame.size.height;
     UIBezierPath *rect  = [UIBezierPath bezierPath];
     
     [rect moveToPoint:origin];
-    [rect addLineToPoint:CGPointMake(origin.x + _progressStripeWidth, origin.y)];
-    [rect addLineToPoint:CGPointMake(origin.x + _progressStripeWidth - 8, origin.y + height)];
-    [rect addLineToPoint:CGPointMake(origin.x - 8, origin.y + height)];
+    
+    if (orientation == YLProgressBarStripeOrientationRight)
+    {
+        [rect addLineToPoint:CGPointMake(origin.x + _progressStripeWidth, origin.y)];
+        [rect addLineToPoint:CGPointMake(origin.x + _progressStripeWidth - YLProgressBarStripesDelta, origin.y + height)];
+        [rect addLineToPoint:CGPointMake(origin.x - YLProgressBarStripesDelta, origin.y + height)];
+    } else
+    {
+        [rect addLineToPoint:CGPointMake(origin.x - _progressStripeWidth, origin.y)];
+        [rect addLineToPoint:CGPointMake(origin.x - _progressStripeWidth + YLProgressBarStripesDelta, origin.y + height)];
+        [rect addLineToPoint:CGPointMake(origin.x + YLProgressBarStripesDelta, origin.y + height)];
+    }
+    
     [rect addLineToPoint:origin];
     [rect closePath];
     
@@ -346,7 +358,8 @@
         for (int i = -_progressStripeWidth; i <= rect.size.width / (2 * _progressStripeWidth) + (2 * _progressStripeWidth); i++)
         {
             UIBezierPath *stripe    = [self stripeWithOrigin:CGPointMake(i * 2 * _progressStripeWidth + self.progressOffset, YLProgressBarSizeInset)
-                                                      bounds:rect];
+                                                      bounds:rect
+                                                 orientation:_progressStripeOrientation];
             [allStripes appendPath:stripe];
         }
         

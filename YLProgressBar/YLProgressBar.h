@@ -43,8 +43,9 @@ typedef enum
 
 /**
  * @abstract The colors shown for the portion of the progress bar
- * that is filled. All the colors available in the array are drawn
- * as a gradient of equal size.
+ * that is filled.
+ * @discussion All the colors in the array are drawn as a gradient
+ * visual of equal size.
  */
 @property (nonatomic, retain) NSArray                           *progressTintColors;
 
@@ -57,6 +58,13 @@ typedef enum
  * The default value for this property is YES.
  */
 @property (nonatomic, getter = isProgressStripeAnimated) BOOL   progressStripeAnimated;
+
+/**
+ * @abstract The orientation of the stripes.
+ * @discussion 
+ * The default value for this property is YLProgressBarStripeOrientationRight.
+ */
+@property (nonatomic, assign) YLProgressBarStripeOrientation    progressStripeOrientation;
 
 /**
  * @abstract The width of the progress stripes drawn over the progress
