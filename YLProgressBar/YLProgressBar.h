@@ -26,6 +26,15 @@
 
 #import <UIKit/UIKit.h>
 
+// Global
+#define YLProgressBarDefaultStripeWidth     7
+
+typedef enum
+{
+    YLProgressBarStripeOrientationLeft,
+    YLProgressBarStripeOrientationRight
+} YLProgressBarStripeOrientation;
+
 /**
  * Custom UIProgressView for iOS (5.0 or over) with a customizable and animated
  * progress bar.
@@ -33,8 +42,8 @@
 @interface YLProgressBar : UIProgressView
 
 /**
- * @abstract The animated vs. nonanimated repeat stripes of the
- * progress bar.
+ * @abstract The animated vs. nonanimated stripes of the progress
+ * bar.
  * @discussion If YES, the stripes over the progress bar is moving
  * from the left to the right side.
  *
@@ -48,6 +57,17 @@
  * as a gradient of equal size.
  */
 @property (nonatomic, retain) NSArray           *progressTintColors;
+
+/**
+ * @abstract The width of the progress stripes drawn over the progress
+ * bar.
+ * @discussion If the property is less or equal than 0 the sprites are
+ * hidden.
+ *
+ * The default value for this property is equal to the YLProgressBarDefaultStripeWidth
+ * value.
+ */
+@property (nonatomic, assign) NSInteger         progressStripeWidth;
 
 #pragma mark Constructors - Initializers
 

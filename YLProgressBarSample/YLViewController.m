@@ -139,6 +139,8 @@
                                                    [UIColor colorWithRed:111/255.0f green:188/255.0f blue:84/255.0f alpha:1.0f],
                                                    nil];
             _progressView.progressTintColors    = tintColors;
+            _progressView.animated              = NO;
+            _progressView.progressStripeWidth   = 20;
             break;
         }
         case 1:

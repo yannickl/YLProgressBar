@@ -30,7 +30,6 @@
 
 // Sizes
 #define YLProgressBarSizeInset              1
-#define YLProgressBarSizeStripeWidth        7
 
 @interface YLProgressBar ()
 @property (nonatomic, assign)               double      progressOffset;
@@ -98,8 +97,8 @@
     // Refresh the corner radius value
     self.cornerRadius   = rect.size.height / 2;
     
-    // Compute the progressOffset for the animation
-    self.progressOffset = (self.progressOffset > 2 * YLProgressBarSizeStripeWidth - 1) ? 0 : ++self.progressOffset;
+    // Compute the progressOffset for the stripe's animation
+    self.progressOffset = (self.progressOffset > 2 * _progressStripeWidth - 1) ? 0 : ++self.progressOffset;
     
     // Draw the background track
     [self drawTrackWithRect:rect];
@@ -112,10 +111,17 @@
                                       rect.size.height - 2 * YLProgressBarSizeInset);
         
         [self drawProgressBarWithRect:innerRect];
-        [self drawStripesWithRect:innerRect];
+        
+        if (_progressStripeWidth > 0)
+        {
+            [self drawStripesWithRect:innerRect];
+        }
+        
         [self drawGlossWithRect:innerRect];
     }
 }
+
+#pragma mark - Properties
 
 - (void)setProgressTintColor:(UIColor *)progressTintColor
 {
@@ -147,8 +153,7 @@
     self.colors             = colors;
 }
 
-#pragma mark -
-#pragma mark YLProgressBar Public Methods
+#pragma mark - Public Methods
 
 - (void)setAnimated:(BOOL)animated
 {
@@ -158,7 +163,7 @@
     {
         if (self.animationTimer == nil)
         {
-            self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f/30.0f
+            self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0f / 30.0f)
                                                                    target:self
                                                                  selector:@selector(setNeedsDisplay)
                                                                  userInfo:nil
@@ -175,7 +180,7 @@
     }
 }
 
-#pragma mark YLProgressBar Private Methods
+#pragma mark - Private Methods
 
 - (void)initializeProgressBar
 {
@@ -183,6 +188,7 @@
     self.progressOffset     = 0;
     self.animationTimer     = nil;
     self.animated           = YES;
+    self.progressStripeWidth        = YLProgressBarDefaultStripeWidth;
 }
 
 - (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame
@@ -191,8 +197,8 @@
     UIBezierPath *rect  = [UIBezierPath bezierPath];
     
     [rect moveToPoint:origin];
-    [rect addLineToPoint:CGPointMake(origin.x + YLProgressBarSizeStripeWidth, origin.y)];
-    [rect addLineToPoint:CGPointMake(origin.x + YLProgressBarSizeStripeWidth - 8, origin.y + height)];
+    [rect addLineToPoint:CGPointMake(origin.x + _progressStripeWidth, origin.y)];
+    [rect addLineToPoint:CGPointMake(origin.x + _progressStripeWidth - 8, origin.y + height)];
     [rect addLineToPoint:CGPointMake(origin.x - 8, origin.y + height)];
     [rect addLineToPoint:origin];
     [rect closePath];
@@ -337,10 +343,10 @@
     {
         UIBezierPath *allStripes = [UIBezierPath bezierPath];
         
-        for (int i = 0; i <= rect.size.width / (2 * YLProgressBarSizeStripeWidth) + (2 * YLProgressBarSizeStripeWidth); i++)
+        for (int i = -_progressStripeWidth; i <= rect.size.width / (2 * _progressStripeWidth) + (2 * _progressStripeWidth); i++)
         {
-            UIBezierPath* stripe = [self stripeWithOrigin:CGPointMake(i * 2 * YLProgressBarSizeStripeWidth + self.progressOffset, YLProgressBarSizeInset)
-                                                   bounds:rect];
+            UIBezierPath *stripe    = [self stripeWithOrigin:CGPointMake(i * 2 * _progressStripeWidth + self.progressOffset, YLProgressBarSizeInset)
+                                                      bounds:rect];
             [allStripes appendPath:stripe];
         }
         
@@ -356,8 +362,8 @@
             CGContextAddPath(context, [allStripes CGPath]);
             CGContextClip(context);
             
-            const CGFloat stripesColorComponents[] = { 0.0f, 0.0f, 0.0f, 0.28f };
-            CGColorRef stripesColor = CGColorCreate(colorSpace, stripesColorComponents);
+            const CGFloat stripesColorComponents[]  = { 0.0f, 0.0f, 0.0f, 0.28f };
+            CGColorRef stripesColor                 = CGColorCreate(colorSpace, stripesColorComponents);
             
             CGContextSetFillColorWithColor(context, stripesColor);
             CGContextFillRect(context, rect);
