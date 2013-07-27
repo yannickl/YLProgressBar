@@ -42,6 +42,13 @@ typedef enum
 @interface YLProgressBar : UIProgressView
 
 /**
+ * @abstract The colors shown for the portion of the progress bar
+ * that is filled. All the colors available in the array are drawn
+ * as a gradient of equal size.
+ */
+@property (nonatomic, retain) NSArray                           *progressTintColors;
+
+/**
  * @abstract The animated vs. nonanimated stripes of the progress
  * bar.
  * @discussion If YES, the stripes over the progress bar is moving
@@ -49,14 +56,7 @@ typedef enum
  *
  * The default value for this property is YES.
  */
-@property (nonatomic, getter = isAnimated) BOOL animated;
-
-/**
- * @abstract The colors shown for the portion of the progress bar
- * that is filled. All the colors available in the array are drawn
- * as a gradient of equal size.
- */
-@property (nonatomic, retain) NSArray           *progressTintColors;
+@property (nonatomic, getter = isProgressStripeAnimated) BOOL   progressStripeAnimated;
 
 /**
  * @abstract The width of the progress stripes drawn over the progress
@@ -67,7 +67,7 @@ typedef enum
  * The default value for this property is equal to the YLProgressBarDefaultStripeWidth
  * value.
  */
-@property (nonatomic, assign) NSInteger         progressStripeWidth;
+@property (nonatomic, assign) NSInteger                         progressStripeWidth;
 
 #pragma mark Constructors - Initializers
 

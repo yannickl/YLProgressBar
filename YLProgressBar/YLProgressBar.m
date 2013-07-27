@@ -89,7 +89,7 @@
 {
     [super setHidden:hidden];
     
-    [self setAnimated:(_animated && !hidden)];
+    [self setProgressStripeAnimated:(_progressStripeAnimated && !hidden)];
 }
 
 - (void)drawRect:(CGRect)rect
@@ -98,7 +98,7 @@
     self.cornerRadius   = rect.size.height / 2;
     
     // Compute the progressOffset for the stripe's animation
-    self.progressOffset = (!_animated || self.progressOffset > 2 * _progressStripeWidth - 1) ? 0 : ++self.progressOffset;
+    self.progressOffset = (!_progressStripeAnimated || self.progressOffset > 2 * _progressStripeWidth - 1) ? 0 : ++self.progressOffset;
     
     // Draw the background track
     [self drawTrackWithRect:rect];
@@ -155,9 +155,9 @@
 
 #pragma mark - Public Methods
 
-- (void)setAnimated:(BOOL)animated
+- (void)setProgressStripeAnimated:(BOOL)animated
 {
-    _animated   = animated;
+    _progressStripeAnimated = animated;
     
     if (animated)
     {
@@ -184,11 +184,11 @@
 
 - (void)initializeProgressBar
 {
-    self.progressTintColor  = self.progressTintColor;
-    self.progressOffset     = 0;
-    self.animationTimer     = nil;
-    self.animated           = YES;
-    self.progressStripeWidth        = YLProgressBarDefaultStripeWidth;
+    self.progressTintColor      = self.progressTintColor;
+    self.progressOffset         = 0;
+    self.animationTimer         = nil;
+    self.progressStripeAnimated = YES;
+    self.progressStripeWidth    = YLProgressBarDefaultStripeWidth;
 }
 
 - (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame
