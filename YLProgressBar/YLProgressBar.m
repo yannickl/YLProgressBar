@@ -189,6 +189,7 @@
     self.progressStripeAnimated     = YES;
     self.progressStripeOrientation  = YLProgressBarStripeOrientationRight;
     self.progressStripeWidth        = YLProgressBarDefaultStripeWidth;
+    self.backgroundColor            = [UIColor clearColor];
 }
 
 - (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame orientation:(YLProgressBarStripeOrientation)orientation
