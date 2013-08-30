@@ -127,9 +127,7 @@
 - (void)setProgressTintColor:(UIColor *)progressTintColor
 {
     progressTintColor  = (progressTintColor) ? progressTintColor : [UIColor blueColor];
-    
-    [super setProgressTintColor:progressTintColor];
-    
+        
     const CGFloat *c    = CGColorGetComponents(progressTintColor.CGColor);
     UIColor *leftColor  = [UIColor colorWithRed:(c[0] / 3.0f) green:(c[1] / 3.0f) blue:(c[2] / 3.0f) alpha:(c[3])];
     UIColor *rightColor = progressTintColor;
@@ -191,6 +189,7 @@
     self.progressStripeAnimated     = YES;
     self.progressStripeOrientation  = YLProgressBarStripeOrientationRight;
     self.progressStripeWidth        = YLProgressBarDefaultStripeWidth;
+    self.backgroundColor            = [UIColor clearColor];
 }
 
 - (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame orientation:(YLProgressBarStripeOrientation)orientation
