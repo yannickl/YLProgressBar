@@ -39,7 +39,7 @@ typedef enum
  * Custom UIProgressView for iOS (5.0 or over) with a customizable and animated
  * progress bar.
  */
-@interface YLProgressBar : UIProgressView
+@interface YLProgressBar : UIView
 
 /**
  * @abstract The colors shown for the portion of the progress bar
@@ -76,6 +76,27 @@ typedef enum
  * value.
  */
 @property (nonatomic, assign) NSInteger                         progressStripeWidth;
+
+/**
+ * @abstract The current progress shown by the receiver.
+ * @discussion The current progress is represented by a floating-point 
+ * value between 0.0 and 1.0, inclusive, where 1.0 indicates the 
+ * completion of the task.
+ *
+ * The default value is 0.0. Values less than
+ * 0.0 and greater than 1.0 are pinned to those limits.
+ */
+@property (nonatomic, assign) float                             progress;
+
+/**
+ * @abstract The color shown for the portion of the progress bar that is filled.
+ */
+@property (nonatomic, retain) UIColor                           *progressTintColor;
+
+/**
+ * @abstract The color shown for the portion of the progress bar that is not filled.
+ */
+@property (nonatomic, retain) UIColor                           *trackTintColor;
 
 #pragma mark Constructors - Initializers
 
