@@ -26,8 +26,6 @@
 
 #import "YLProgressBar.h"
 
-#import "ARCMacro.h"
-
 // Sizes
 #define YLProgressBarSizeInset      1
 #define YLProgressBarStripesDelta   8
@@ -35,8 +33,8 @@
 @interface YLProgressBar ()
 @property (nonatomic, assign)               double      progressOffset;
 @property (nonatomic, assign)               CGFloat     cornerRadius;
-@property (nonatomic, SAFE_ARC_PROP_RETAIN) NSTimer     *animationTimer;
-@property (nonatomic, SAFE_ARC_PROP_RETAIN) NSArray     *colors;
+@property (nonatomic, strong) NSTimer     *animationTimer;
+@property (nonatomic, strong) NSArray     *colors;
 
 /** Init the progress bar. */
 - (void)initializeProgressBar;
@@ -57,17 +55,14 @@
 
 @implementation YLProgressBar
 
+@synthesize progress = _progress;
+
 - (void)dealloc
 {
     if (_animationTimer && [_animationTimer isValid])
     {
         [_animationTimer invalidate];
     }
-    
-    SAFE_ARC_RELEASE (_animationTimer);
-    SAFE_ARC_RELEASE(_progressTintColors);
-    
-    SAFE_ARC_SUPER_DEALLOC ();
 }
 
 -(id)initWithFrame:(CGRect)frameRect
@@ -90,7 +85,7 @@
 {
     [super setHidden:hidden];
     
-    [self setProgressStripeAnimated:(_progressStripeAnimated && !hidden)];
+    [self setProgressStripeAnimated:(!hidden)];
 }
 
 - (void)drawRect:(CGRect)rect
@@ -127,22 +122,21 @@
 - (void)setProgressTintColor:(UIColor *)progressTintColor
 {
     progressTintColor  = (progressTintColor) ? progressTintColor : [UIColor blueColor];
-        
+    
     const CGFloat *c    = CGColorGetComponents(progressTintColor.CGColor);
     UIColor *leftColor  = [UIColor colorWithRed:(c[0] / 3.0f) green:(c[1] / 3.0f) blue:(c[2] / 3.0f) alpha:(c[3])];
     UIColor *rightColor = progressTintColor;
-    NSArray *colors     = [NSArray arrayWithObjects:(id)leftColor, (id)rightColor, nil];
+    NSArray *colors     = @[(id)leftColor, (id)rightColor];
     
     [self setProgressTintColors:colors];
 }
 
 - (void)setProgressTintColors:(NSArray *)progressTintColors
 {
-    if (_progressTintColors)
+    if (_progressTintColors != progressTintColors)
     {
-        SAFE_ARC_RELEASE(self.progressTintColors);
+        _progressTintColors = progressTintColors;
     }
-    _progressTintColors = SAFE_ARC_RETAIN(progressTintColors);
     
     NSMutableArray *colors  = [NSMutableArray arrayWithCapacity:[progressTintColors count]];
     for (UIColor *color in progressTintColors)
@@ -158,7 +152,7 @@
 {
     _progressStripeAnimated = animated;
     
-    if (animated)
+    if (animated == YES)
     {
         if (self.animationTimer == nil)
         {
@@ -188,7 +182,7 @@
     self.animationTimer             = nil;
     self.progressStripeAnimated     = YES;
     self.progressStripeOrientation  = YLProgressBarStripeOrientationRight;
-    self.progressStripeWidth        = YLProgressBarDefaultStripeWidth;
+    self.progressStripeWidth        = 0.0f;
     self.backgroundColor            = [UIColor clearColor];
 }
 
@@ -261,7 +255,7 @@
         CGContextAddPath(context, [progressBounds CGPath]);
         CGContextClip(context);
         
-        CFArrayRef colorRefs = (CFArrayRef)_colors;
+        CFArrayRef colorRefs = (__bridge CFArrayRef)_colors;
         
         float delta          = 1.0f / [_colors count];
         float semi_delta     = delta / 2.0f;
@@ -387,6 +381,42 @@
     CGContextRestoreGState(context);
     
     CGColorSpaceRelease(colorSpace);
+}
+
+- (CGFloat) progress
+{
+    @synchronized (self)
+    {
+        return _progress;
+    }
+}
+
+- (void) setProgress:(CGFloat)progress
+{
+    @synchronized (self)
+    {
+        CGFloat newProgress = progress;
+        if (newProgress > 1.0f)
+        {
+            newProgress = 1.0f;
+        }
+        else if (newProgress < 0.0f)
+        {
+            newProgress = 0.0f;
+        }
+        
+        if (newProgress > 0.9988f || newProgress < 0.001f)
+        {
+            newProgress = 1.0f;
+            _progressStripeWidth = YLProgressBarDefaultStripeWidth;
+        }
+        else
+        {
+            _progressStripeWidth = 0.0f;
+        }
+        
+        _progress = newProgress;
+    }
 }
 
 @end

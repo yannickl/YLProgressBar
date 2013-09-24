@@ -41,7 +41,6 @@
 		C2D59F1014DED6B9009394A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/YLViewController_iPhone.xib; sourceTree = "<group>"; };
 		C2D59F1314DED6B9009394A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/YLViewController_iPad.xib; sourceTree = "<group>"; };
 		F49F762D17988EF00035A8F1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		F49F7635179896760035A8F1 /* ARCMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCMacro.h; sourceTree = "<group>"; };
 		F49F7636179896760035A8F1 /* YLProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLProgressBar.h; sourceTree = "<group>"; };
 		F49F7637179896760035A8F1 /* YLProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLProgressBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -161,7 +160,6 @@
 		F49F7634179896760035A8F1 /* YLProgressBar */ = {
 			isa = PBXGroup;
 			children = (
-				F49F7635179896760035A8F1 /* ARCMacro.h */,
 				F49F7636179896760035A8F1 /* YLProgressBar.h */,
 				F49F7637179896760035A8F1 /* YLProgressBar.m */,
 			);
@@ -338,6 +336,7 @@
 		C2D59F1814DED6B9009394A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YLProgressBarSample/YLProgressBarSample-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
@@ -350,6 +349,7 @@
 		C2D59F1914DED6B9009394A0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YLProgressBarSample/YLProgressBarSample-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;

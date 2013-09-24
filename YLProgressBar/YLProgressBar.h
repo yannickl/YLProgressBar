@@ -24,8 +24,6 @@
  *
  */
 
-#import <UIKit/UIKit.h>
-
 // Global
 #define YLProgressBarDefaultStripeWidth     7 //px
 
@@ -47,7 +45,7 @@ typedef enum
  * @discussion All the colors in the array are drawn as a gradient
  * visual of equal size.
  */
-@property (nonatomic, retain) NSArray                           *progressTintColors;
+@property (nonatomic, strong) NSArray                           *progressTintColors;
 
 /**
  * @abstract The animated vs. nonanimated stripes of the progress
@@ -86,17 +84,17 @@ typedef enum
  * The default value is 0.0. Values less than
  * 0.0 and greater than 1.0 are pinned to those limits.
  */
-@property (nonatomic, assign) float                             progress;
+@property (atomic, assign) CGFloat                             progress;
 
 /**
  * @abstract The color shown for the portion of the progress bar that is filled.
  */
-@property (nonatomic, retain) UIColor                           *progressTintColor;
+@property (nonatomic, strong) UIColor                           *progressTintColor;
 
 /**
  * @abstract The color shown for the portion of the progress bar that is not filled.
  */
-@property (nonatomic, retain) UIColor                           *trackTintColor;
+@property (nonatomic, strong) UIColor                           *trackTintColor;
 
 #pragma mark Constructors - Initializers
 
