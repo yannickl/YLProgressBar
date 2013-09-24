@@ -24,8 +24,6 @@
  *
  */
 
-#import <UIKit/UIKit.h>
-
 // Global
 #define YLProgressBarDefaultStripeWidth     7 //px
 
@@ -39,7 +37,7 @@ typedef enum
  * Custom UIProgressView for iOS (5.0 or over) with a customizable and animated
  * progress bar.
  */
-@interface YLProgressBar : UIProgressView
+@interface YLProgressBar : UIView
 
 /**
  * @abstract The colors shown for the portion of the progress bar
@@ -47,7 +45,7 @@ typedef enum
  * @discussion All the colors in the array are drawn as a gradient
  * visual of equal size.
  */
-@property (nonatomic, retain) NSArray                           *progressTintColors;
+@property (nonatomic, strong) NSArray                           *progressTintColors;
 
 /**
  * @abstract The animated vs. nonanimated stripes of the progress
@@ -76,6 +74,27 @@ typedef enum
  * value.
  */
 @property (nonatomic, assign) NSInteger                         progressStripeWidth;
+
+/**
+ * @abstract The current progress shown by the receiver.
+ * @discussion The current progress is represented by a floating-point 
+ * value between 0.0 and 1.0, inclusive, where 1.0 indicates the 
+ * completion of the task.
+ *
+ * The default value is 0.0. Values less than
+ * 0.0 and greater than 1.0 are pinned to those limits.
+ */
+@property (atomic, assign) CGFloat                             progress;
+
+/**
+ * @abstract The color shown for the portion of the progress bar that is filled.
+ */
+@property (nonatomic, strong) UIColor                           *progressTintColor;
+
+/**
+ * @abstract The color shown for the portion of the progress bar that is not filled.
+ */
+@property (nonatomic, strong) UIColor                           *trackTintColor;
 
 #pragma mark Constructors - Initializers
 

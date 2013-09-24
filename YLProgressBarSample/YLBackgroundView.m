@@ -26,10 +26,8 @@
 
 #import "YLBackgroundView.h"
 
-#import "ARCMacro.h"
-
 @interface YLBackgroundView ()
-@property (nonatomic, SAFE_ARC_PROP_RETAIN) UIImage *noizeImage;
+@property (nonatomic, strong) UIImage *noizeImage;
 
 /** Loads the noize image. */
 - (void)loadNoizeImage;
@@ -39,12 +37,6 @@
 @implementation YLBackgroundView
 @synthesize noizeImage;
 
-- (void)dealloc
-{
-    SAFE_ARC_RELEASE (noizeImage);
-    
-    SAFE_ARC_SUPER_DEALLOC ();
-}
 
 - (id)initWithFrame:(CGRect)frame
 {

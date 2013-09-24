@@ -11,7 +11,7 @@
 #import "YLProgressBar.h"
 
 @interface YLViewController ()
-@property (nonatomic, SAFE_ARC_PROP_RETAIN) NSTimer*    progressTimer;
+@property (nonatomic, strong) NSTimer*    progressTimer;
 
 @end
 
@@ -23,13 +23,6 @@
     {
         [_progressTimer invalidate];
     }
-    
-    SAFE_ARC_RELEASE (_progressTimer);
-    SAFE_ARC_RELEASE (_progressValueLabel);
-    SAFE_ARC_RELEASE (_colorsSegmented);
-    SAFE_ARC_RELEASE (_progressView);
-    
-    SAFE_ARC_SUPER_DEALLOC ();
 }
 
 #pragma mark - View lifecycle
@@ -126,7 +119,7 @@
         case 0:
         {
             // Use the progressTintColors to defines the colors of the progress bar
-            NSArray *tintColors                 = [NSArray arrayWithObjects:[UIColor colorWithRed:33/255.0f green:180/255.0f blue:162/255.0f alpha:1.0f],
+            NSArray *tintColors                 = @[[UIColor colorWithRed:33/255.0f green:180/255.0f blue:162/255.0f alpha:1.0f],
                                                    [UIColor colorWithRed:3/255.0f green:137/255.0f blue:166/255.0f alpha:1.0f],
                                                    [UIColor colorWithRed:91/255.0f green:63/255.0f blue:150/255.0f alpha:1.0f],
                                                    [UIColor colorWithRed:87/255.0f green:26/255.0f blue:70/255.0f alpha:1.0f],
@@ -136,8 +129,7 @@
                                                    [UIColor colorWithRed:245/255.0f green:166/255.0f blue:35/255.0f alpha:1.0f],
                                                    [UIColor colorWithRed:165/255.0f green:202/255.0f blue:60/255.0f alpha:1.0f],
                                                    [UIColor colorWithRed:202/255.0f green:217/255.0f blue:54/255.0f alpha:1.0f],
-                                                   [UIColor colorWithRed:111/255.0f green:188/255.0f blue:84/255.0f alpha:1.0f],
-                                                   nil];
+                                                   [UIColor colorWithRed:111/255.0f green:188/255.0f blue:84/255.0f alpha:1.0f]];
             _progressView.progressTintColors    = tintColors;
             break;
         }
