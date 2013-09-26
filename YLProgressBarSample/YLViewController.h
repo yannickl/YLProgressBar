@@ -8,15 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ARCMacro.h"
-
 @class YLProgressBar;
 
 @interface YLViewController : UIViewController
 
-@property (nonatomic, SAFE_ARC_PROP_RETAIN) IBOutlet YLProgressBar      *progressView;
-@property (nonatomic, SAFE_ARC_PROP_RETAIN) IBOutlet UISegmentedControl *colorsSegmented;
-@property (nonatomic, SAFE_ARC_PROP_RETAIN) IBOutlet UILabel            *progressValueLabel;
+@property (nonatomic, strong) IBOutlet YLProgressBar      *progressView;
+@property (nonatomic, strong) IBOutlet UISegmentedControl *colorsSegmented;
+@property (nonatomic, strong) IBOutlet UILabel            *progressValueLabel;
 
 #pragma mark Constructors - Initializers
 
