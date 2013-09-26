@@ -45,7 +45,7 @@ typedef enum
  * @discussion All the colors in the array are drawn as a gradient
  * visual of equal size.
  */
-@property (nonatomic, strong) NSArray                           *progressTintColors;
+@property (nonatomic, strong) NSArray   *progressTintColors;
 
 /**
  * @abstract The animated vs. nonanimated stripes of the progress
@@ -73,7 +73,14 @@ typedef enum
  * The default value for this property is equal to the YLProgressBarDefaultStripeWidth
  * value.
  */
-@property (nonatomic, assign) NSInteger                         progressStripeWidth;
+@property (nonatomic, assign) NSInteger progressStripeWidth;
+
+/**
+ * @abstract A Boolean value that determines whether the stripes are hidden.
+ * @discussion Setting the value of this property to YES hides the stripes and setting
+ * it to NO shows the stripes. The default value is NO.
+ */
+@property (nonatomic, assign) BOOL hideStripes;
 
 /**
  * @abstract The current progress shown by the receiver.
@@ -84,17 +91,17 @@ typedef enum
  * The default value is 0.0. Values less than
  * 0.0 and greater than 1.0 are pinned to those limits.
  */
-@property (atomic, assign) CGFloat                              progress;
+@property (atomic, assign) CGFloat  progress;
 
 /**
  * @abstract The color shown for the portion of the progress bar that is filled.
  */
-@property (nonatomic, strong) UIColor                           *progressTintColor;
+@property (nonatomic, strong) UIColor   *progressTintColor;
 
 /**
  * @abstract The color shown for the portion of the progress bar that is not filled.
  */
-@property (nonatomic, strong) UIColor                           *trackTintColor;
+@property (nonatomic, strong) UIColor   *trackTintColor;
 
 #pragma mark Constructors - Initializers
 

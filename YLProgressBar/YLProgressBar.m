@@ -101,7 +101,7 @@
         
         [self drawProgressBarWithRect:innerRect];
         
-        if (_progressStripeWidth > 0)
+        if (_progressStripeWidth > 0 && !_hideStripes)
         {
             [self drawStripesWithRect:innerRect];
         }
@@ -174,15 +174,6 @@
             newProgress = 0.0f;
         }
         
-        if (newProgress > 0.9988f || newProgress < 0.001f)
-        {
-            newProgress = 1.0f;
-            _progressStripeWidth = YLProgressBarDefaultStripeWidth;
-        } else
-        {
-            _progressStripeWidth = 0.0f;
-        }
-        
         _progress = newProgress;
     }
 }
@@ -216,13 +207,15 @@
 
 - (void)initializeProgressBar
 {
-    self.progress                   = 0.0f;
+    _progress       = 0.0f;
+    _hideStripes    = NO;
+    
     self.progressTintColor          = self.progressTintColor;
     self.progressOffset             = 0;
     self.animationTimer             = nil;
     self.progressStripeAnimated     = YES;
     self.progressStripeOrientation  = YLProgressBarStripeOrientationRight;
-    self.progressStripeWidth        = 0.0f;
+    self.progressStripeWidth        = YLProgressBarDefaultStripeWidth;
     self.backgroundColor            = [UIColor clearColor];
 }
 

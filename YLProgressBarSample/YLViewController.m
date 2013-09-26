@@ -99,8 +99,8 @@
 
 - (void)changeProgressValue
 {
-    float progressValue         = _progressView.progress;
-    
+    CGFloat progressValue         = _progressView.progress;
+
     progressValue               += 0.01f;
     if (progressValue > 1)
     {
