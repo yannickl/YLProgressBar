@@ -83,6 +83,11 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    if (self.isHidden)
+    {
+        return;
+    }
+    
     // Refresh the corner radius value
     self.cornerRadius   = rect.size.height / 2;
     
@@ -111,13 +116,6 @@
 }
 
 #pragma mark - Properties
-
-- (void)setHidden:(BOOL)hidden
-{
-    [super setHidden:hidden];
-    
-    [self setProgressStripeAnimated:(!hidden)];
-}
 
 - (CGFloat)progress
 {
