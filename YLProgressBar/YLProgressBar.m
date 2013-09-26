@@ -129,28 +129,7 @@
 
 - (void)setProgress:(CGFloat)progress
 {
-    @synchronized (self)
-    {
-        CGFloat newProgress = progress;
-        if (newProgress > 1.0f)
-        {
-            newProgress = 1.0f;
-        } else if (newProgress < 0.0f)
-        {
-            newProgress = 0.0f;
-        }
-        
-        if (newProgress > 0.9988f || newProgress < 0.001f)
-        {
-            newProgress = 1.0f;
-            _progressStripeWidth = YLProgressBarDefaultStripeWidth;
-        } else
-        {
-            _progressStripeWidth = 0.0f;
-        }
-        
-        _progress = newProgress;
-    }
+    [self setProgress:progress animated:NO];
 }
 
 - (void)setProgressTintColor:(UIColor *)progressTintColor
@@ -181,6 +160,32 @@
 }
 
 #pragma mark - Public Methods
+
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated
+{
+    @synchronized (self)
+    {
+        CGFloat newProgress = progress;
+        if (newProgress > 1.0f)
+        {
+            newProgress = 1.0f;
+        } else if (newProgress < 0.0f)
+        {
+            newProgress = 0.0f;
+        }
+        
+        if (newProgress > 0.9988f || newProgress < 0.001f)
+        {
+            newProgress = 1.0f;
+            _progressStripeWidth = YLProgressBarDefaultStripeWidth;
+        } else
+        {
+            _progressStripeWidth = 0.0f;
+        }
+        
+        _progress = newProgress;
+    }
+}
 
 - (void)setProgressStripeAnimated:(BOOL)animated
 {

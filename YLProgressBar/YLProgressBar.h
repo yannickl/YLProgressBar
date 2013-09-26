@@ -100,4 +100,17 @@ typedef enum
 
 #pragma mark Public Methods
 
+/**
+ * @abstract Adjusts the current progress shown by the receiver, optionally 
+ * animating the change.
+ * @param progress The new progress value.
+ * @param animated YES if the change should be animated, NO if the change should
+ * happen immediately.
+ * @discussion The current progress is represented by a floating-point value 
+ * between 0.0 and 1.0, inclusive, where 1.0 indicates the completion of the task.
+ * The default value is 0.0. Values less than 0.0 and greater than 1.0 are pinned 
+ * to those limits.
+ */
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
+
 @end
