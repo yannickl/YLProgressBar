@@ -31,8 +31,8 @@
 #define YLProgressBarStripesDelta   8
 
 @interface YLProgressBar ()
-@property (nonatomic, assign)               double      progressOffset;
-@property (nonatomic, assign)               CGFloat     cornerRadius;
+@property (nonatomic, assign) double      progressOffset;
+@property (nonatomic, assign) CGFloat     cornerRadius;
 @property (nonatomic, strong) NSTimer     *animationTimer;
 @property (nonatomic, strong) NSArray     *colors;
 
@@ -81,13 +81,6 @@
     [self initializeProgressBar];
 }
 
-- (void)setHidden:(BOOL)hidden
-{
-    [super setHidden:hidden];
-    
-    [self setProgressStripeAnimated:(!hidden)];
-}
-
 - (void)drawRect:(CGRect)rect
 {
     // Refresh the corner radius value
@@ -119,6 +112,47 @@
 
 #pragma mark - Properties
 
+- (void)setHidden:(BOOL)hidden
+{
+    [super setHidden:hidden];
+    
+    [self setProgressStripeAnimated:(!hidden)];
+}
+
+- (CGFloat)progress
+{
+    @synchronized (self)
+    {
+        return _progress;
+    }
+}
+
+- (void)setProgress:(CGFloat)progress
+{
+    @synchronized (self)
+    {
+        CGFloat newProgress = progress;
+        if (newProgress > 1.0f)
+        {
+            newProgress = 1.0f;
+        } else if (newProgress < 0.0f)
+        {
+            newProgress = 0.0f;
+        }
+        
+        if (newProgress > 0.9988f || newProgress < 0.001f)
+        {
+            newProgress = 1.0f;
+            _progressStripeWidth = YLProgressBarDefaultStripeWidth;
+        } else
+        {
+            _progressStripeWidth = 0.0f;
+        }
+        
+        _progress = newProgress;
+    }
+}
+
 - (void)setProgressTintColor:(UIColor *)progressTintColor
 {
     progressTintColor  = (progressTintColor) ? progressTintColor : [UIColor blueColor];
@@ -143,7 +177,7 @@
     {
         [colors addObject:(id)color.CGColor];
     }
-    self.colors             = colors;
+    self.colors = colors;
 }
 
 #pragma mark - Public Methods
@@ -177,6 +211,7 @@
 
 - (void)initializeProgressBar
 {
+    self.progress                   = 0.0f;
     self.progressTintColor          = self.progressTintColor;
     self.progressOffset             = 0;
     self.animationTimer             = nil;
@@ -381,42 +416,6 @@
     CGContextRestoreGState(context);
     
     CGColorSpaceRelease(colorSpace);
-}
-
-- (CGFloat) progress
-{
-    @synchronized (self)
-    {
-        return _progress;
-    }
-}
-
-- (void) setProgress:(CGFloat)progress
-{
-    @synchronized (self)
-    {
-        CGFloat newProgress = progress;
-        if (newProgress > 1.0f)
-        {
-            newProgress = 1.0f;
-        }
-        else if (newProgress < 0.0f)
-        {
-            newProgress = 0.0f;
-        }
-        
-        if (newProgress > 0.9988f || newProgress < 0.001f)
-        {
-            newProgress = 1.0f;
-            _progressStripeWidth = YLProgressBarDefaultStripeWidth;
-        }
-        else
-        {
-            _progressStripeWidth = 0.0f;
-        }
-        
-        _progress = newProgress;
-    }
 }
 
 @end

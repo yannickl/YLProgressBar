@@ -84,7 +84,7 @@ typedef enum
  * The default value is 0.0. Values less than
  * 0.0 and greater than 1.0 are pinned to those limits.
  */
-@property (atomic, assign) CGFloat                             progress;
+@property (atomic, assign) CGFloat                              progress;
 
 /**
  * @abstract The color shown for the portion of the progress bar that is filled.
