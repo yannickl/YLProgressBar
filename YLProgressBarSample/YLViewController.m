@@ -166,7 +166,7 @@
         case 3:
         {
             _progressView.progressTintColor     = [UIColor greenColor];
-            _progressView.stripesOrientation    = YLProgressBarStripesOrientationRight;
+            _progressView.stripesOrientation    = YLProgressBarStripesOrientationLeft;
             _progressView.behavior              = YLProgressBarBehaviorDefault;
             break;
         }

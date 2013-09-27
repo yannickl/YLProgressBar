@@ -157,7 +157,7 @@
     progressTintColor  = (progressTintColor) ? progressTintColor : [UIColor blueColor];
     
     const CGFloat *c    = CGColorGetComponents(progressTintColor.CGColor);
-    UIColor *leftColor  = [UIColor colorWithRed:(c[0] / 3.0f) green:(c[1] / 3.0f) blue:(c[2] / 3.0f) alpha:(c[3])];
+    UIColor *leftColor  = [UIColor colorWithRed:(c[0] / 2.0f) green:(c[1] / 2.0f) blue:(c[2] / 2.0f) alpha:(c[3])];
     UIColor *rightColor = progressTintColor;
     NSArray *colors     = @[(id)leftColor, (id)rightColor];
     
@@ -293,15 +293,15 @@
         // Draw the white shadow
         [[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.2] set];
         
-        UIBezierPath *shadow        = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.5f, 0, rect.size.width - 1, rect.size.height - 1)
-                                                                 cornerRadius:_cornerRadius];
+        UIBezierPath *shadow    = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.5f, 0, rect.size.width - 1, rect.size.height - 1)
+                                                             cornerRadius:_cornerRadius];
         [shadow stroke];
         
         // Draw the inner glow
         [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4f] set];
         
-        UIBezierPath *glow          = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(_cornerRadius, 0, rect.size.width - _cornerRadius * 2, 1)
-                                                                 cornerRadius:0];
+        UIBezierPath *glow  = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(_cornerRadius, 0, rect.size.width - _cornerRadius * 2, 1)
+                                                         cornerRadius:0];
         [glow stroke];
     }
     CGContextRestoreGState(context);
