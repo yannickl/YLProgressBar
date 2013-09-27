@@ -119,7 +119,7 @@
             localProgress = _progressValue;
             break;
     }
-    NSLog(@"localProgress: %f progressValue:%f", localProgress, _progressValue);
+
     _progressValueLabel.text    = [NSString stringWithFormat:@"%.0f%%", (localProgress * 100)];
     _progressView.progress      = localProgress;
 }
@@ -149,7 +149,6 @@
         }
         case 1:
         {
-            // Traditional progressTintColor to define the color
             _progressView.progressTintColor     = [UIColor redColor];
             _progressView.behavior              = YLProgressBarBehaviorIndeterminate;
             break;
@@ -157,16 +156,19 @@
         case 2:
         {
             _progressView.progressTintColor     = [UIColor cyanColor];
+            _progressView.behavior              = YLProgressBarBehaviorWaiting;
             break;
         }
         case 3:
         {
             _progressView.progressTintColor     = [UIColor greenColor];
+            _progressView.behavior              = YLProgressBarBehaviorDefault;
             break;
         }
         case 4:
         {
             _progressView.progressTintColor     = [UIColor yellowColor];
+            _progressView.behavior              = YLProgressBarBehaviorDefault;
             break;
         }
         default:

@@ -96,15 +96,14 @@
     // Draw the background track
     [self drawTrackWithRect:rect];
     
-    if (self.progress < 0.001f && _behavior == YLProgressBarBehaviorIndeterminate)
+    if (self.progress == 0 && _behavior == YLProgressBarBehaviorIndeterminate)
     {
         CGRect innerRect = CGRectMake(YLProgressBarSizeInset,
                                       YLProgressBarSizeInset,
                                       rect.size.width - 2 * YLProgressBarSizeInset,
                                       rect.size.height - 2 * YLProgressBarSizeInset);
         [self drawStripesWithRect:innerRect];
-    }
-    else if (self.progress >= 0.001f)
+    } else if (self.progress > 0)
     {
         CGRect innerRect = CGRectMake(YLProgressBarSizeInset,
                                       YLProgressBarSizeInset,
@@ -115,7 +114,10 @@
         
         if (_stripesWidth > 0 && !_hideStripes)
         {
-            [self drawStripesWithRect:innerRect];
+            if (_behavior != YLProgressBarBehaviorIndeterminate)
+            {
+                [self drawStripesWithRect:innerRect];
+            }
         }
         
         [self drawGlossWithRect:innerRect];
