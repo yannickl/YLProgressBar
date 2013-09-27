@@ -29,8 +29,9 @@
 
 typedef NS_ENUM(NSUInteger, YLProgressBarStripesOrientation)
 {
-    YLProgressBarStripesOrientationLeft  = 0,
-    YLProgressBarStripesOrientationRight = 1,
+    YLProgressBarStripesOrientationLeft     = 0,
+    YLProgressBarStripesOrientationRight    = 1,
+    YLProgressBarStripesOrientationVertical = 2,
 };
 
 typedef NS_ENUM(NSUInteger, YLProgressBarBehavior)

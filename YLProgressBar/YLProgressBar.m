@@ -249,16 +249,23 @@
     
     [rect moveToPoint:origin];
     
-    if (orientation == YLProgressBarStripesOrientationRight)
+    switch (orientation)
     {
-        [rect addLineToPoint:CGPointMake(origin.x + _stripesWidth, origin.y)];
-        [rect addLineToPoint:CGPointMake(origin.x + _stripesWidth - YLProgressBarStripesDelta, origin.y + height)];
-        [rect addLineToPoint:CGPointMake(origin.x - YLProgressBarStripesDelta, origin.y + height)];
-    } else
-    {
-        [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth, origin.y)];
-        [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth + YLProgressBarStripesDelta, origin.y + height)];
-        [rect addLineToPoint:CGPointMake(origin.x + YLProgressBarStripesDelta, origin.y + height)];
+        case YLProgressBarStripesOrientationRight:
+            [rect addLineToPoint:CGPointMake(origin.x + _stripesWidth, origin.y)];
+            [rect addLineToPoint:CGPointMake(origin.x + _stripesWidth - YLProgressBarStripesDelta, origin.y + height)];
+            [rect addLineToPoint:CGPointMake(origin.x - YLProgressBarStripesDelta, origin.y + height)];
+            break;
+        case YLProgressBarStripesOrientationLeft:
+            [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth, origin.y)];
+            [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth + YLProgressBarStripesDelta, origin.y + height)];
+            [rect addLineToPoint:CGPointMake(origin.x + YLProgressBarStripesDelta, origin.y + height)];
+            break;
+        default:
+            [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth, origin.y)];
+            [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth, origin.y + height)];
+            [rect addLineToPoint:CGPointMake(origin.x, origin.y + height)];
+            break;
     }
     
     [rect addLineToPoint:origin];
@@ -406,9 +413,9 @@
         
         for (int i = -_stripesWidth; i <= rect.size.width / (2 * _stripesWidth) + (2 * _stripesWidth); i++)
         {
-            UIBezierPath *stripe    = [self stripeWithOrigin:CGPointMake(i * 2 * _stripesWidth + self.stripesOffset, YLProgressBarSizeInset)
-                                                      bounds:rect
-                                                 orientation:_stripesOrientation];
+            UIBezierPath *stripe = [self stripeWithOrigin:CGPointMake(i * 2 * _stripesWidth + self.stripesOffset, YLProgressBarSizeInset)
+                                                   bounds:rect
+                                              orientation:_stripesOrientation];
             [allStripes appendPath:stripe];
         }
         
