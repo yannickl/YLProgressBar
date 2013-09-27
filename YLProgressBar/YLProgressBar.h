@@ -27,6 +27,12 @@
 // Global
 #define YLProgressBarDefaultStripeWidth     7 //px
 
+/**
+ * @name Progress Bar Stripes Orientation
+ * @const YLProgressBarStripesOrientationLeft
+ * @const YLProgressBarStripesOrientationRight
+ * @const YLProgressBarStripesOrientationVertical
+ */
 typedef NS_ENUM(NSUInteger, YLProgressBarStripesOrientation)
 {
     YLProgressBarStripesOrientationLeft     = 0,
@@ -34,6 +40,15 @@ typedef NS_ENUM(NSUInteger, YLProgressBarStripesOrientation)
     YLProgressBarStripesOrientationVertical = 2,
 };
 
+/**
+ * @name Progress Bar Behavior
+ * @abstract The behavior of a progress bar.
+ * @const YLProgressBarBehaviorDefault The default behavior of a progress bar.
+ * @const YLProgressBarBehaviorIndeterminate This behavior display the stripes
+ * when the progress value is equal to 0 only.
+ * @const YLProgressBarBehaviorWaiting The waiting behavior display the stripes
+ * when the progress value is equal to 1 only.
+ */
 typedef NS_ENUM(NSUInteger, YLProgressBarBehavior)
 {
     YLProgressBarBehaviorDefault       = 0,
