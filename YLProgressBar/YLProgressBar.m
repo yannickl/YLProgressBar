@@ -31,16 +31,16 @@
 #define YLProgressBarStripesDelta   8
 
 @interface YLProgressBar ()
-@property (nonatomic, assign) double      progressOffset;
+@property (nonatomic, assign) double      stripesOffset;
 @property (nonatomic, assign) CGFloat     cornerRadius;
 @property (nonatomic, strong) NSTimer     *animationTimer;
 @property (nonatomic, strong) NSArray     *colors;
 
-/** Init the progress bar. */
+/** Init the progress bar with default values. */
 - (void)initializeProgressBar;
 
 /** Build the stripes using the given parameters. */
-- (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame orientation:(YLProgressBarStripeOrientation)orientation;
+- (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame orientation:(YLProgressBarStripesOrientation)orientation;
 
 /** Draw the background (track) of the slider. */
 - (void)drawTrackWithRect:(CGRect)rect;
@@ -54,8 +54,7 @@
 @end
 
 @implementation YLProgressBar
-
-@synthesize progress = _progress;
+@synthesize progress    = _progress;
 
 - (void)dealloc
 {
@@ -92,12 +91,20 @@
     self.cornerRadius   = rect.size.height / 2;
     
     // Compute the progressOffset for the stripe's animation
-    self.progressOffset = (!_progressStripeAnimated || self.progressOffset > 2 * _progressStripeWidth - 1) ? 0 : ++self.progressOffset;
+    self.stripesOffset = (!_stripesAnimated || self.stripesOffset > 2 * _stripesWidth - 1) ? 0 : ++self.stripesOffset;
     
     // Draw the background track
     [self drawTrackWithRect:rect];
     
-    if (self.progress > 0)
+    if (self.progress < 0.001f && _behavior == YLProgressBarBehaviorIndeterminate)
+    {
+        CGRect innerRect = CGRectMake(YLProgressBarSizeInset,
+                                      YLProgressBarSizeInset,
+                                      rect.size.width - 2 * YLProgressBarSizeInset,
+                                      rect.size.height - 2 * YLProgressBarSizeInset);
+        [self drawStripesWithRect:innerRect];
+    }
+    else if (self.progress >= 0.001f)
     {
         CGRect innerRect = CGRectMake(YLProgressBarSizeInset,
                                       YLProgressBarSizeInset,
@@ -106,7 +113,7 @@
         
         [self drawProgressBarWithRect:innerRect];
         
-        if (_progressStripeWidth > 0 && !_hideStripes)
+        if (_stripesWidth > 0 && !_hideStripes)
         {
             [self drawStripesWithRect:innerRect];
         }
@@ -128,6 +135,13 @@
 - (void)setProgress:(CGFloat)progress
 {
     [self setProgress:progress animated:NO];
+}
+
+- (void)setBehavior:(YLProgressBarBehavior)behavior
+{
+    _behavior   = behavior;
+    
+    [self setNeedsDisplay];
 }
 
 - (void)setProgressTintColor:(UIColor *)progressTintColor
@@ -173,12 +187,14 @@
         }
         
         _progress = newProgress;
+        
+        [self setNeedsDisplay];
     }
 }
 
-- (void)setProgressStripeAnimated:(BOOL)animated
+- (void)setStripesAnimated:(BOOL)animated
 {
-    _progressStripeAnimated = animated;
+    _stripesAnimated = animated;
     
     if (animated == YES)
     {
@@ -207,32 +223,33 @@
 {
     _progress       = 0.0f;
     _hideStripes    = NO;
+    _behavior       = YLProgressBarBehaviorDefault;
     
-    self.progressTintColor          = self.progressTintColor;
-    self.progressOffset             = 0;
-    self.animationTimer             = nil;
-    self.progressStripeAnimated     = YES;
-    self.progressStripeOrientation  = YLProgressBarStripeOrientationRight;
-    self.progressStripeWidth        = YLProgressBarDefaultStripeWidth;
-    self.backgroundColor            = [UIColor clearColor];
+    self.progressTintColor   = self.progressTintColor;
+    self.stripesOffset       = 0;
+    self.animationTimer      = nil;
+    self.stripesAnimated     = YES;
+    self.stripesOrientation  = YLProgressBarStripesOrientationRight;
+    self.stripesWidth        = YLProgressBarDefaultStripeWidth;
+    self.backgroundColor     = [UIColor clearColor];
 }
 
-- (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame orientation:(YLProgressBarStripeOrientation)orientation
+- (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame orientation:(YLProgressBarStripesOrientation)orientation
 {
     float height        = frame.size.height;
     UIBezierPath *rect  = [UIBezierPath bezierPath];
     
     [rect moveToPoint:origin];
     
-    if (orientation == YLProgressBarStripeOrientationRight)
+    if (orientation == YLProgressBarStripesOrientationRight)
     {
-        [rect addLineToPoint:CGPointMake(origin.x + _progressStripeWidth, origin.y)];
-        [rect addLineToPoint:CGPointMake(origin.x + _progressStripeWidth - YLProgressBarStripesDelta, origin.y + height)];
+        [rect addLineToPoint:CGPointMake(origin.x + _stripesWidth, origin.y)];
+        [rect addLineToPoint:CGPointMake(origin.x + _stripesWidth - YLProgressBarStripesDelta, origin.y + height)];
         [rect addLineToPoint:CGPointMake(origin.x - YLProgressBarStripesDelta, origin.y + height)];
     } else
     {
-        [rect addLineToPoint:CGPointMake(origin.x - _progressStripeWidth, origin.y)];
-        [rect addLineToPoint:CGPointMake(origin.x - _progressStripeWidth + YLProgressBarStripesDelta, origin.y + height)];
+        [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth, origin.y)];
+        [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth + YLProgressBarStripesDelta, origin.y + height)];
         [rect addLineToPoint:CGPointMake(origin.x + YLProgressBarStripesDelta, origin.y + height)];
     }
     
@@ -379,11 +396,11 @@
     {
         UIBezierPath *allStripes = [UIBezierPath bezierPath];
         
-        for (int i = -_progressStripeWidth; i <= rect.size.width / (2 * _progressStripeWidth) + (2 * _progressStripeWidth); i++)
+        for (int i = -_stripesWidth; i <= rect.size.width / (2 * _stripesWidth) + (2 * _stripesWidth); i++)
         {
-            UIBezierPath *stripe    = [self stripeWithOrigin:CGPointMake(i * 2 * _progressStripeWidth + self.progressOffset, YLProgressBarSizeInset)
+            UIBezierPath *stripe    = [self stripeWithOrigin:CGPointMake(i * 2 * _stripesWidth + self.stripesOffset, YLProgressBarSizeInset)
                                                       bounds:rect
-                                                 orientation:_progressStripeOrientation];
+                                                 orientation:_stripesOrientation];
             [allStripes appendPath:stripe];
         }
         
@@ -399,7 +416,7 @@
             CGContextAddPath(context, [allStripes CGPath]);
             CGContextClip(context);
             
-            const CGFloat stripesColorComponents[]  = { 0.0f, 0.0f, 0.0f, 0.28f };
+            const CGFloat stripesColorComponents[]  = { 1.0f, 1.0f, 1.0f, 0.28f };
             CGColorRef stripesColor                 = CGColorCreate(colorSpace, stripesColorComponents);
             
             CGContextSetFillColorWithColor(context, stripesColor);

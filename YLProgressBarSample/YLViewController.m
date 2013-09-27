@@ -11,7 +11,8 @@
 #import "YLProgressBar.h"
 
 @interface YLViewController ()
-@property (nonatomic, strong) NSTimer*    progressTimer;
+@property (nonatomic, strong) NSTimer *progressTimer;
+@property (nonatomic, assign) CGFloat progressValue;
 
 @end
 
@@ -31,6 +32,7 @@
 {
     [super viewDidLoad];
     
+    self.progressValue  = 0;
     self.progressTimer  = [NSTimer scheduledTimerWithTimeInterval:0.3f
                                                            target:self
                                                          selector:@selector(changeProgressValue)
@@ -99,16 +101,27 @@
 
 - (void)changeProgressValue
 {
-    CGFloat progressValue         = _progressView.progress;
-
-    progressValue               += 0.01f;
-    if (progressValue > 1)
+    CGFloat localProgress   = 0;
+    
+    _progressValue  += 0.01f;
+    if (_progressValue > 1)
     {
-        progressValue = 0;
+        _progressValue = 0;
     }
     
-    _progressValueLabel.text    = [NSString stringWithFormat:@"%.0f%%", (progressValue * 100)];
-    _progressView.progress      = progressValue;
+    switch (_progressView.behavior)
+    {
+        case YLProgressBarBehaviorIndeterminate:
+            localProgress = _progressValue - 0.2f;
+            localProgress = (localProgress < 0) ? 0 : localProgress;
+            break;
+        default:
+            localProgress = _progressValue;
+            break;
+    }
+    NSLog(@"localProgress: %f progressValue:%f", localProgress, _progressValue);
+    _progressValueLabel.text    = [NSString stringWithFormat:@"%.0f%%", (localProgress * 100)];
+    _progressView.progress      = localProgress;
 }
 
 - (IBAction)colorButtonTapped:(id)sender
@@ -120,23 +133,25 @@
         {
             // Use the progressTintColors to defines the colors of the progress bar
             NSArray *tintColors                 = @[[UIColor colorWithRed:33/255.0f green:180/255.0f blue:162/255.0f alpha:1.0f],
-                                                   [UIColor colorWithRed:3/255.0f green:137/255.0f blue:166/255.0f alpha:1.0f],
-                                                   [UIColor colorWithRed:91/255.0f green:63/255.0f blue:150/255.0f alpha:1.0f],
-                                                   [UIColor colorWithRed:87/255.0f green:26/255.0f blue:70/255.0f alpha:1.0f],
-                                                   [UIColor colorWithRed:126/255.0f green:26/255.0f blue:36/255.0f alpha:1.0f],
-                                                   [UIColor colorWithRed:149/255.0f green:37/255.0f blue:36/255.0f alpha:1.0f],
-                                                   [UIColor colorWithRed:228/255.0f green:69/255.0f blue:39/255.0f alpha:1.0f],
-                                                   [UIColor colorWithRed:245/255.0f green:166/255.0f blue:35/255.0f alpha:1.0f],
-                                                   [UIColor colorWithRed:165/255.0f green:202/255.0f blue:60/255.0f alpha:1.0f],
-                                                   [UIColor colorWithRed:202/255.0f green:217/255.0f blue:54/255.0f alpha:1.0f],
-                                                   [UIColor colorWithRed:111/255.0f green:188/255.0f blue:84/255.0f alpha:1.0f]];
+                                                    [UIColor colorWithRed:3/255.0f green:137/255.0f blue:166/255.0f alpha:1.0f],
+                                                    [UIColor colorWithRed:91/255.0f green:63/255.0f blue:150/255.0f alpha:1.0f],
+                                                    [UIColor colorWithRed:87/255.0f green:26/255.0f blue:70/255.0f alpha:1.0f],
+                                                    [UIColor colorWithRed:126/255.0f green:26/255.0f blue:36/255.0f alpha:1.0f],
+                                                    [UIColor colorWithRed:149/255.0f green:37/255.0f blue:36/255.0f alpha:1.0f],
+                                                    [UIColor colorWithRed:228/255.0f green:69/255.0f blue:39/255.0f alpha:1.0f],
+                                                    [UIColor colorWithRed:245/255.0f green:166/255.0f blue:35/255.0f alpha:1.0f],
+                                                    [UIColor colorWithRed:165/255.0f green:202/255.0f blue:60/255.0f alpha:1.0f],
+                                                    [UIColor colorWithRed:202/255.0f green:217/255.0f blue:54/255.0f alpha:1.0f],
+                                                    [UIColor colorWithRed:111/255.0f green:188/255.0f blue:84/255.0f alpha:1.0f]];
             _progressView.progressTintColors    = tintColors;
+            _progressView.behavior              = YLProgressBarBehaviorDefault;
             break;
         }
         case 1:
         {
             // Traditional progressTintColor to define the color
             _progressView.progressTintColor     = [UIColor redColor];
+            _progressView.behavior              = YLProgressBarBehaviorIndeterminate;
             break;
         }
         case 2:
@@ -157,6 +172,8 @@
         default:
             break;
     }
+    
+    [self changeProgressValue];
 }
 
 #pragma mark YLViewController Private Methods
