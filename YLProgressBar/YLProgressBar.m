@@ -114,7 +114,13 @@
         
         if (_stripesWidth > 0 && !_hideStripes)
         {
-            if (_behavior != YLProgressBarBehaviorIndeterminate)
+            if (_behavior == YLProgressBarBehaviorWaiting)
+            {
+                if (self.progress == 1.0f)
+                {
+                    [self drawStripesWithRect:innerRect];
+                }
+            } else if (_behavior != YLProgressBarBehaviorIndeterminate)
             {
                 [self drawStripesWithRect:innerRect];
             }

@@ -115,6 +115,10 @@
             localProgress = _progressValue - 0.2f;
             localProgress = (localProgress < 0) ? 0 : localProgress;
             break;
+        case YLProgressBarBehaviorWaiting:
+            localProgress =_progressValue + 0.2f;
+            localProgress = (localProgress > 1.0f) ? 1.0f : localProgress;
+            break;
         default:
             localProgress = _progressValue;
             break;
