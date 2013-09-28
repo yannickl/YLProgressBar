@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ###
-# You need appledoc 2.1 (https://github.com/tomaz/appledoc/) to generate the documentation thanks to this script
+# You need appledoc 2.2 (https://github.com/tomaz/appledoc/) to generate the documentation thanks to this script
 ###
 
 mkdir documentation
 
-/Applications/appledoc -h AppledocSettings.plist ./YLProgressBar 
+/usr/local/bin/appledoc -h AppledocSettings.plist ./YLProgressBar

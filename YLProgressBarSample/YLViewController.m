@@ -148,18 +148,21 @@
                                                     [UIColor colorWithRed:202/255.0f green:217/255.0f blue:54/255.0f alpha:1.0f],
                                                     [UIColor colorWithRed:111/255.0f green:188/255.0f blue:84/255.0f alpha:1.0f]];
             _progressView.progressTintColors    = tintColors;
+            _progressView.stripesOrientation    = YLProgressBarStripesOrientationRight;
             _progressView.behavior              = YLProgressBarBehaviorDefault;
             break;
         }
         case 1:
         {
             _progressView.progressTintColor     = [UIColor redColor];
+            _progressView.stripesOrientation    = YLProgressBarStripesOrientationRight;
             _progressView.behavior              = YLProgressBarBehaviorIndeterminate;
             break;
         }
         case 2:
         {
             _progressView.progressTintColor     = [UIColor cyanColor];
+            _progressView.stripesOrientation    = YLProgressBarStripesOrientationRight;
             _progressView.behavior              = YLProgressBarBehaviorWaiting;
             break;
         }
@@ -173,6 +176,7 @@
         case 4:
         {
             _progressView.progressTintColor     = [UIColor yellowColor];
+            _progressView.stripesOrientation    = YLProgressBarStripesOrientationRight;
             _progressView.stripesOrientation    = YLProgressBarStripesOrientationVertical;
             _progressView.behavior              = YLProgressBarBehaviorDefault;
             break;

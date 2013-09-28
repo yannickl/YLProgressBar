@@ -28,31 +28,44 @@
 #define YLProgressBarDefaultStripeWidth     7 //px
 
 /**
- * @name Progress Bar Stripes Orientation
- * @const YLProgressBarStripesOrientationLeft
- * @const YLProgressBarStripesOrientationRight
- * @const YLProgressBarStripesOrientationVertical
+ * The stripes orienation.
  */
 typedef NS_ENUM(NSUInteger, YLProgressBarStripesOrientation)
 {
-    YLProgressBarStripesOrientationLeft     = 0,
-    YLProgressBarStripesOrientationRight    = 1,
+    /**
+     * The stripes are obliques in the north-west direction.
+     */
+    YLProgressBarStripesOrientationRight    = 0,
+    /**
+     * The stripes are obliques in the south-west direction.
+     */
+    YLProgressBarStripesOrientationLeft     = 1,
+    /**
+     * The stripes are verticals.
+     */
     YLProgressBarStripesOrientationVertical = 2,
 };
 
 /**
- * @name Progress Bar Behavior
- * @abstract The behavior of a progress bar.
- * @const YLProgressBarBehaviorDefault The default behavior of a progress bar.
- * @const YLProgressBarBehaviorIndeterminate This behavior display the stripes
- * when the progress value is equal to 0 only.
- * @const YLProgressBarBehaviorWaiting The waiting behavior display the stripes
- * when the progress value is equal to 1 only.
+ * The behavior of a progress bar.
  */
 typedef NS_ENUM(NSUInteger, YLProgressBarBehavior)
 {
+    /**
+     * The default behavior of a progress bar. This mode is identical to the
+     * UIProgressView.
+     */
     YLProgressBarBehaviorDefault       = 0,
+    /**
+     * The indeterminate behavior display the stripes when the progress value 
+     * is equal to 0 only. This mode is helpful when percentage is not yet 
+     * known, but will be known shortly.
+     */
     YLProgressBarBehaviorIndeterminate = 1,
+    /**
+     * The waiting behavior display the stripes when the progress value is
+     * equal to 1 only.
+     */
     YLProgressBarBehaviorWaiting       = 2,
 };
 
