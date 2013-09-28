@@ -150,6 +150,7 @@
             _progressView.progressTintColors    = tintColors;
             _progressView.stripesOrientation    = YLProgressBarStripesOrientationRight;
             _progressView.behavior              = YLProgressBarBehaviorDefault;
+            _progressView.stripesColor          = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.28f];
             break;
         }
         case 1:
@@ -157,6 +158,7 @@
             _progressView.progressTintColor     = [UIColor redColor];
             _progressView.stripesOrientation    = YLProgressBarStripesOrientationRight;
             _progressView.behavior              = YLProgressBarBehaviorIndeterminate;
+            _progressView.stripesColor          = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.28f];
             break;
         }
         case 2:
@@ -164,6 +166,7 @@
             _progressView.progressTintColor     = [UIColor cyanColor];
             _progressView.stripesOrientation    = YLProgressBarStripesOrientationRight;
             _progressView.behavior              = YLProgressBarBehaviorWaiting;
+            _progressView.stripesColor          = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.28f];
             break;
         }
         case 3:
@@ -171,6 +174,7 @@
             _progressView.progressTintColor     = [UIColor greenColor];
             _progressView.stripesOrientation    = YLProgressBarStripesOrientationLeft;
             _progressView.behavior              = YLProgressBarBehaviorDefault;
+            _progressView.stripesColor          = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.28f];
             break;
         }
         case 4:
@@ -179,6 +183,7 @@
             _progressView.stripesOrientation    = YLProgressBarStripesOrientationRight;
             _progressView.stripesOrientation    = YLProgressBarStripesOrientationVertical;
             _progressView.behavior              = YLProgressBarBehaviorDefault;
+            _progressView.stripesColor          = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.28f];
             break;
         }
         default:

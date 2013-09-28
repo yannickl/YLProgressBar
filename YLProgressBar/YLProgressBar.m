@@ -232,6 +232,7 @@
     _progress       = 0.0f;
     _hideStripes    = NO;
     _behavior       = YLProgressBarBehaviorDefault;
+    _stripesColor   = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.28f];
     
     self.progressTintColor   = self.progressTintColor;
     self.stripesOffset       = 0;
@@ -404,9 +405,8 @@
 
 - (void)drawStripesWithRect:(CGRect)rect
 {
-    CGContextRef context        = UIGraphicsGetCurrentContext();
-    CGColorSpaceRef colorSpace  = CGColorSpaceCreateDeviceRGB ();
-    
+    CGContextRef context    = UIGraphicsGetCurrentContext();
+
     CGContextSaveGState(context);
     {
         UIBezierPath *allStripes = [UIBezierPath bezierPath];
@@ -430,20 +430,13 @@
             // Clip the stripes
             CGContextAddPath(context, [allStripes CGPath]);
             CGContextClip(context);
-            
-            const CGFloat stripesColorComponents[]  = { 1.0f, 1.0f, 1.0f, 0.28f };
-            CGColorRef stripesColor                 = CGColorCreate(colorSpace, stripesColorComponents);
-            
-            CGContextSetFillColorWithColor(context, stripesColor);
+
+            CGContextSetFillColorWithColor(context, [_stripesColor CGColor]);
             CGContextFillRect(context, rect);
-            
-            CGColorRelease(stripesColor);
         }
         CGContextRestoreGState(context);
     }
     CGContextRestoreGState(context);
-    
-    CGColorSpaceRelease(colorSpace);
 }
 
 @end

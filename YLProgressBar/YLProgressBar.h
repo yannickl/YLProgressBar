@@ -154,6 +154,11 @@ typedef NS_ENUM(NSUInteger, YLProgressBarBehavior)
 @property (nonatomic, assign) NSInteger stripesWidth;
 
 /**
+ * @abstract The color show for the stripes over the progress bar.
+ */
+@property (nonatomic, strong) UIColor *stripesColor;
+
+/**
  * @abstract A Boolean value that determines whether the stripes are hidden.
  * @discussion Setting the value of this property to YES hides the stripes and
  * setting it to NO shows the stripes. The default value is NO.
