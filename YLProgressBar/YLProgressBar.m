@@ -344,17 +344,20 @@
 {
     CGContextRef context        = UIGraphicsGetCurrentContext();
     CGColorSpaceRef colorSpace  = CGColorSpaceCreateDeviceRGB();
-    
+
     CGContextSaveGState(context);
     {
+        CGRect fillRect = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, floorf(rect.size.height / 3));
+        
         // Draw the gloss
         CGContextSetBlendMode(context, kCGBlendModeOverlay);
-        CGContextBeginTransparencyLayerWithRect(context, CGRectMake(rect.origin.x, rect.origin.y + floorf(rect.size.height) / 2, rect.size.width, floorf(rect.size.height) / 2), NULL);
+        CGContextBeginTransparencyLayerWithRect(context, fillRect, NULL);
         {
-            const CGFloat glossGradientComponents[] = {1.0f, 1.0f, 1.0f, 0.47f, 0.0f, 0.0f, 0.0f, 0.0f};
-            const CGFloat glossGradientLocations[]  = {1.0, 0.0};
-            CGGradientRef glossGradient = CGGradientCreateWithColorComponents(colorSpace, glossGradientComponents, glossGradientLocations, (kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation));
-            CGContextDrawLinearGradient(context, glossGradient, CGPointMake(0, 0), CGPointMake(0, rect.size.width), 0);
+            const CGFloat glossGradientComponents[] = {1.0f, 1.0f, 1.0f, 0.16f, 1.0f, 1.0f, 1.0f, 0.16f};
+            const CGGradientRef glossGradient       = CGGradientCreateWithColorComponents(colorSpace, glossGradientComponents, NULL, (kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation));
+            CGPoint startPoint                      = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect));
+            CGPoint endPoint                        = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect));
+            CGContextDrawLinearGradient(context, glossGradient, startPoint, endPoint, 0);
             CGGradientRelease(glossGradient);
         }
         CGContextEndTransparencyLayer(context);
@@ -363,10 +366,8 @@
         CGContextSetBlendMode(context, kCGBlendModeSoftLight);
         CGContextBeginTransparencyLayer(context, NULL);
         {
-            CGRect fillRect = CGRectMake(rect.origin.x, rect.origin.y + floorf(rect.size.height / 2), rect.size.width, floorf(rect.size.height / 2));
-            
-            const CGFloat glossDropShadowComponents[] = {0.0f, 0.0f, 0.0f, 0.56f, 0.0f, 0.0f, 0.0f, 0.0f};
-            CGColorRef glossDropShadowColor = CGColorCreate(colorSpace, glossDropShadowComponents);
+            const CGFloat glossDropShadowComponents[] = {0.0f, 0.0f, 0.0f, 0.16f, 0.0f, 0.0f, 0.0f, 0.0f};
+            CGColorRef glossDropShadowColor           = CGColorCreate(colorSpace, glossDropShadowComponents);
             
             CGContextSaveGState(context);
             {
@@ -383,13 +384,13 @@
     }
     CGContextRestoreGState(context);
     
-    UIBezierPath *progressBounds    = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:_cornerRadius];
-    
     // Draw progress bar glow
     CGContextSaveGState(context);
     {
+        UIBezierPath *progressBounds = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:_cornerRadius];
         CGContextAddPath(context, [progressBounds CGPath]);
-        const CGFloat progressBarGlowComponents[]   = {1.0f, 1.0f, 1.0f, 0.12f};
+        
+        const CGFloat progressBarGlowComponents[]   = {1.0f, 1.0f, 1.0f, 0.16f};
         CGColorRef progressBarGlowColor             = CGColorCreate(colorSpace, progressBarGlowComponents);
         
         CGContextSetBlendMode(context, kCGBlendModeOverlay);

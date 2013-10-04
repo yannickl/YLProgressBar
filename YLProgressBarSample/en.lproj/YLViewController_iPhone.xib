@@ -26,7 +26,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="13">
-                    <rect key="frame" x="0.0" y="431" width="320" height="30"/>
+                    <rect key="frame" x="5" y="431" width="310" height="30"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <segments>
                         <segment title="Rainbow"/>
@@ -41,7 +41,7 @@
                     </connections>
                 </segmentedControl>
                 <view contentMode="scaleToFill" id="FDt-Cn-iar" customClass="YLProgressBar">
-                    <rect key="frame" x="85" y="220" width="150" height="15"/>
+                    <rect key="frame" x="85" y="223" width="150" height="10"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>

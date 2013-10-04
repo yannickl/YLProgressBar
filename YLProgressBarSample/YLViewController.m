@@ -119,7 +119,7 @@
     CGFloat localProgress   = 0;
     
     _progressValue  += 0.01f;
-    if (_progressValue > 1)
+    if (_progressValue > 1.0f)
     {
         _progressValue = 0;
     }
