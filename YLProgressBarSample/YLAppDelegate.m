@@ -11,9 +11,8 @@
 #import "YLViewController.h"
 
 @implementation YLAppDelegate
-
-@synthesize window = _window;
-@synthesize viewController = _viewController;
+@synthesize window          = _window;
+@synthesize viewController  = _viewController;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -28,7 +27,7 @@
     {
         self.viewController = [[YLViewController alloc] initWithNibName:@"YLViewController_iPad" bundle:nil];
     }
-    self.window.rootViewController = self.viewController;
+    self.window.rootViewController = _viewController;
     [self.window makeKeyAndVisible];
     
     return YES;
@@ -71,6 +70,18 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+
+// For iOS6 and newer
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        return UIInterfaceOrientationMaskAllButUpsideDown;
+    } else
+    {
+        return UIInterfaceOrientationMaskAll;
+    }
 }
 
 @end

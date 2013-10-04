@@ -77,15 +77,25 @@
 }
 
 // For iOS6 and newer
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
 - (NSUInteger)supportedInterfaceOrientations
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
-        return UIInterfaceOrientationPortrait|UIInterfaceOrientationMaskLandscape;
+        return UIInterfaceOrientationMaskAllButUpsideDown;
     } else
     {
         return UIInterfaceOrientationMaskAll;
     }
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationPortrait;
 }
 
 // For iOS5 and older

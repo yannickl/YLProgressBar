@@ -1,7 +1,7 @@
 /*
  * YLBackgroundView.m
  *
- * Copyright 2012 Yannick Loriot.
+ * Copyright 2013 Yannick Loriot.
  * http://yannickloriot.com
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy

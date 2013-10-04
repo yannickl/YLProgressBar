@@ -1,7 +1,7 @@
 /*
  * YLBackgroundView.h
  *
- * Copyright 2012 Yannick Loriot.
+ * Copyright 2013 Yannick Loriot.
  * http://yannickloriot.com
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,10 +27,6 @@
 #import <UIKit/UIKit.h>
 
 @interface YLBackgroundView : UIView
-{
-@protected
-    UIImage *noizeImage;
-}
 
 #pragma mark Contructors - Initializers
 
