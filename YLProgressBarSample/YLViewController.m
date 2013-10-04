@@ -71,6 +71,11 @@
 	[super viewDidDisappear:animated];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 // For iOS6 and newer
 - (NSUInteger)supportedInterfaceOrientations
 {
