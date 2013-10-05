@@ -239,12 +239,12 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
  * @discussion The default value is set to 
  * YLProgressBarIndicatorTextDisplayModeNone.
  */
-@property (nonatomic, assign) YLProgressBarIndicatorTextDisplayMode indicatorTextDisplayMode;
+@property (nonatomic, assign) YLProgressBarIndicatorTextDisplayMode indicatorTextDisplayMode; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The type of the progress bar.
  * @discussion The default value is set to YLProgressBarTypeRounded.
  */
-@property (nonatomic, assign) YLProgressBarType type;
+@property (nonatomic, assign) YLProgressBarType type; //UI_APPEARANCE_SELECTOR;
 
 @end

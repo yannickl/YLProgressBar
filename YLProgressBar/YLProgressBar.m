@@ -27,14 +27,19 @@
 #import "YLProgressBar.h"
 
 // Sizes
-#define YLProgressBarSizeInset      1 //px
-#define YLProgressBarStripesDelta   8 //px
+const NSInteger YLProgressBarSizeInset    = 1; //px
+const NSInteger YLProgressBarStripesDelta = 8; //px
+
+// Animation times
+const NSTimeInterval YLProgressBarStripesAnimationTime = 1.0f / 30.0f; // s
+const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
 
 @interface YLProgressBar ()
 @property (nonatomic, assign) double      stripesOffset;
 @property (nonatomic, assign) CGFloat     cornerRadius;
 @property (nonatomic, strong) NSTimer     *stripesTimer;
 @property (nonatomic, strong) NSArray     *colors;
+@property (nonatomic, strong) NSTimer     *progressTargetTimer;
 @property (nonatomic, assign) CGFloat     progressTargetValue;
 
 /** Init the progress bar with the default values. */
@@ -54,6 +59,9 @@
 /** Draw the given text into the given location of the rect. */
 - (void)drawText:(CGContextRef)context withRect:(CGRect)rect;
 
+/** Callback for the setProgress:Animated: animation timer. */
+- (void)updateProgressWithTimer:(NSTimer *)timer;
+
 @end
 
 @implementation YLProgressBar
@@ -64,6 +72,10 @@
     if (_stripesTimer && [_stripesTimer isValid])
     {
         [_stripesTimer invalidate];
+    }
+    if (_progressTargetTimer && [_progressTargetTimer isValid])
+    {
+        [_progressTargetTimer invalidate];
     }
 }
 
@@ -212,12 +224,11 @@
     {
         if (self.stripesTimer == nil)
         {
-            const NSTimeInterval refreshInterval = 1.0f / 30.0f;
-            self.stripesTimer                    = [NSTimer timerWithTimeInterval:refreshInterval
-                                                                           target:self
-                                                                         selector:@selector(setNeedsDisplay)
-                                                                         userInfo:nil
-                                                                          repeats:YES];
+            self.stripesTimer= [NSTimer timerWithTimeInterval:YLProgressBarStripesAnimationTime
+                                                       target:self
+                                                     selector:@selector(setNeedsDisplay)
+                                                     userInfo:nil
+                                                      repeats:YES];
             [[NSRunLoop currentRunLoop] addTimer:_stripesTimer forMode:NSRunLoopCommonModes];
         }
     } else
@@ -237,6 +248,11 @@
 {
     @synchronized (self)
     {
+        if (_progressTargetTimer && [_progressTargetTimer isValid])
+        {
+            [_progressTargetTimer invalidate];
+        }
+        
         CGFloat newProgress = progress;
         if (newProgress > 1.0f)
         {
@@ -246,13 +262,44 @@
             newProgress = 0.0f;
         }
         
-        _progress = newProgress;
-        
-        [self setNeedsDisplay];
+        if (animated)
+        {
+            _progressTargetValue        = newProgress;
+            CGFloat incrementValue      = ((_progressTargetValue - _progress) * YLProgressBarStripesAnimationTime) / YLProgressBarProgressTime;
+            self.progressTargetTimer    = [NSTimer timerWithTimeInterval:YLProgressBarStripesAnimationTime
+                                                                  target:self
+                                                                selector:@selector(updateProgressWithTimer:)
+                                                                userInfo:[NSNumber numberWithFloat:incrementValue]
+                                                                 repeats:YES];
+            [[NSRunLoop currentRunLoop] addTimer:_progressTargetTimer forMode:NSRunLoopCommonModes];
+        } else
+        {
+            _progress = newProgress;
+            
+            [self setNeedsDisplay];
+        }
     }
 }
 
 #pragma mark - Private Methods
+
+- (void)updateProgressWithTimer:(NSTimer *)timer
+{
+    CGFloat dt_progress = [timer.userInfo floatValue];
+    
+    _progress += dt_progress;
+
+    if ((dt_progress < 0 && _progress <= _progressTargetValue)
+        || (dt_progress > 0 && _progress >= _progressTargetValue))
+    {
+        [_progressTargetTimer invalidate];
+        _progressTargetTimer = nil;
+        
+        _progress = _progressTargetValue;
+    }
+    
+    [self setNeedsDisplay];
+}
 
 - (void)initializeProgressBar
 {
