@@ -28,7 +28,22 @@
 #define YLProgressBarDefaultStripeWidth     7 //px
 
 /**
- * The stripes orienation.
+ * The progress bar appearance.
+ */
+typedef NS_ENUM (NSUInteger, YLProgressBarType)
+{
+    /**
+     * The progress bar has rounded corners and the gloss effect.
+     */
+    YLProgressBarTypeRounded = 0,
+    /**
+     * The progress bar has squared corners and no gloss.
+     */
+    YLProgressBarTypeFlat = 1,
+};
+
+/**
+ * The stripes orientation.
  */
 typedef NS_ENUM (NSUInteger, YLProgressBarStripesOrientation)
 {
@@ -225,5 +240,11 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
  * YLProgressBarIndicatorTextDisplayModeNone.
  */
 @property (nonatomic, assign) YLProgressBarIndicatorTextDisplayMode indicatorTextDisplayMode;
+
+/**
+ * @abstract The type of the progress bar.
+ * @discussion The default value is set to YLProgressBarTypeRounded.
+ */
+@property (nonatomic, assign) YLProgressBarType type;
 
 @end

@@ -95,7 +95,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     // Refresh the corner radius value
-    self.cornerRadius   = rect.size.height / 2;
+    self.cornerRadius   = (_type == YLProgressBarTypeRounded) ? rect.size.height / 2 : 0;
     
     // Compute the progressOffset for the stripe's animation
     self.stripesOffset = (!_stripesAnimated || self.stripesOffset > 2 * _stripesWidth - 1) ? 0 : ++self.stripesOffset;
@@ -139,7 +139,10 @@
             }
         }
         
-        [self drawGloss:context withRect:innerRect];
+        if (_type == YLProgressBarTypeRounded)
+        {
+            [self drawGloss:context withRect:innerRect];
+        }
         
         // Draw the indicator text if necessary
         if (_indicatorTextDisplayMode == YLProgressBarIndicatorTextDisplayModeProgress)
@@ -253,6 +256,7 @@
 
 - (void)initializeProgressBar
 {
+    _type           = YLProgressBarTypeRounded;
     _progress       = 0.0f;
     _hideStripes    =  NO;
     _behavior       = YLProgressBarBehaviorDefault;
@@ -324,19 +328,22 @@
         UIBezierPath* roundedRect   = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, rect.size.width, rect.size.height-1) cornerRadius:_cornerRadius];
         [roundedRect fill];
         
-        // Draw the white shadow
-        [[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.2] set];
-        
-        UIBezierPath *shadow    = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.5f, 0, rect.size.width - 1, rect.size.height - 1)
-                                                             cornerRadius:_cornerRadius];
-        [shadow stroke];
-        
-        // Draw the inner glow
-        [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4f] set];
-        
-        UIBezierPath *glow  = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(_cornerRadius, 0, rect.size.width - _cornerRadius * 2, 1)
-                                                         cornerRadius:0];
-        [glow stroke];
+        if (_type == YLProgressBarTypeRounded)
+        {
+            // Draw the white shadow
+            [[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.2] set];
+            
+            UIBezierPath *shadow    = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.5f, 0, rect.size.width - 1, rect.size.height - 1)
+                                                                 cornerRadius:_cornerRadius];
+            [shadow stroke];
+            
+            // Draw the inner glow
+            [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4f] set];
+            
+            UIBezierPath *glow  = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(_cornerRadius, 0, rect.size.width - _cornerRadius * 2, 1)
+                                                             cornerRadius:0];
+            [glow stroke];
+        }
     }
     CGContextRestoreGState(context);
 }
