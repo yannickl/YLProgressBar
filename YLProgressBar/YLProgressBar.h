@@ -30,7 +30,7 @@
 /**
  * The stripes orienation.
  */
-typedef NS_ENUM(NSUInteger, YLProgressBarStripesOrientation)
+typedef NS_ENUM (NSUInteger, YLProgressBarStripesOrientation)
 {
     /**
      * The stripes are obliques in the north-west direction.
@@ -49,7 +49,7 @@ typedef NS_ENUM(NSUInteger, YLProgressBarStripesOrientation)
 /**
  * The behavior of a progress bar.
  */
-typedef NS_ENUM(NSUInteger, YLProgressBarBehavior)
+typedef NS_ENUM (NSUInteger, YLProgressBarBehavior)
 {
     /**
      * The default behavior of a progress bar. This mode is identical to the
@@ -67,6 +67,26 @@ typedef NS_ENUM(NSUInteger, YLProgressBarBehavior)
      * equal to 1 only.
      */
     YLProgressBarBehaviorWaiting       = 2,
+};
+
+/**
+ * The display mode of the indicator text.
+ */
+typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
+{
+    /**
+     * The indicator text is not displayed.
+     */
+    YLProgressBarIndicatorTextDisplayModeNone      = 0,
+    /**
+     * The indicator text is displayed over the track bar and below the
+     * progress bar.
+     */
+    YLProgressBarIndicatorTextDisplayModeTrack     = 1,
+    /**
+     * The indicator text is diplayed over the progress bar.
+     */
+    YLProgressBarIndicatorTextDisplayModeProgress  = 2,
 };
 
 /**
@@ -197,5 +217,13 @@ typedef NS_ENUM(NSUInteger, YLProgressBarBehavior)
  * change using the background color.
  */
 @property (nonatomic, strong) UILabel *indicatorTextLabel;
+
+/**
+ * @abstract The display indicator text mode. It defines where the 
+ * indicator text needs to display.
+ * @discussion The default value is set to 
+ * YLProgressBarIndicatorTextDisplayModeNone.
+ */
+@property (nonatomic, assign) YLProgressBarIndicatorTextDisplayMode indicatorTextDisplayMode;
 
 @end

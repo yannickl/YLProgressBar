@@ -169,6 +169,9 @@
             _progressView.stripesOrientation    = YLProgressBarStripesOrientationRight;
             _progressView.behavior              = YLProgressBarBehaviorDefault;
             _progressView.stripesColor          = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.28f];
+            
+            _progressView.indicatorTextDisplayMode  = YLProgressBarIndicatorTextDisplayModeProgress;
+            
             [[YLProgressBar appearance] setProgressTintColors:tintColors];
             break;
         }
