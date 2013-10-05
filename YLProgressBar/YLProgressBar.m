@@ -33,23 +33,23 @@
 @interface YLProgressBar ()
 @property (nonatomic, assign) double      stripesOffset;
 @property (nonatomic, assign) CGFloat     cornerRadius;
-@property (nonatomic, strong) NSTimer     *animationTimer;
+@property (nonatomic, strong) NSTimer     *stripesTimer;
 @property (nonatomic, strong) NSArray     *colors;
 
-/** Init the progress bar with default values. */
+/** Init the progress bar with the default values. */
 - (void)initializeProgressBar;
 
 /** Build the stripes using the given parameters. */
 - (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame orientation:(YLProgressBarStripesOrientation)orientation;
 
 /** Draw the background (track) of the slider. */
-- (void)drawTrackWithRect:(CGRect)rect;
+- (void)drawTrack:(CGContextRef)context withRect:(CGRect)rect;
 /** Draw the progress bar. */
-- (void)drawProgressBarWithRect:(CGRect)rect;
+- (void)drawProgressBar:(CGContextRef)context withRect:(CGRect)rect;
 /** Draw the gloss into the given rect. */
-- (void)drawGlossWithRect:(CGRect)rect;
+- (void)drawGloss:(CGContextRef)context withRect:(CGRect)rect;
 /** Draw the stipes into the given rect. */
-- (void)drawStripesWithRect:(CGRect)rect;
+- (void)drawStripes:(CGContextRef)context withRect:(CGRect)rect;
 
 @end
 
@@ -58,15 +58,24 @@
 
 - (void)dealloc
 {
-    if (_animationTimer && [_animationTimer isValid])
+    if (_stripesTimer && [_stripesTimer isValid])
     {
-        [_animationTimer invalidate];
+        [_stripesTimer invalidate];
     }
 }
 
 -(id)initWithFrame:(CGRect)frameRect
 {
     if ((self = [super initWithFrame:frameRect]))
+    {
+        [self initializeProgressBar];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if ((self = [super initWithCoder:aDecoder]))
     {
         [self initializeProgressBar];
     }
@@ -87,6 +96,8 @@
         return;
     }
     
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
     // Refresh the corner radius value
     self.cornerRadius   = rect.size.height / 2;
     
@@ -94,7 +105,7 @@
     self.stripesOffset = (!_stripesAnimated || self.stripesOffset > 2 * _stripesWidth - 1) ? 0 : ++self.stripesOffset;
     
     // Draw the background track
-    [self drawTrackWithRect:rect];
+    [self drawTrack:context withRect:rect];
     
     if (self.progress == 0 && _behavior == YLProgressBarBehaviorIndeterminate)
     {
@@ -102,7 +113,7 @@
                                       YLProgressBarSizeInset,
                                       rect.size.width - 2 * YLProgressBarSizeInset,
                                       rect.size.height - 2 * YLProgressBarSizeInset);
-        [self drawStripesWithRect:innerRect];
+        [self drawStripes:context withRect:innerRect];
     } else if (self.progress > 0)
     {
         CGRect innerRect = CGRectMake(YLProgressBarSizeInset,
@@ -110,7 +121,7 @@
                                       rect.size.width * self.progress - 2 * YLProgressBarSizeInset,
                                       rect.size.height - 2 * YLProgressBarSizeInset);
         
-        [self drawProgressBarWithRect:innerRect];
+        [self drawProgressBar:context withRect:innerRect];
         
         if (_stripesWidth > 0 && !_hideStripes)
         {
@@ -118,15 +129,15 @@
             {
                 if (self.progress == 1.0f)
                 {
-                    [self drawStripesWithRect:innerRect];
+                    [self drawStripes:context withRect:innerRect];
                 }
             } else if (_behavior != YLProgressBarBehaviorIndeterminate)
             {
-                [self drawStripesWithRect:innerRect];
+                [self drawStripes:context withRect:innerRect];
             }
         }
         
-        [self drawGlossWithRect:innerRect];
+        [self drawGloss:context withRect:innerRect];
     }
 }
 
@@ -179,6 +190,32 @@
     self.colors = colors;
 }
 
+- (void)setStripesAnimated:(BOOL)animated
+{
+    _stripesAnimated = animated;
+    
+    if (animated == YES)
+    {
+        if (self.stripesTimer == nil)
+        {
+            const NSTimeInterval refreshInterval = 1.0f / 30.0f;
+            self.stripesTimer                  = [NSTimer scheduledTimerWithTimeInterval:refreshInterval
+                                                                                    target:self
+                                                                                  selector:@selector(setNeedsDisplay)
+                                                                                  userInfo:nil
+                                                                                   repeats:YES];
+        }
+    } else
+    {
+        if (_stripesTimer && [_stripesTimer isValid])
+        {
+            [_stripesTimer invalidate];
+        }
+        
+        self.stripesTimer = nil;
+    }
+}
+
 #pragma mark - Public Methods
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated
@@ -200,31 +237,6 @@
     }
 }
 
-- (void)setStripesAnimated:(BOOL)animated
-{
-    _stripesAnimated = animated;
-    
-    if (animated == YES)
-    {
-        if (self.animationTimer == nil)
-        {
-            self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0f / 30.0f)
-                                                                   target:self
-                                                                 selector:@selector(setNeedsDisplay)
-                                                                 userInfo:nil
-                                                                  repeats:YES];
-        }
-    } else
-    {
-        if (_animationTimer && [_animationTimer isValid])
-        {
-            [_animationTimer invalidate];
-        }
-        
-        self.animationTimer = nil;
-    }
-}
-
 #pragma mark - Private Methods
 
 - (void)initializeProgressBar
@@ -236,7 +248,7 @@
     
     self.progressTintColor   = self.progressTintColor;
     self.stripesOffset       = 0;
-    self.animationTimer      = nil;
+    self.stripesTimer      = nil;
     self.stripesAnimated     = YES;
     self.stripesOrientation  = YLProgressBarStripesOrientationRight;
     self.stripesWidth        = YLProgressBarDefaultStripeWidth;
@@ -275,10 +287,8 @@
     return rect;
 }
 
-- (void)drawTrackWithRect:(CGRect)rect
+- (void)drawTrack:(CGContextRef)context withRect:(CGRect)rect
 {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
     // Define the progress bar pattern to clip all the content inside
     UIBezierPath *roundedRect   = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, rect.size.width, rect.size.height)
                                                              cornerRadius:_cornerRadius];
@@ -308,9 +318,8 @@
     CGContextRestoreGState(context);
 }
 
-- (void)drawProgressBarWithRect:(CGRect)rect
+- (void)drawProgressBar:(CGContextRef)context withRect:(CGRect)rect
 {
-    CGContextRef context        = UIGraphicsGetCurrentContext();
     CGColorSpaceRef colorSpace  = CGColorSpaceCreateDeviceRGB();
     
     CGContextSaveGState(context);
@@ -340,9 +349,8 @@
     CGColorSpaceRelease(colorSpace);
 }
 
-- (void)drawGlossWithRect:(CGRect)rect
+- (void)drawGloss:(CGContextRef)context withRect:(CGRect)rect
 {
-    CGContextRef context        = UIGraphicsGetCurrentContext();
     CGColorSpaceRef colorSpace  = CGColorSpaceCreateDeviceRGB();
 
     CGContextSaveGState(context);
@@ -404,10 +412,8 @@
     CGColorSpaceRelease(colorSpace);
 }
 
-- (void)drawStripesWithRect:(CGRect)rect
+- (void)drawStripes:(CGContextRef)context withRect:(CGRect)rect
 {
-    CGContextRef context    = UIGraphicsGetCurrentContext();
-
     CGContextSaveGState(context);
     {
         UIBezierPath *allStripes = [UIBezierPath bezierPath];
