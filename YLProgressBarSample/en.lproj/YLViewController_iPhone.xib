@@ -41,7 +41,12 @@
                     </connections>
                 </segmentedControl>
                 <view contentMode="scaleToFill" id="FDt-Cn-iar" customClass="YLProgressBar">
-                    <rect key="frame" x="85" y="223" width="150" height="10"/>
+                    <rect key="frame" x="85" y="224" width="150" height="8"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" id="M8H-xu-cxO" customClass="YLProgressBar">
+                    <rect key="frame" x="85" y="262" width="150" height="8"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>

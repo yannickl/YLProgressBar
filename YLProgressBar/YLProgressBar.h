@@ -139,7 +139,7 @@ typedef NS_ENUM(NSUInteger, YLProgressBarBehavior)
  *
  * The default value for this property is YES.
  */
-@property (nonatomic, getter = isStripesAnimated) BOOL  stripesAnimated; //UI_APPEARANCE_SELECTOR;
+@property (nonatomic, getter = isStripesAnimated) BOOL  stripesAnimated;
 
 /**
  * @abstract The orientation of the stripes.
@@ -168,7 +168,7 @@ typedef NS_ENUM(NSUInteger, YLProgressBarBehavior)
  * @discussion Setting the value of this property to YES hides the stripes and
  * setting it to NO shows the stripes. The default value is NO.
  */
-@property (nonatomic, assign) BOOL hideStripes; //UI_APPEARANCE_SELECTOR;
+@property (nonatomic, assign) BOOL hideStripes;
 
 /**
  * @abstract The colors shown for the portion of the progress bar
@@ -187,5 +187,15 @@ typedef NS_ENUM(NSUInteger, YLProgressBarBehavior)
  * @abstract The color shown for the portion of the progress bar that is not filled.
  */
 @property (nonatomic, strong) UIColor   *trackTintColor; //UI_APPEARANCE_SELECTOR;
+
+/**
+ * @abstract A label to display some indications for the user.
+ * When the label text is set to nil it shows the progress value as a 
+ * percentage. You can configure its font color, the font size, the text
+ * alignement, etc. as any other labels.
+ * @discussion By default the label text is set to nil and its text color
+ * change using the background color.
+ */
+@property (nonatomic, strong) UILabel *indicatorTextLabel;
 
 @end

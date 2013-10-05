@@ -31,14 +31,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+    [[YLProgressBar appearance] setStripesWidth:25];
+    [[YLProgressBar appearance] setProgress:0.6f];
+
     self.progressValue  = 0;
-    self.progressTimer  = [NSTimer scheduledTimerWithTimeInterval:0.3f
-                                                           target:self
-                                                         selector:@selector(changeProgressValue)
-                                                         userInfo:nil
-                                                          repeats:YES];
-    
+    self.progressTimer  = [NSTimer timerWithTimeInterval:0.2f
+                                                  target:self
+                                                selector:@selector(changeProgressValue)
+                                                userInfo:nil
+                                                 repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:_progressTimer forMode:NSDefaultRunLoopMode];
 }
 
 - (void)viewDidUnload
@@ -166,6 +169,7 @@
             _progressView.stripesOrientation    = YLProgressBarStripesOrientationRight;
             _progressView.behavior              = YLProgressBarBehaviorDefault;
             _progressView.stripesColor          = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.28f];
+            [[YLProgressBar appearance] setProgressTintColors:tintColors];
             break;
         }
         case 1:

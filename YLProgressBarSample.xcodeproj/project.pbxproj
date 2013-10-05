@@ -344,6 +344,7 @@
 				GCC_PREFIX_HEADER = "YLProgressBarSample/YLProgressBarSample-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "YLProgressBarSample/YLProgressBarSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = YLProgressBarSample;
 				WRAPPER_EXTENSION = app;
 			};
@@ -357,6 +358,7 @@
 				GCC_PREFIX_HEADER = "YLProgressBarSample/YLProgressBarSample-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "YLProgressBarSample/YLProgressBarSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = YLProgressBarSample;
 				WRAPPER_EXTENSION = app;
 			};
