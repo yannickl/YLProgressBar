@@ -79,6 +79,11 @@ typedef NS_ENUM(NSUInteger, YLProgressBarBehavior)
  *
  * Unlike the UIProgressView, the YLProgressBar can be used for as an
  * indeterminate progress indicator thanks to its pre-made behaviors.
+ *
+ * <em>Note: The YLProgressBar is conform to the UIAppearance protocol, however,
+ * because of the current version of the appledoc project, the 
+ * UI_APPEARANCE_SELECTOR macros are not taken into account, that's why they are
+ * commented.</em>
  */
 @interface YLProgressBar : UIView
 
@@ -121,7 +126,7 @@ typedef NS_ENUM(NSUInteger, YLProgressBarBehavior)
  *
  * @discussion The default value is YLProgressBarBehaviorDefault.
  */
-@property (nonatomic, assign) YLProgressBarBehavior behavior;
+@property (nonatomic, assign) YLProgressBarBehavior behavior; //UI_APPEARANCE_SELECTOR;
 
 #pragma mark Configuring the Progress Bar
 /** @name Configuring the Progress Bar */
@@ -134,14 +139,14 @@ typedef NS_ENUM(NSUInteger, YLProgressBarBehavior)
  *
  * The default value for this property is YES.
  */
-@property (nonatomic, getter = isStripesAnimated) BOOL  stripesAnimated;
+@property (nonatomic, getter = isStripesAnimated) BOOL  stripesAnimated; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The orientation of the stripes.
  * @discussion The default value for this property is 
  * YLProgressBarStripesOrientationRight.
  */
-@property (nonatomic, assign) YLProgressBarStripesOrientation   stripesOrientation;
+@property (nonatomic, assign) YLProgressBarStripesOrientation   stripesOrientation; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The width of the stripes drawn over the progress bar.
@@ -151,19 +156,19 @@ typedef NS_ENUM(NSUInteger, YLProgressBarBehavior)
  * The default value for this property is equal to the 
  * YLProgressBarDefaultStripeWidth value.
  */
-@property (nonatomic, assign) NSInteger stripesWidth;
+@property (nonatomic, assign) NSInteger stripesWidth; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The color show for the stripes over the progress bar.
  */
-@property (nonatomic, strong) UIColor *stripesColor;
+@property (nonatomic, strong) UIColor *stripesColor; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract A Boolean value that determines whether the stripes are hidden.
  * @discussion Setting the value of this property to YES hides the stripes and
  * setting it to NO shows the stripes. The default value is NO.
  */
-@property (nonatomic, assign) BOOL hideStripes;
+@property (nonatomic, assign) BOOL hideStripes; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The colors shown for the portion of the progress bar
@@ -171,16 +176,16 @@ typedef NS_ENUM(NSUInteger, YLProgressBarBehavior)
  * @discussion All the colors in the array are drawn as a gradient
  * visual of equal size.
  */
-@property (nonatomic, strong) NSArray   *progressTintColors;
+@property (nonatomic, strong) NSArray   *progressTintColors; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The color shown for the portion of the progress bar that is filled.
  */
-@property (nonatomic, strong) UIColor   *progressTintColor;
+@property (nonatomic, strong) UIColor   *progressTintColor; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The color shown for the portion of the progress bar that is not filled.
  */
-@property (nonatomic, strong) UIColor   *trackTintColor;
+@property (nonatomic, strong) UIColor   *trackTintColor; //UI_APPEARANCE_SELECTOR;
 
 @end
