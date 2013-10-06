@@ -121,20 +121,24 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
         [self drawText:context withRect:rect];
     }
     
+    // Compute the inner rectangle
+    CGRect innerRect;
+    if (_type == YLProgressBarTypeRounded)
+    {
+        innerRect = CGRectMake(YLProgressBarSizeInset,
+                               YLProgressBarSizeInset,
+                               CGRectGetWidth(rect) * self.progress - 2 * YLProgressBarSizeInset,
+                               CGRectGetHeight(rect) - 2 * YLProgressBarSizeInset);
+    } else
+    {
+        innerRect = CGRectMake(0, 0, CGRectGetWidth(rect) * self.progress, CGRectGetHeight(rect));
+    }
+    
     if (self.progress == 0 && _behavior == YLProgressBarBehaviorIndeterminate)
     {
-        CGRect innerRect = CGRectMake(YLProgressBarSizeInset,
-                                      YLProgressBarSizeInset,
-                                      rect.size.width - 2 * YLProgressBarSizeInset,
-                                      rect.size.height - 2 * YLProgressBarSizeInset);
         [self drawStripes:context withRect:innerRect];
     } else if (self.progress > 0)
     {
-        CGRect innerRect = CGRectMake(YLProgressBarSizeInset,
-                                      YLProgressBarSizeInset,
-                                      rect.size.width * self.progress - 2 * YLProgressBarSizeInset,
-                                      rect.size.height - 2 * YLProgressBarSizeInset);
-        
         [self drawProgressBar:context withRect:innerRect];
         
         if (_stripesWidth > 0 && !_hideStripes)
@@ -331,7 +335,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
 
 - (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame orientation:(YLProgressBarStripesOrientation)orientation
 {
-    float height        = frame.size.height;
+    CGFloat height      = CGRectGetHeight(frame);
     UIBezierPath *rect  = [UIBezierPath bezierPath];
     
     [rect moveToPoint:origin];
@@ -364,15 +368,17 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
 - (void)drawTrack:(CGContextRef)context withRect:(CGRect)rect
 {
     // Define the progress bar pattern to clip all the content inside
-    UIBezierPath *roundedRect   = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, rect.size.width, rect.size.height)
+    UIBezierPath *roundedRect   = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, CGRectGetWidth(rect), CGRectGetHeight(rect))
                                                              cornerRadius:_cornerRadius];
     [roundedRect addClip];
     
     CGContextSaveGState(context);
     {
+        CGFloat trackHeight = (_type == YLProgressBarTypeRounded) ? CGRectGetHeight(rect) - 1 : CGRectGetHeight(rect);
+        
         // Draw the track
         [self.trackTintColor set];
-        UIBezierPath* roundedRect   = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, rect.size.width, rect.size.height-1) cornerRadius:_cornerRadius];
+        UIBezierPath* roundedRect   = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, CGRectGetWidth(rect), trackHeight) cornerRadius:_cornerRadius];
         [roundedRect fill];
         
         if (_type == YLProgressBarTypeRounded)
@@ -380,14 +386,14 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
             // Draw the white shadow
             [[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.2] set];
             
-            UIBezierPath *shadow    = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.5f, 0, rect.size.width - 1, rect.size.height - 1)
+            UIBezierPath *shadow    = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.5f, 0, CGRectGetWidth(rect) - 1, trackHeight)
                                                                  cornerRadius:_cornerRadius];
             [shadow stroke];
             
             // Draw the inner glow
             [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4f] set];
             
-            UIBezierPath *glow  = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(_cornerRadius, 0, rect.size.width - _cornerRadius * 2, 1)
+            UIBezierPath *glow  = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(_cornerRadius, 0, CGRectGetWidth(rect) - _cornerRadius * 2, 1)
                                                              cornerRadius:0];
             [glow stroke];
         }
@@ -418,7 +424,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
         
         CGGradientRef gradient  = CGGradientCreateWithColors (colorSpace, colorRefs, locations);
         
-        CGContextDrawLinearGradient(context, gradient, CGPointMake(rect.origin.x, rect.origin.y), CGPointMake(rect.origin.x + rect.size.width, rect.origin.y), (kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation));
+        CGContextDrawLinearGradient(context, gradient, CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect)), CGPointMake(CGRectGetMinX(rect) + CGRectGetWidth(rect), CGRectGetMinY(rect)), (kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation));
         
         CGGradientRelease(gradient);
     }
@@ -496,11 +502,12 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     {
         UIBezierPath *allStripes = [UIBezierPath bezierPath];
         
-        int start = -_stripesWidth;
-        int end   = rect.size.width / (2 * _stripesWidth) + (2 * _stripesWidth);
+        int start       = -_stripesWidth;
+        int end         = rect.size.width / (2 * _stripesWidth) + (2 * _stripesWidth);
+        CGFloat yOffset = (_type == YLProgressBarTypeRounded) ? YLProgressBarSizeInset : 0;
         for (int i = start; i <= end; i++)
         {
-            UIBezierPath *stripe = [self stripeWithOrigin:CGPointMake(i * 2 * _stripesWidth + _stripesOffset, YLProgressBarSizeInset)
+            UIBezierPath *stripe = [self stripeWithOrigin:CGPointMake(i * 2 * _stripesWidth + _stripesOffset, yOffset)
                                                    bounds:rect
                                               orientation:_stripesOrientation];
             [allStripes appendPath:stripe];
@@ -536,7 +543,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     CGRect innerRect            = CGRectMake(CGRectGetMinX(rect) + 4, CGRectGetMinY(rect) + 1, CGRectGetWidth(rect) - 8, CGRectGetHeight(rect) - 2);
     _indicatorTextLabel.frame   = innerRect;
     
-    if (CGRectGetWidth(innerRect) < 30)
+    if (CGRectGetWidth(innerRect) < CGRectGetHeight(innerRect) * 3)
     {
         return;
     }
