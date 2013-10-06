@@ -61,7 +61,7 @@ You can also configure every YLProgressBar using the UIAppearence protocol, whic
 
 ```objc
 [[YLProgressBar appearance] setType:YLProgressBarTypeFlat];
-[[LDProgressView appearance] setProgressTintColor:[UIColor blueColor]];
+[[YLProgressBar appearance] setProgressTintColor:[UIColor blueColor]];
 ```
 
 License
