@@ -29,27 +29,27 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" id="Kzw-PX-fQI" customClass="YLProgressBar">
-                    <rect key="frame" x="20" y="199" width="728" height="2"/>
+                    <rect key="frame" x="20" y="344" width="728" height="2"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.21721323044725016" green="0.45897575746433417" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="g4I-GQ-jgW" customClass="YLProgressBar">
-                    <rect key="frame" x="20" y="275" width="728" height="10"/>
+                    <rect key="frame" x="20" y="420" width="728" height="10"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.21721323040000001" green="0.45897575750000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="Dmu-iV-4aF" customClass="YLProgressBar">
-                    <rect key="frame" x="20" y="355" width="728" height="10"/>
+                    <rect key="frame" x="20" y="500" width="728" height="10"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.21721323040000001" green="0.45897575750000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="ctJ-xj-HKZ" customClass="YLProgressBar">
-                    <rect key="frame" x="20" y="434" width="728" height="12"/>
+                    <rect key="frame" x="20" y="579" width="728" height="12"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.21721323040000001" green="0.45897575750000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="Aax-RT-dnT" customClass="YLProgressBar">
-                    <rect key="frame" x="20" y="505" width="728" height="30"/>
+                    <rect key="frame" x="20" y="650" width="728" height="30"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.21721323040000001" green="0.45897575750000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>

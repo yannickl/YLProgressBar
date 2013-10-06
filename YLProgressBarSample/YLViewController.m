@@ -182,7 +182,7 @@
     _progressBarFlatWithIndicator.type                     = YLProgressBarTypeFlat;
     _progressBarFlatWithIndicator.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeProgress;
     _progressBarFlatWithIndicator.behavior                 = YLProgressBarBehaviorIndeterminate;
-    _progressBarFlatAnimated.stripesOrientation            = YLProgressBarStripesOrientationVertical;
+    _progressBarFlatWithIndicator.stripesOrientation       = YLProgressBarStripesOrientationVertical;
 }
 
 - (void)initFlatAnimatedProgressBar

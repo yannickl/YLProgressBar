@@ -136,7 +136,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     
     if (self.progress == 0 && _behavior == YLProgressBarBehaviorIndeterminate)
     {
-        [self drawStripes:context withRect:innerRect];
+        [self drawStripes:context withRect:rect];
     } else if (self.progress > 0)
     {
         [self drawProgressBar:context withRect:innerRect];
