@@ -11,45 +11,43 @@
 #import "YLProgressBar.h"
 
 @interface YLViewController ()
-@property (nonatomic, strong) NSTimer *progressTimer;
-@property (nonatomic, assign) CGFloat progressValue;
+
+// Manage progress bars
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
+
+// Configure progress bars
+- (void)initFlatRainbowProgressBar;
+- (void)initFlatWithIndicatorProgressBar;
+- (void)initFlatAnimatedProgressBar;
+- (void)initRoundedSlimProgressBar;
+- (void)initRoundedFatProgressBar;
 
 @end
 
 @implementation YLViewController
-
-- (void)dealloc
-{
-    if (_progressTimer && [_progressTimer isValid])
-    {
-        [_progressTimer invalidate];
-    }
-}
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    [[YLProgressBar appearance] setStripesWidth:25];
-    [[YLProgressBar appearance] setProgress:0.6f];
-    [[YLProgressBar appearance] setType:YLProgressBarTypeFlat];
-
-    self.progressValue  = 0;
-    self.progressTimer  = [NSTimer timerWithTimeInterval:0.2f
-                                                  target:self
-                                                selector:@selector(changeProgressValue)
-                                                userInfo:nil
-                                                 repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:_progressTimer forMode:NSDefaultRunLoopMode];
+    
+    [self initFlatRainbowProgressBar];
+    [self initFlatWithIndicatorProgressBar];
+    [self initFlatAnimatedProgressBar];
+    [self initRoundedSlimProgressBar];
+    [self initRoundedFatProgressBar];
 }
 
 - (void)viewDidUnload
 {
-    [self setProgressValueLabel:nil];
-    [self setProgressView:nil];
-    [self setColorsSegmented:nil];
+    self.progressBarFlatRainbow       = nil;
+    self.progressBarFlatWithIndicator = nil;
+    self.progressBarFlatAnimated      = nil;
+    self.progressBarRoundedSlim       = nil;
+    self.progressBarRoundedFat        = nil;
+    self.colorsSegmented              = nil;
+    
     [super viewDidUnload];
 }
 
@@ -57,7 +55,7 @@
 {
     [super viewWillAppear:animated];
     
-    [self colorButtonTapped:_colorsSegmented];
+    [self percentageButtonTapped:_colorsSegmented];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -118,103 +116,106 @@
 #pragma mark -
 #pragma mark YLViewController Public Methods
 
-- (void)changeProgressValue
-{
-    CGFloat localProgress   = 0;
-    
-    _progressValue  += 0.01f;
-    if (_progressValue > 1.0f)
-    {
-        _progressValue = 0;
-    }
-    
-    switch (_progressView.behavior)
-    {
-        case YLProgressBarBehaviorIndeterminate:
-            localProgress = _progressValue - 0.2f;
-            localProgress = (localProgress < 0) ? 0 : localProgress;
-            break;
-        case YLProgressBarBehaviorWaiting:
-            localProgress =_progressValue + 0.2f;
-            localProgress = (localProgress > 1.0f) ? 1.0f : localProgress;
-            break;
-        default:
-            localProgress = _progressValue;
-            break;
-    }
-
-    _progressValueLabel.text    = [NSString stringWithFormat:@"%.0f%%", (localProgress * 100)];
-    _progressView.progress      = localProgress;
-}
-
-- (IBAction)colorButtonTapped:(id)sender
+- (IBAction)percentageButtonTapped:(id)sender
 {
     UISegmentedControl *seg = (UISegmentedControl*)sender;
     switch (seg.selectedSegmentIndex)
     {
         case 0:
         {
-            // Use the progressTintColors to defines the colors of the progress bar
-            NSArray *tintColors                 = @[[UIColor colorWithRed:33/255.0f green:180/255.0f blue:162/255.0f alpha:1.0f],
-                                                    [UIColor colorWithRed:3/255.0f green:137/255.0f blue:166/255.0f alpha:1.0f],
-                                                    [UIColor colorWithRed:91/255.0f green:63/255.0f blue:150/255.0f alpha:1.0f],
-                                                    [UIColor colorWithRed:87/255.0f green:26/255.0f blue:70/255.0f alpha:1.0f],
-                                                    [UIColor colorWithRed:126/255.0f green:26/255.0f blue:36/255.0f alpha:1.0f],
-                                                    [UIColor colorWithRed:149/255.0f green:37/255.0f blue:36/255.0f alpha:1.0f],
-                                                    [UIColor colorWithRed:228/255.0f green:69/255.0f blue:39/255.0f alpha:1.0f],
-                                                    [UIColor colorWithRed:245/255.0f green:166/255.0f blue:35/255.0f alpha:1.0f],
-                                                    [UIColor colorWithRed:165/255.0f green:202/255.0f blue:60/255.0f alpha:1.0f],
-                                                    [UIColor colorWithRed:202/255.0f green:217/255.0f blue:54/255.0f alpha:1.0f],
-                                                    [UIColor colorWithRed:111/255.0f green:188/255.0f blue:84/255.0f alpha:1.0f]];
-            _progressView.progressTintColors    = tintColors;
-            _progressView.stripesOrientation    = YLProgressBarStripesOrientationRight;
-            _progressView.behavior              = YLProgressBarBehaviorDefault;
-            _progressView.stripesColor          = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.28f];
-            _progressView.indicatorTextDisplayMode  = YLProgressBarIndicatorTextDisplayModeProgress;
-            
-            [[YLProgressBar appearance] setProgressTintColors:tintColors];
-            break;
-        }
+            [self setProgress:0.0f animated:YES];
+        } break;
         case 1:
         {
-            _progressView.progressTintColor     = [UIColor redColor];
-            _progressView.stripesOrientation    = YLProgressBarStripesOrientationRight;
-            _progressView.behavior              = YLProgressBarBehaviorIndeterminate;
-            _progressView.stripesColor          = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.28f];
-            break;
-        }
+            [self setProgress:0.3f animated:YES];
+        } break;
         case 2:
         {
-            _progressView.progressTintColor     = [UIColor cyanColor];
-            _progressView.stripesOrientation    = YLProgressBarStripesOrientationRight;
-            _progressView.behavior              = YLProgressBarBehaviorWaiting;
-            _progressView.stripesColor          = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.28f];
-            break;
-        }
+            [self setProgress:0.5f animated:YES];
+        } break;
         case 3:
         {
-            _progressView.progressTintColor     = [UIColor greenColor];
-            _progressView.stripesOrientation    = YLProgressBarStripesOrientationLeft;
-            _progressView.behavior              = YLProgressBarBehaviorDefault;
-            _progressView.stripesColor          = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.28f];
-            break;
-        }
+            [self setProgress:0.7f animated:YES];
+        } break;
         case 4:
         {
-            _progressView.progressTintColor     = [UIColor yellowColor];
-            _progressView.stripesOrientation    = YLProgressBarStripesOrientationRight;
-            _progressView.stripesOrientation    = YLProgressBarStripesOrientationVertical;
-            _progressView.behavior              = YLProgressBarBehaviorDefault;
-            _progressView.stripesColor          = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.28f];
-            break;
-        }
+            [self setProgress:1.0f animated:YES];
+        } break;
         default:
             break;
     }
-    
-    [self changeProgressValue];
 }
 
 #pragma mark YLViewController Private Methods
+
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated
+{
+    [_progressBarFlatRainbow setProgress:progress animated:animated];
+    [_progressBarFlatWithIndicator setProgress:progress animated:animated];
+    [_progressBarFlatAnimated setProgress:progress animated:animated];
+    [_progressBarRoundedSlim setProgress:progress animated:animated];
+    [_progressBarRoundedFat setProgress:progress animated:animated];
+}
+
+- (void)initFlatRainbowProgressBar
+{
+    NSArray *tintColors = @[[UIColor colorWithRed:33/255.0f green:180/255.0f blue:162/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:3/255.0f green:137/255.0f blue:166/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:91/255.0f green:63/255.0f blue:150/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:87/255.0f green:26/255.0f blue:70/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:126/255.0f green:26/255.0f blue:36/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:149/255.0f green:37/255.0f blue:36/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:228/255.0f green:69/255.0f blue:39/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:245/255.0f green:166/255.0f blue:35/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:165/255.0f green:202/255.0f blue:60/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:202/255.0f green:217/255.0f blue:54/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:111/255.0f green:188/255.0f blue:84/255.0f alpha:1.0f]];
+    
+    _progressBarFlatRainbow.type               = YLProgressBarTypeFlat;
+    _progressBarFlatRainbow.progressTintColors = tintColors;
+    _progressBarFlatRainbow.hideStripes        = YES;
+    _progressBarFlatRainbow.behavior           = YLProgressBarBehaviorDefault;
+}
+
+- (void)initFlatWithIndicatorProgressBar
+{
+    _progressBarFlatWithIndicator.type                     = YLProgressBarTypeFlat;
+    _progressBarFlatWithIndicator.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeProgress;
+    _progressBarFlatWithIndicator.behavior                 = YLProgressBarBehaviorIndeterminate;
+    _progressBarFlatAnimated.stripesOrientation            = YLProgressBarStripesOrientationVertical;
+}
+
+- (void)initFlatAnimatedProgressBar
+{
+    _progressBarFlatAnimated.progressTintColor  = [UIColor colorWithRed:232/255.0f green:132/255.0f blue:12/255.0f alpha:1.0f];
+    _progressBarFlatAnimated.type               = YLProgressBarTypeFlat;
+    _progressBarFlatAnimated.stripesOrientation = YLProgressBarStripesOrientationVertical;
+}
+
+- (void)initRoundedSlimProgressBar
+{
+    _progressBarRoundedSlim.progressTintColor        = [UIColor colorWithRed:239/255.0f green:225/255.0f blue:13/255.0f alpha:1.0f];
+    _progressBarRoundedSlim.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeTrack;
+}
+
+- (void)initRoundedFatProgressBar
+{
+    NSArray *tintColors = @[[UIColor colorWithRed:33/255.0f green:180/255.0f blue:162/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:3/255.0f green:137/255.0f blue:166/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:91/255.0f green:63/255.0f blue:150/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:87/255.0f green:26/255.0f blue:70/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:126/255.0f green:26/255.0f blue:36/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:149/255.0f green:37/255.0f blue:36/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:228/255.0f green:69/255.0f blue:39/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:245/255.0f green:166/255.0f blue:35/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:165/255.0f green:202/255.0f blue:60/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:202/255.0f green:217/255.0f blue:54/255.0f alpha:1.0f],
+                            [UIColor colorWithRed:111/255.0f green:188/255.0f blue:84/255.0f alpha:1.0f]];
+    
+    _progressBarRoundedFat.progressTintColors       = tintColors;
+    _progressBarRoundedFat.stripesOrientation       = YLProgressBarStripesOrientationLeft;
+    _progressBarRoundedFat.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeProgress;
+    _progressBarRoundedFat.indicatorTextLabel.font  = [UIFont fontWithName:@"Arial-BoldMT" size:20];
+}
 
 @end

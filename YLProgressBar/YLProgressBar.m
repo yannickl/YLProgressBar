@@ -543,7 +543,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     CGRect innerRect            = CGRectMake(CGRectGetMinX(rect) + 4, CGRectGetMinY(rect) + 1, CGRectGetWidth(rect) - 8, CGRectGetHeight(rect) - 2);
     _indicatorTextLabel.frame   = innerRect;
     
-    if (CGRectGetWidth(innerRect) < CGRectGetHeight(innerRect) * 3)
+    if (CGRectGetWidth(innerRect) < CGRectGetHeight(innerRect) * 2.5)
     {
         return;
     }

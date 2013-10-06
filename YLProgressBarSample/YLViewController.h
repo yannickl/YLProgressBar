@@ -12,14 +12,17 @@
 
 @interface YLViewController : UIViewController
 
-@property (nonatomic, strong) IBOutlet YLProgressBar      *progressView;
+@property (nonatomic, strong) IBOutlet YLProgressBar      *progressBarFlatRainbow;
+@property (nonatomic, strong) IBOutlet YLProgressBar      *progressBarFlatWithIndicator;
+@property (nonatomic, strong) IBOutlet YLProgressBar      *progressBarFlatAnimated;
+@property (nonatomic, strong) IBOutlet YLProgressBar      *progressBarRoundedSlim;
+@property (nonatomic, strong) IBOutlet YLProgressBar      *progressBarRoundedFat;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *colorsSegmented;
-@property (nonatomic, strong) IBOutlet UILabel            *progressValueLabel;
 
 #pragma mark Constructors - Initializers
 
 #pragma mark Public Methods
 
-- (IBAction)colorButtonTapped:(id)sender;
+- (IBAction)percentageButtonTapped:(id)sender;
 
 @end
