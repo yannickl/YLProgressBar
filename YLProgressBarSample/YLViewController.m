@@ -196,6 +196,7 @@
 {
     _progressBarRoundedSlim.progressTintColor        = [UIColor colorWithRed:239/255.0f green:225/255.0f blue:13/255.0f alpha:1.0f];
     _progressBarRoundedSlim.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeTrack;
+    _progressBarRoundedSlim.stripesColor             = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.36f];
 }
 
 - (void)initRoundedFatProgressBar
