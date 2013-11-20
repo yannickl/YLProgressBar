@@ -64,6 +64,12 @@ You can also configure every YLProgressBar using the UIAppearence protocol, whic
 [[YLProgressBar appearance] setProgressTintColor:[UIColor blueColor]];
 ```
 
+## Contact
+
+Yannick Loriot
+ - [https://twitter.com/yannickloriot](https://twitter.com/yannickloriot)
+ - [contact@yannickloriot.com](mailto:contact@yannickloriot.com)
+
 License
 ====================
 Copyright 2013 Yannick Loriot.<br />
