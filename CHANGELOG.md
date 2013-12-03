@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 3.1.1
+
+- [FIX] Stop the stripes animation when hidden #13
+
 ### Version 3.1.0
 
 - [FIX] Gloss effect on the stripes

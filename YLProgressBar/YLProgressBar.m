@@ -77,6 +77,9 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     {
         [_progressTargetTimer invalidate];
     }
+    
+    [self removeObserver:self forKeyPath:@"stripesAnimated"];
+    [self removeObserver:self forKeyPath:@"hideStripes"];
 }
 
 - (id)initWithFrame:(CGRect)frameRect
@@ -220,32 +223,6 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     self.colors = colors;
 }
 
-- (void)setStripesAnimated:(BOOL)animated
-{
-    _stripesAnimated = animated;
-    
-    if (animated == YES)
-    {
-        if (self.stripesTimer == nil)
-        {
-            self.stripesTimer= [NSTimer timerWithTimeInterval:YLProgressBarStripesAnimationTime
-                                                       target:self
-                                                     selector:@selector(setNeedsDisplay)
-                                                     userInfo:nil
-                                                      repeats:YES];
-            [[NSRunLoop currentRunLoop] addTimer:_stripesTimer forMode:NSRunLoopCommonModes];
-        }
-    } else
-    {
-        if (_stripesTimer && [_stripesTimer isValid])
-        {
-            [_stripesTimer invalidate];
-        }
-        
-        self.stripesTimer = nil;
-    }
-}
-
 #pragma mark - Public Methods
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated
@@ -307,6 +284,9 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
 
 - (void)initializeProgressBar
 {
+    [self addObserver:self forKeyPath:@"hideStripes" options:NSKeyValueObservingOptionNew context:nil];
+    [self addObserver:self forKeyPath:@"stripesAnimated" options:NSKeyValueObservingOptionNew context:nil];
+    
     _type           = YLProgressBarTypeRounded;
     _progress       = 0.0f;
     _hideStripes    =  NO;
@@ -580,6 +560,35 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     if (!hasText)
     {
         _indicatorTextLabel.text = nil;
+    }
+}
+
+#pragma mark - KVO Delegate Methods
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"hideStripes"] || [keyPath isEqualToString:@"stripesAnimated"])
+    {
+        if (!_hideStripes && _stripesAnimated)
+        {
+            if (_stripesTimer == nil)
+            {
+                _stripesTimer= [NSTimer timerWithTimeInterval:YLProgressBarStripesAnimationTime
+                                                           target:self
+                                                         selector:@selector(setNeedsDisplay)
+                                                         userInfo:nil
+                                                          repeats:YES];
+                [[NSRunLoop currentRunLoop] addTimer:_stripesTimer forMode:NSRunLoopCommonModes];
+            }
+        } else
+        {
+            if (_stripesTimer && [_stripesTimer isValid])
+            {
+                [_stripesTimer invalidate];
+            }
+            
+            self.stripesTimer = nil;
+        }
     }
 }
 
