@@ -47,6 +47,7 @@
     self.progressBarRoundedSlim       = nil;
     self.progressBarRoundedFat        = nil;
     self.colorsSegmented              = nil;
+    self.gradientSegmented            = nil;
     
     [super viewDidUnload];
 }
@@ -56,6 +57,7 @@
     [super viewWillAppear:animated];
     
     [self percentageButtonTapped:_colorsSegmented];
+    [self gradientButtonTapped:_gradientSegmented];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -146,6 +148,23 @@
     }
 }
 
+- (IBAction)gradientButtonTapped:(id)sender {
+    UISegmentedControl *seg = (UISegmentedControl*)sender;
+    switch (seg.selectedSegmentIndex)
+    {
+        case 0:
+        {
+            [self setGradientType:YLProgressBarWithGradient];
+        } break;
+        case 1:
+        {
+            [self setGradientType:YLProgressBarWithNoGradient];
+        } break;
+        default:
+            break;
+    }
+}
+
 #pragma mark YLViewController Private Methods
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated
@@ -155,6 +174,16 @@
     [_progressBarFlatAnimated setProgress:progress animated:animated];
     [_progressBarRoundedSlim setProgress:progress animated:animated];
     [_progressBarRoundedFat setProgress:progress animated:animated];
+}
+
+- (void)setGradientType:(YLProgressGradientType)gradient
+{
+    _progressBarFlatRainbow.gradientType = gradient;
+    _progressBarFlatWithIndicator.gradientType = gradient;
+    _progressBarFlatAnimated.gradientType = gradient;
+    _progressBarRoundedSlim.gradientType = gradient;
+    _progressBarRoundedFat.gradientType = gradient;
+    [self percentageButtonTapped:_colorsSegmented];
 }
 
 - (void)initFlatRainbowProgressBar
@@ -175,6 +204,7 @@
     _progressBarFlatRainbow.progressTintColors = tintColors;
     _progressBarFlatRainbow.hideStripes        = YES;
     _progressBarFlatRainbow.behavior           = YLProgressBarBehaviorDefault;
+    _progressBarFlatRainbow.gradientType      = YLProgressBarWithNoGradient;
 }
 
 - (void)initFlatWithIndicatorProgressBar
@@ -183,6 +213,7 @@
     _progressBarFlatWithIndicator.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeProgress;
     _progressBarFlatWithIndicator.behavior                 = YLProgressBarBehaviorIndeterminate;
     _progressBarFlatWithIndicator.stripesOrientation       = YLProgressBarStripesOrientationVertical;
+    _progressBarFlatWithIndicator.gradientType             = YLProgressBarWithNoGradient;
 }
 
 - (void)initFlatAnimatedProgressBar
@@ -190,6 +221,7 @@
     _progressBarFlatAnimated.progressTintColor  = [UIColor colorWithRed:232/255.0f green:132/255.0f blue:12/255.0f alpha:1.0f];
     _progressBarFlatAnimated.type               = YLProgressBarTypeFlat;
     _progressBarFlatAnimated.stripesOrientation = YLProgressBarStripesOrientationVertical;
+    _progressBarFlatAnimated.gradientType       = YLProgressBarWithNoGradient;
 }
 
 - (void)initRoundedSlimProgressBar
@@ -197,6 +229,7 @@
     _progressBarRoundedSlim.progressTintColor        = [UIColor colorWithRed:239/255.0f green:225/255.0f blue:13/255.0f alpha:1.0f];
     _progressBarRoundedSlim.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeTrack;
     _progressBarRoundedSlim.stripesColor             = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.36f];
+    _progressBarRoundedSlim.gradientType             = YLProgressBarWithNoGradient;
 }
 
 - (void)initRoundedFatProgressBar
@@ -217,6 +250,7 @@
     _progressBarRoundedFat.stripesOrientation       = YLProgressBarStripesOrientationLeft;
     _progressBarRoundedFat.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeProgress;
     _progressBarRoundedFat.indicatorTextLabel.font  = [UIFont fontWithName:@"Arial-BoldMT" size:20];
+    _progressBarRoundedFat.gradientType             = YLProgressBarWithNoGradient;
 }
 
 @end

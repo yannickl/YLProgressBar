@@ -18,11 +18,13 @@
 @property (nonatomic, strong) IBOutlet YLProgressBar      *progressBarRoundedSlim;
 @property (nonatomic, strong) IBOutlet YLProgressBar      *progressBarRoundedFat;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *colorsSegmented;
+@property (nonatomic, strong) IBOutlet UISegmentedControl *gradientSegmented;
 
 #pragma mark Constructors - Initializers
 
 #pragma mark Public Methods
 
 - (IBAction)percentageButtonTapped:(id)sender;
+- (IBAction)gradientButtonTapped:(id)sender;
 
 @end
