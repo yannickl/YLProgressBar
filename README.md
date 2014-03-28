@@ -47,7 +47,7 @@ $ open MyProject.xcworkspace
 
 # How To Use
 
-Here are some examples to show you how you can configure the YLProgressBar:
+Here are some examples to show you how the `YLProgressBar` can be configured:
 
 ```objc
 // Blue flat progress, with no stripes
@@ -77,7 +77,7 @@ _progressBar.progressTintColors       = @[[UIColor colorWithRed:33/255.0f green:
                                           [UIColor colorWithRed:111/255.0f green:188/255.0f blue:84/255.0f alpha:1.0f]];
 ```
 
-You can also configure every YLProgressBar using the UIAppearence protocol, which can be done in your app delegate:
+You can also use the `UIAppearence` protocol to configure all the progress bar:
 
 ```objc
 [[YLProgressBar appearance] setType:YLProgressBarTypeFlat];
