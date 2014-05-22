@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YLViewController">
             <connections>
                 <outlet property="colorsSegmented" destination="8" id="10"/>
+                <outlet property="gradientSegmented" destination="b5x-fA-HfJ" id="iZH-7l-bcE"/>
                 <outlet property="progressBarFlatAnimated" destination="Dmu-iV-4aF" id="KNA-cW-496"/>
                 <outlet property="progressBarFlatRainbow" destination="Kzw-PX-fQI" id="rFa-mr-v8m"/>
                 <outlet property="progressBarFlatWithIndicator" destination="g4I-GQ-jgW" id="K6C-L0-31w"/>
@@ -66,6 +67,18 @@
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <action selector="percentageButtonTapped:" destination="-1" eventType="valueChanged" id="cEh-gp-II9"/>
+                    </connections>
+                </segmentedControl>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="b5x-fA-HfJ">
+                    <rect key="frame" x="224" y="939" width="320" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <segments>
+                        <segment title="With Gradient"/>
+                        <segment title="No Gradient"/>
+                    </segments>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="gradientButtonTapped:" destination="-1" eventType="valueChanged" id="bbh-dN-wRW"/>
                     </connections>
                 </segmentedControl>
             </subviews>

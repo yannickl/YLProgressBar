@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YLViewController">
             <connections>
                 <outlet property="colorsSegmented" destination="13" id="15"/>
+                <outlet property="gradientSegmented" destination="MBQ-RG-sov" id="ZoY-iC-Sfq"/>
                 <outlet property="progressBarFlatAnimated" destination="M8H-xu-cxO" id="VyA-Xf-bDt"/>
                 <outlet property="progressBarFlatRainbow" destination="FDt-Cn-iar" id="df1-xA-uM4"/>
                 <outlet property="progressBarFlatWithIndicator" destination="Vka-3w-pJi" id="ofv-V3-lmW"/>
@@ -68,6 +69,18 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="MBQ-RG-sov">
+                    <rect key="frame" x="68" y="395" width="184" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <segments>
+                        <segment title="With Gradient"/>
+                        <segment title="No Gradient"/>
+                    </segments>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="gradientButtonTapped:" destination="-1" eventType="valueChanged" id="pLr-X7-omp"/>
+                    </connections>
+                </segmentedControl>
             </subviews>
             <color key="backgroundColor" red="0.43529411759999997" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>

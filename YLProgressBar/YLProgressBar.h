@@ -28,6 +28,21 @@
 #define YLProgressBarDefaultStripeWidth     7 //px
 
 /**
+ * The progress bar gradient type.
+ */
+typedef NS_ENUM (NSUInteger, YLProgressGradientType)
+{
+    /**
+     * The progress bar has rounded corners and the gloss effect.
+     */
+    YLProgressBarWithGradient = 0,
+    /**
+     * The progress bar has squared corners and no gloss.
+     */
+    YLProgressBarWithNoGradient = 1,
+};
+
+/**
  * The progress bar appearance.
  */
 typedef NS_ENUM (NSUInteger, YLProgressBarType)
@@ -246,5 +261,11 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
  * @discussion The default value is set to YLProgressBarTypeRounded.
  */
 @property (nonatomic, assign) YLProgressBarType type; //UI_APPEARANCE_SELECTOR;
+
+/**
+ * @abstract The type of the progress bar.
+ * @discussion The default value is set to YLProgressBarWithGradient.
+ */
+@property (nonatomic, assign) YLProgressGradientType gradientType; //UI_APPEARANCE_SELECTOR;
 
 @end
