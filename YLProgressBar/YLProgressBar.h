@@ -25,7 +25,7 @@
  */
 
 // Global
-#define YLProgressBarDefaultStripeWidth     7 //px
+#define YLProgressBarDefaultStripeWidth 7 //px
 
 /**
  * The progress bar appearance.

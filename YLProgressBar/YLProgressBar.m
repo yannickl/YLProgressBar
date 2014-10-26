@@ -35,12 +35,12 @@ const NSTimeInterval YLProgressBarStripesAnimationTime = 1.0f / 30.0f; // s
 const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
 
 @interface YLProgressBar ()
-@property (nonatomic, assign) double      stripesOffset;
-@property (nonatomic, assign) CGFloat     cornerRadius;
-@property (nonatomic, strong) NSTimer     *stripesTimer;
-@property (nonatomic, strong) NSArray     *colors;
-@property (nonatomic, strong) NSTimer     *progressTargetTimer;
-@property (nonatomic, assign) CGFloat     progressTargetValue;
+@property (nonatomic, assign) double  stripesOffset;
+@property (nonatomic, assign) CGFloat cornerRadius;
+@property (nonatomic, strong) NSTimer *stripesTimer;
+@property (nonatomic, strong) NSArray *colors;
+@property (nonatomic, strong) NSTimer *progressTargetTimer;
+@property (nonatomic, assign) CGFloat progressTargetValue;
 
 /** Init the progress bar with the default values. */
 - (void)initializeProgressBar;
@@ -65,7 +65,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
 @end
 
 @implementation YLProgressBar
-@synthesize progress    = _progress;
+@synthesize progress = _progress;
 
 - (void)dealloc
 {
@@ -110,7 +110,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     // Refresh the corner radius value
-    self.cornerRadius   = (_type == YLProgressBarTypeRounded) ? rect.size.height / 2 : 0;
+    self.cornerRadius = (_type == YLProgressBarTypeRounded) ? rect.size.height / 2 : 0;
     
     // Compute the progressOffset for the stripe's animation
     self.stripesOffset = (!_stripesAnimated || self.stripesOffset > 2 * _stripesWidth - 1) ? 0 : ++self.stripesOffset;
@@ -188,14 +188,14 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
 
 - (void)setBehavior:(YLProgressBarBehavior)behavior
 {
-    _behavior   = behavior;
+    _behavior = behavior;
     
     [self setNeedsDisplay];
 }
 
 - (void)setProgressTintColor:(UIColor *)progressTintColor
 {
-    progressTintColor  = (progressTintColor) ? progressTintColor : [UIColor blueColor];
+    progressTintColor = (progressTintColor) ? progressTintColor : [UIColor blueColor];
     
     const CGFloat *c    = CGColorGetComponents(progressTintColor.CGColor);
     UIColor *leftColor  = [UIColor colorWithRed:(c[0] / 2.0f) green:(c[1] / 2.0f) blue:(c[2] / 2.0f) alpha:(c[3])];
@@ -245,13 +245,13 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
         
         if (animated)
         {
-            _progressTargetValue        = newProgress;
-            CGFloat incrementValue      = ((_progressTargetValue - _progress) * YLProgressBarStripesAnimationTime) / YLProgressBarProgressTime;
-            self.progressTargetTimer    = [NSTimer timerWithTimeInterval:YLProgressBarStripesAnimationTime
-                                                                  target:self
-                                                                selector:@selector(updateProgressWithTimer:)
-                                                                userInfo:[NSNumber numberWithFloat:incrementValue]
-                                                                 repeats:YES];
+            _progressTargetValue     = newProgress;
+            CGFloat incrementValue   = ((_progressTargetValue - _progress) * YLProgressBarStripesAnimationTime) / YLProgressBarProgressTime;
+            self.progressTargetTimer = [NSTimer timerWithTimeInterval:YLProgressBarStripesAnimationTime
+                                                               target:self
+                                                             selector:@selector(updateProgressWithTimer:)
+                                                             userInfo:[NSNumber numberWithFloat:incrementValue]
+                                                              repeats:YES];
             [[NSRunLoop currentRunLoop] addTimer:_progressTargetTimer forMode:NSRunLoopCommonModes];
         } else
         {
@@ -269,7 +269,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     CGFloat dt_progress = [timer.userInfo floatValue];
     
     _progress += dt_progress;
-
+    
     if ((dt_progress < 0 && _progress <= _progressTargetValue)
         || (dt_progress > 0 && _progress >= _progressTargetValue))
     {
@@ -287,36 +287,36 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     [self addObserver:self forKeyPath:@"hideStripes" options:NSKeyValueObservingOptionNew context:nil];
     [self addObserver:self forKeyPath:@"stripesAnimated" options:NSKeyValueObservingOptionNew context:nil];
     
-    _type           = YLProgressBarTypeRounded;
-    _progress       = 0.0f;
-    _hideStripes    =  NO;
-    _behavior       = YLProgressBarBehaviorDefault;
-    _stripesColor   = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.28f];
+    _type         = YLProgressBarTypeRounded;
+    _progress     = 0.0f;
+    _hideStripes  =  NO;
+    _behavior     = YLProgressBarBehaviorDefault;
+    _stripesColor = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.28f];
     
-    _indicatorTextLabel                             = [[UILabel alloc] initWithFrame:self.frame];
-    _indicatorTextLabel.adjustsFontSizeToFitWidth   = YES;
-    _indicatorTextLabel.backgroundColor             = [UIColor clearColor];
-    _indicatorTextLabel.textAlignment               = NSTextAlignmentRight;
-    _indicatorTextLabel.lineBreakMode               = NSLineBreakByTruncatingHead;
-    _indicatorTextLabel.font                        = [UIFont fontWithName:@"Arial-BoldMT" size:CGRectGetHeight(self.frame)];
-    _indicatorTextLabel.textColor                   = [UIColor clearColor];
+    _indicatorTextLabel                           = [[UILabel alloc] initWithFrame:self.frame];
+    _indicatorTextLabel.adjustsFontSizeToFitWidth = YES;
+    _indicatorTextLabel.backgroundColor           = [UIColor clearColor];
+    _indicatorTextLabel.textAlignment             = NSTextAlignmentRight;
+    _indicatorTextLabel.lineBreakMode             = NSLineBreakByTruncatingHead;
+    _indicatorTextLabel.font                      = [UIFont fontWithName:@"Arial-BoldMT" size:CGRectGetHeight(self.frame)];
+    _indicatorTextLabel.textColor                 = [UIColor clearColor];
     
-    _indicatorTextDisplayMode   = YLProgressBarIndicatorTextDisplayModeNone;
+    _indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeNone;
     
-    self.trackTintColor      = [UIColor blackColor];
-    self.progressTintColor   = self.backgroundColor;
-    self.stripesOffset       = 0;
-    self.stripesTimer        = nil;
-    self.stripesAnimated     = YES;
-    self.stripesOrientation  = YLProgressBarStripesOrientationRight;
-    self.stripesWidth        = YLProgressBarDefaultStripeWidth;
-    self.backgroundColor     = [UIColor clearColor];
+    self.trackTintColor     = [UIColor blackColor];
+    self.progressTintColor  = self.backgroundColor;
+    self.stripesOffset      = 0;
+    self.stripesTimer       = nil;
+    self.stripesAnimated    = YES;
+    self.stripesOrientation = YLProgressBarStripesOrientationRight;
+    self.stripesWidth       = YLProgressBarDefaultStripeWidth;
+    self.backgroundColor    = [UIColor clearColor];
 }
 
 - (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame orientation:(YLProgressBarStripesOrientation)orientation
 {
-    CGFloat height      = CGRectGetHeight(frame);
-    UIBezierPath *rect  = [UIBezierPath bezierPath];
+    CGFloat height     = CGRectGetHeight(frame);
+    UIBezierPath *rect = [UIBezierPath bezierPath];
     
     [rect moveToPoint:origin];
     
@@ -348,8 +348,8 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
 - (void)drawTrack:(CGContextRef)context withRect:(CGRect)rect
 {
     // Define the progress bar pattern to clip all the content inside
-    UIBezierPath *roundedRect   = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, CGRectGetWidth(rect), CGRectGetHeight(rect))
-                                                             cornerRadius:_cornerRadius];
+    UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, CGRectGetWidth(rect), CGRectGetHeight(rect))
+                                                           cornerRadius:_cornerRadius];
     [roundedRect addClip];
     
     CGContextSaveGState(context);
@@ -358,7 +358,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
         
         // Draw the track
         [self.trackTintColor set];
-        UIBezierPath* roundedRect   = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, CGRectGetWidth(rect), trackHeight) cornerRadius:_cornerRadius];
+        UIBezierPath* roundedRect = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, CGRectGetWidth(rect), trackHeight) cornerRadius:_cornerRadius];
         [roundedRect fill];
         
         if (_type == YLProgressBarTypeRounded)
@@ -366,15 +366,15 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
             // Draw the white shadow
             [[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.2] set];
             
-            UIBezierPath *shadow    = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.5f, 0, CGRectGetWidth(rect) - 1, trackHeight)
-                                                                 cornerRadius:_cornerRadius];
+            UIBezierPath *shadow = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.5f, 0, CGRectGetWidth(rect) - 1, trackHeight)
+                                                              cornerRadius:_cornerRadius];
             [shadow stroke];
             
             // Draw the inner glow
             [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4f] set];
             
-            UIBezierPath *glow  = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(_cornerRadius, 0, CGRectGetWidth(rect) - _cornerRadius * 2, 1)
-                                                             cornerRadius:0];
+            UIBezierPath *glow = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(_cornerRadius, 0, CGRectGetWidth(rect) - _cornerRadius * 2, 1)
+                                                            cornerRadius:0];
             [glow stroke];
         }
     }
@@ -383,26 +383,26 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
 
 - (void)drawProgressBar:(CGContextRef)context withRect:(CGRect)rect
 {
-    CGColorSpaceRef colorSpace  = CGColorSpaceCreateDeviceRGB();
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     
     CGContextSaveGState(context);
     {
-        UIBezierPath *progressBounds    = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:_cornerRadius];
+        UIBezierPath *progressBounds = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:_cornerRadius];
         CGContextAddPath(context, [progressBounds CGPath]);
         CGContextClip(context);
         
-        CFArrayRef colorRefs = (__bridge CFArrayRef)_colors;
-        int colorCount       = [_colors count];
+        CFArrayRef colorRefs  = (__bridge CFArrayRef)_colors;
+        NSUInteger colorCount = [_colors count];
         
-        float delta          = 1.0f / [_colors count];
-        float semi_delta     = delta / 2.0f;
+        float delta      = 1.0f / [_colors count];
+        float semi_delta = delta / 2.0f;
         CGFloat locations[colorCount];
         for (int i = 0; i < colorCount; i++)
         {
             locations[i] = delta * i + semi_delta;
         }
         
-        CGGradientRef gradient  = CGGradientCreateWithColors (colorSpace, colorRefs, locations);
+        CGGradientRef gradient = CGGradientCreateWithColors (colorSpace, colorRefs, locations);
         
         CGContextDrawLinearGradient(context, gradient, CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect)), CGPointMake(CGRectGetMinX(rect) + CGRectGetWidth(rect), CGRectGetMinY(rect)), (kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation));
         
@@ -415,8 +415,8 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
 
 - (void)drawGloss:(CGContextRef)context withRect:(CGRect)rect
 {
-    CGColorSpaceRef colorSpace  = CGColorSpaceCreateDeviceRGB();
-
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    
     CGContextSaveGState(context);
     {
         CGRect fillRect = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, floorf(rect.size.height / 3));
@@ -462,8 +462,8 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
         UIBezierPath *progressBounds = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:_cornerRadius];
         CGContextAddPath(context, [progressBounds CGPath]);
         
-        const CGFloat progressBarGlowComponents[]   = {1.0f, 1.0f, 1.0f, 0.16f};
-        CGColorRef progressBarGlowColor             = CGColorCreate(colorSpace, progressBarGlowComponents);
+        const CGFloat progressBarGlowComponents[] = {1.0f, 1.0f, 1.0f, 0.16f};
+        CGColorRef progressBarGlowColor           = CGColorCreate(colorSpace, progressBarGlowComponents);
         
         CGContextSetBlendMode(context, kCGBlendModeOverlay);
         CGContextSetStrokeColorWithColor(context, progressBarGlowColor);
@@ -482,10 +482,10 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     {
         UIBezierPath *allStripes = [UIBezierPath bezierPath];
         
-        int start       = -_stripesWidth;
-        int end         = rect.size.width / (2 * _stripesWidth) + (2 * _stripesWidth);
+        NSInteger start = -_stripesWidth;
+        NSInteger end   = rect.size.width / (2 * _stripesWidth) + (2 * _stripesWidth);
         CGFloat yOffset = (_type == YLProgressBarTypeRounded) ? YLProgressBarSizeInset : 0;
-        for (int i = start; i <= end; i++)
+        for (NSInteger i = start; i <= end; i++)
         {
             UIBezierPath *stripe = [self stripeWithOrigin:CGPointMake(i * 2 * _stripesWidth + _stripesOffset, yOffset)
                                                    bounds:rect
@@ -504,7 +504,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
             // Clip the stripes
             CGContextAddPath(context, [allStripes CGPath]);
             CGContextClip(context);
-
+            
             CGContextSetFillColorWithColor(context, [_stripesColor CGColor]);
             CGContextFillRect(context, rect);
         }
@@ -519,15 +519,15 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     {
         return;
     }
-
-    CGRect innerRect            = CGRectMake(CGRectGetMinX(rect) + 4, CGRectGetMinY(rect) + 1, CGRectGetWidth(rect) - 8, CGRectGetHeight(rect) - 2);
-    _indicatorTextLabel.frame   = innerRect;
+    
+    CGRect innerRect          = CGRectMake(CGRectGetMinX(rect) + 4, CGRectGetMinY(rect) + 1, CGRectGetWidth(rect) - 8, CGRectGetHeight(rect) - 2);
+    _indicatorTextLabel.frame = innerRect;
     
     if (CGRectGetWidth(innerRect) < CGRectGetHeight(innerRect) * 2.5)
     {
         return;
     }
-
+    
     BOOL hasTextColor = ![_indicatorTextLabel.textColor isEqual:[UIColor clearColor]];
     if (!hasTextColor)
     {
@@ -539,10 +539,10 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
         {
             backgroundColor =  (__bridge CGColorRef)[_colors lastObject];
         }
-        const CGFloat *components       = CGColorGetComponents(backgroundColor);
-        BOOL isLightBackground          = (components[0] + components[1] + components[2]) / 3.0f >= 0.5f;
+        const CGFloat *components = CGColorGetComponents(backgroundColor);
+        BOOL isLightBackground    = (components[0] + components[1] + components[2]) / 3.0f >= 0.5f;
         
-        _indicatorTextLabel.textColor   = (isLightBackground) ? [UIColor blackColor] : [UIColor whiteColor];
+        _indicatorTextLabel.textColor = (isLightBackground) ? [UIColor blackColor] : [UIColor whiteColor];
     }
     
     BOOL hasText = (_indicatorTextLabel.text != nil);
@@ -550,7 +550,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     {
         _indicatorTextLabel.text = [NSString stringWithFormat:@"%.0f%%", (self.progress * 100)];
     }
-
+    
     [_indicatorTextLabel drawTextInRect:innerRect];
     
     if (!hasTextColor)
@@ -574,10 +574,10 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
             if (_stripesTimer == nil)
             {
                 _stripesTimer= [NSTimer timerWithTimeInterval:YLProgressBarStripesAnimationTime
-                                                           target:self
-                                                         selector:@selector(setNeedsDisplay)
-                                                         userInfo:nil
-                                                          repeats:YES];
+                                                       target:self
+                                                     selector:@selector(setNeedsDisplay)
+                                                     userInfo:nil
+                                                      repeats:YES];
                 [[NSRunLoop currentRunLoop] addTimer:_stripesTimer forMode:NSRunLoopCommonModes];
             }
         } else
