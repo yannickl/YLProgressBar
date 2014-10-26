@@ -33,7 +33,7 @@
 typedef NS_ENUM (NSUInteger, YLProgressBarType)
 {
     /**
-     * The progress bar has rounded corners and the gloss effect.
+     * The progress bar has rounded corners and the gloss effect by default.
      */
     YLProgressBarTypeRounded = 0,
     /**
@@ -167,6 +167,15 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
 /** @name Configuring the Progress Bar */
 
 /**
+ * @abstract A Boolean value that determines whether the gloss effet is hidden.
+ * @discussion Setting the value of this property to YES hides the gloss effect
+ * and setting it to NO shows the gloss effect whatever the progress type
+ * (`YLProgressBarTypeRounded` or `YLProgressBarTypeFlat`). The value is updated each
+ * time the type change.
+ */
+@property (nonatomic, assign) BOOL hideGloss;
+
+/**
  * @abstract The animated vs. nonanimated stripes of the progress
  * bar.
  * @discussion If YES, the stripes over the progress bar is moving
@@ -174,14 +183,14 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
  *
  * The default value for this property is YES.
  */
-@property (nonatomic, getter = isStripesAnimated) BOOL  stripesAnimated;
+@property (nonatomic, getter = isStripesAnimated) BOOL stripesAnimated;
 
 /**
  * @abstract The orientation of the stripes.
  * @discussion The default value for this property is 
  * YLProgressBarStripesOrientationRight.
  */
-@property (nonatomic, assign) YLProgressBarStripesOrientation   stripesOrientation; //UI_APPEARANCE_SELECTOR;
+@property (nonatomic, assign) YLProgressBarStripesOrientation stripesOrientation; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The width of the stripes drawn over the progress bar.
@@ -211,17 +220,17 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
  * @discussion All the colors in the array are drawn as a gradient
  * visual of equal size.
  */
-@property (nonatomic, strong) NSArray   *progressTintColors; //UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) NSArray *progressTintColors; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The color shown for the portion of the progress bar that is filled.
  */
-@property (nonatomic, strong) UIColor   *progressTintColor; //UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor *progressTintColor; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The color shown for the portion of the progress bar that is not filled.
  */
-@property (nonatomic, strong) UIColor   *trackTintColor; //UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor *trackTintColor; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract A label to display some indications for the user.

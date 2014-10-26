@@ -158,7 +158,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
             }
         }
         
-        if (_type == YLProgressBarTypeRounded)
+        if (!_hideGloss)
         {
             [self drawGloss:context withRect:innerRect];
         }
@@ -172,6 +172,19 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
 }
 
 #pragma mark - Properties
+
+- (void)setType:(YLProgressBarType)type {
+    _type = type;
+    
+    switch (type) {
+        case YLProgressBarTypeRounded:
+            _hideGloss = NO;
+            break;
+        default:
+            _hideGloss = YES;
+            break;
+    }
+}
 
 - (CGFloat)progress
 {
@@ -288,6 +301,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     [self addObserver:self forKeyPath:@"stripesAnimated" options:NSKeyValueObservingOptionNew context:nil];
     
     _type         = YLProgressBarTypeRounded;
+    _hideGloss    = NO;
     _progress     = 0.0f;
     _hideStripes  =  NO;
     _behavior     = YLProgressBarBehaviorDefault;
