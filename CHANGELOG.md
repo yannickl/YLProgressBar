@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 3.2.0
+
+- [ADD] `hideGloss` property to manage the display of the gloss effect
+
 ### Version 3.1.1
 
 - [FIX] Stop the stripes animation when hidden #13
@@ -17,8 +21,8 @@
 - [UPDATE] Makes the YLProgressBar inherits from `UIView` instead of `UIProgressView` to work with iOS7
 - [ADD] `hideStripes` property to remove the stripes
 - [ADD] `stripesColor` property to change the stripes color
-- [ADD] `behavior` property to define the behavior of the progress bar in certain case.
-- [ADD] `progressTintColors` property to define a gradient of colors
+- [ADD] `behavior` property to define the behaviour of the progress bar in certain case.
+- [ADD] `progressTintColors` property to define a gradient of colours
 - [ADD] `setProgress:animated:` method
 - [NEW] `YLProgressBarStripesOrientationVertical` orientation
 - [UPDATE] `progressStripeAnimated` property => `stripesAnimated`
