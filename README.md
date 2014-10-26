@@ -25,8 +25,9 @@ Go to the directory of your Xcode project, and Create and Edit your Podfile and 
 $ cd /path/to/MyProject
 $ touch Podfile
 $ edit Podfile
+source 'https://github.com/CocoaPods/Specs.git'
 platform :ios
-pod 'YLProgressBar', '~> 3.1.1'
+pod 'YLProgressBar', '~> 3.2.0'
 ```
 
 Install into your project:
