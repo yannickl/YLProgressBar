@@ -93,7 +93,7 @@ Yannick Loriot
 
 License
 ====================
-Copyright 2013 - present Yannick Loriot.<br />
+Copyright 2012-present - Yannick Loriot.<br />
 http://yannickloriot.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy<br />
