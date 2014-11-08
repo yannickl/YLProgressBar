@@ -27,7 +27,7 @@ $ touch Podfile
 $ edit Podfile
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios
-pod 'YLProgressBar', '~> 3.2.0'
+pod 'YLProgressBar', '~> 3.3.0'
 ```
 
 Install into your project:
@@ -56,26 +56,29 @@ _progressBar.type               = YLProgressBarTypeFlat;
 _progressBar.progressTintColor  = [UIColor blueColor];
 _progressBar.hideStripes        = YES;
 
-// Green rounded/gloss progress, with vertical animated stripes
+// Green rounded/gloss progress, with vertical animated stripes in the left direction
 _progressBar.type               = YLProgressBarTypeRounded;
 _progressBar.progressTintColor  = [UIColor greenColor];
 _progressBar.stripesOrientation = YLProgressBarStripesOrientationVertical;
+_progressBar.stripesDirection   = YLProgressBarStripesDirectionLeft;
 
 // Rainbow flat progress, with the indicator text displayed over the progress bar
+NSArray *rainbowColors = @[[UIColor colorWithRed:33/255.0f green:180/255.0f blue:162/255.0f alpha:1.0f],
+                           [UIColor colorWithRed:3/255.0f green:137/255.0f blue:166/255.0f alpha:1.0f],
+                           [UIColor colorWithRed:91/255.0f green:63/255.0f blue:150/255.0f alpha:1.0f],
+                           [UIColor colorWithRed:87/255.0f green:26/255.0f blue:70/255.0f alpha:1.0f],
+                           [UIColor colorWithRed:126/255.0f green:26/255.0f blue:36/255.0f alpha:1.0f],
+                           [UIColor colorWithRed:149/255.0f green:37/255.0f blue:36/255.0f alpha:1.0f],
+                           [UIColor colorWithRed:228/255.0f green:69/255.0f blue:39/255.0f alpha:1.0f],
+                           [UIColor colorWithRed:245/255.0f green:166/255.0f blue:35/255.0f alpha:1.0f],
+                           [UIColor colorWithRed:165/255.0f green:202/255.0f blue:60/255.0f alpha:1.0f],
+                           [UIColor colorWithRed:202/255.0f green:217/255.0f blue:54/255.0f alpha:1.0f],
+                           [UIColor colorWithRed:111/255.0f green:188/255.0f blue:84/255.0f alpha:1.0f]];
+
 _progressBar.type                     = YLProgressBarTypeFlat;
 _progressBar.hideStripes              = YES;
 _progressBar.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeProgress;
-_progressBar.progressTintColors       = @[[UIColor colorWithRed:33/255.0f green:180/255.0f blue:162/255.0f alpha:1.0f],
-                                          [UIColor colorWithRed:3/255.0f green:137/255.0f blue:166/255.0f alpha:1.0f],
-                                          [UIColor colorWithRed:91/255.0f green:63/255.0f blue:150/255.0f alpha:1.0f],
-                                          [UIColor colorWithRed:87/255.0f green:26/255.0f blue:70/255.0f alpha:1.0f],
-                                          [UIColor colorWithRed:126/255.0f green:26/255.0f blue:36/255.0f alpha:1.0f],
-                                          [UIColor colorWithRed:149/255.0f green:37/255.0f blue:36/255.0f alpha:1.0f],
-                                          [UIColor colorWithRed:228/255.0f green:69/255.0f blue:39/255.0f alpha:1.0f],
-                                          [UIColor colorWithRed:245/255.0f green:166/255.0f blue:35/255.0f alpha:1.0f],
-                                          [UIColor colorWithRed:165/255.0f green:202/255.0f blue:60/255.0f alpha:1.0f],
-                                          [UIColor colorWithRed:202/255.0f green:217/255.0f blue:54/255.0f alpha:1.0f],
-                                          [UIColor colorWithRed:111/255.0f green:188/255.0f blue:84/255.0f alpha:1.0f]];
+_progressBar.progressTintColors       = rainbowColors;
 ```
 
 You can also use the `UIAppearence` protocol to configure all the progress bar:

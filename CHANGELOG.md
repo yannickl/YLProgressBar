@@ -3,6 +3,7 @@
 ### Version 3.3.0
 
 - [ADD] `stripesDirection` property to change the stripes direction of their movement
+- [ADD] `stripesAnimationVelocity` property to update the velocity of the stripe animation
 
 ### Version 3.2.0
 
@@ -28,7 +29,7 @@
 - [ADD] `behavior` property to define the behaviour of the progress bar in certain case.
 - [ADD] `progressTintColors` property to define a gradient of colours
 - [ADD] `setProgress:animated:` method
-- [NEW] `YLProgressBarStripesOrientationVertical` orientation
+- [ADD] `YLProgressBarStripesOrientationVertical` orientation
 - [UPDATE] `progressStripeAnimated` property => `stripesAnimated`
 - [UPDATE] `progressStripeOrientation` property => `stripesOrientation`
 - [UPDATE] `progressStripeWidth` property => `stripesWidth`
