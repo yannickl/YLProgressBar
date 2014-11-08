@@ -246,18 +246,26 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
 @property (nonatomic, getter = isStripesAnimated) BOOL stripesAnimated;
 
 /**
+ * @abstract The direction of the movement during the animation.
+ * @discussion The default value for this property is
+ * `YLProgressBarStripesDirectionRight`.
+ */
+@property (nonatomic, assign) YLProgressBarStripesDirection stripesDirection; //UI_APPEARANCE_SELECTOR;
+
+/**
+ * @abstract The velocity of the stripes during the animation. Higher is the value,
+ * greater the distance traveled by the stripes during a frame is.
+ * @discussion The absolute value of the property is taken into account. By default
+ * the velocity is `1`.
+ */
+@property (nonatomic, assign) double stripesAnimationVelocity; //UI_APPEARANCE_SELECTOR;
+
+/**
  * @abstract The orientation of the stripes.
  * @discussion The default value for this property is 
  * `YLProgressBarStripesOrientationRight`.
  */
 @property (nonatomic, assign) YLProgressBarStripesOrientation stripesOrientation; //UI_APPEARANCE_SELECTOR;
-
-/**
- * @abstract The direction of the movement for the stripes animation.
- * @discussion The default value for this property is
- * `YLProgressBarStripesDirectionRight`.
- */
-@property (nonatomic, assign) YLProgressBarStripesDirection stripesDirection; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The width of the stripes drawn over the progress bar.

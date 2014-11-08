@@ -113,7 +113,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     self.cornerRadius = (_type == YLProgressBarTypeRounded) ? rect.size.height / 2 : 0;
   
     // Compute the progressOffset for the stripe's animation
-    self.stripesOffset = (!_stripesAnimated || abs(self.stripesOffset) > 2 * _stripesWidth - 1) ? 0 : self.stripesDirection + self.stripesOffset;
+    self.stripesOffset = (!_stripesAnimated || abs(self.stripesOffset) > 2 * _stripesWidth - 1) ? 0 : self.stripesDirection * abs(self.stripesAnimationVelocity) + self.stripesOffset;
     
     // Draw the background track
     [self drawTrack:context withRect:rect];
@@ -317,15 +317,16 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     
     _indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeNone;
     
-    self.trackTintColor     = [UIColor blackColor];
-    self.progressTintColor  = self.backgroundColor;
-    self.stripesOffset      = 0;
-    self.stripesTimer       = nil;
-    self.stripesAnimated    = YES;
-    self.stripesOrientation = YLProgressBarStripesOrientationRight;
-    self.stripesDirection   = YLProgressBarStripesDirectionRight;
-    self.stripesWidth       = YLProgressBarDefaultStripeWidth;
-    self.backgroundColor    = [UIColor clearColor];
+    self.trackTintColor           = [UIColor blackColor];
+    self.progressTintColor        = self.backgroundColor;
+    self.stripesOffset            = 0;
+    self.stripesTimer             = nil;
+    self.stripesAnimated          = YES;
+    self.stripesOrientation       = YLProgressBarStripesOrientationRight;
+    self.stripesDirection         = YLProgressBarStripesDirectionRight;
+    self.stripesAnimationVelocity = 1;
+    self.stripesWidth             = YLProgressBarDefaultStripeWidth;
+    self.backgroundColor          = [UIColor clearColor];
 }
 
 - (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame orientation:(YLProgressBarStripesOrientation)orientation
