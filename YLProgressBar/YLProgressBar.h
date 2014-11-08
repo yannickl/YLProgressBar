@@ -62,6 +62,21 @@ typedef NS_ENUM (NSUInteger, YLProgressBarStripesOrientation)
 };
 
 /**
+ * The stripes movement direction.
+ */
+typedef NS_ENUM (NSInteger, YLProgressBarStripesDirection)
+{
+  /**
+   * The stripes go from right to left.
+   */
+  YLProgressBarStripesDirectionLeft  = -1,
+  /**
+   * The stripes go from left to right.
+   */
+  YLProgressBarStripesDirectionRight = 1
+};
+
+/**
  * The behavior of a progress bar.
  */
 typedef NS_ENUM (NSUInteger, YLProgressBarBehavior)
@@ -188,9 +203,16 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
 /**
  * @abstract The orientation of the stripes.
  * @discussion The default value for this property is 
- * YLProgressBarStripesOrientationRight.
+ * `YLProgressBarStripesOrientationRight`.
  */
 @property (nonatomic, assign) YLProgressBarStripesOrientation stripesOrientation; //UI_APPEARANCE_SELECTOR;
+
+/**
+ * @abstract The direction of the movement for the stripes animation.
+ * @discussion The default value for this property is
+ * `YLProgressBarStripesDirectionRight`.
+ */
+@property (nonatomic, assign) YLProgressBarStripesDirection stripesDirection; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The width of the stripes drawn over the progress bar.
@@ -198,7 +220,7 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
  * hidden.
  *
  * The default value for this property is equal to the 
- * YLProgressBarDefaultStripeWidth value.
+ * `YLProgressBarDefaultStripeWidth` value.
  */
 @property (nonatomic, assign) NSInteger stripesWidth; //UI_APPEARANCE_SELECTOR;
 
@@ -246,13 +268,13 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
  * @abstract The display indicator text mode. It defines where the 
  * indicator text needs to display.
  * @discussion The default value is set to 
- * YLProgressBarIndicatorTextDisplayModeNone.
+ * `YLProgressBarIndicatorTextDisplayModeNone`.
  */
 @property (nonatomic, assign) YLProgressBarIndicatorTextDisplayMode indicatorTextDisplayMode; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The type of the progress bar.
- * @discussion The default value is set to YLProgressBarTypeRounded.
+ * @discussion The default value is set to `YLProgressBarTypeRounded`.
  */
 @property (nonatomic, assign) YLProgressBarType type; //UI_APPEARANCE_SELECTOR;
 

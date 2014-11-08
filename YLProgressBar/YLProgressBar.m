@@ -111,9 +111,9 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     
     // Refresh the corner radius value
     self.cornerRadius = (_type == YLProgressBarTypeRounded) ? rect.size.height / 2 : 0;
-    
+  
     // Compute the progressOffset for the stripe's animation
-    self.stripesOffset = (!_stripesAnimated || self.stripesOffset > 2 * _stripesWidth - 1) ? 0 : ++self.stripesOffset;
+    self.stripesOffset = (!_stripesAnimated || abs(self.stripesOffset) > 2 * _stripesWidth - 1) ? 0 : self.stripesDirection + self.stripesOffset;
     
     // Draw the background track
     [self drawTrack:context withRect:rect];
@@ -323,6 +323,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     self.stripesTimer       = nil;
     self.stripesAnimated    = YES;
     self.stripesOrientation = YLProgressBarStripesOrientationRight;
+    self.stripesDirection   = YLProgressBarStripesDirectionRight;
     self.stripesWidth       = YLProgressBarDefaultStripeWidth;
     self.backgroundColor    = [UIColor clearColor];
 }
