@@ -1,7 +1,7 @@
 /*
  * YLProgressBar.m
  *
- * Copyright 2012-2013 Yannick Loriot.
+ * Copyright 2012 - present, Yannick Loriot.
  * http://yannickloriot.com
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy

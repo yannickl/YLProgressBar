@@ -1,7 +1,7 @@
 /*
  * YLProgressBar.h
  *
- * Copyright 2012-2013 Yannick Loriot.
+ * Copyright 2012 - present, Yannick Loriot.
  * http://yannickloriot.com
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -191,6 +191,51 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
 @property (nonatomic, assign) BOOL hideGloss;
 
 /**
+ * @abstract The colors shown for the portion of the progress bar
+ * that is filled.
+ * @discussion All the colors in the array are drawn as a gradient
+ * visual of equal size.
+ */
+@property (nonatomic, strong) NSArray *progressTintColors; //UI_APPEARANCE_SELECTOR;
+
+/**
+ * @abstract The color shown for the portion of the progress bar that is filled.
+ */
+@property (nonatomic, strong) UIColor *progressTintColor; //UI_APPEARANCE_SELECTOR;
+
+/**
+ * @abstract The color shown for the portion of the progress bar that is not filled.
+ */
+@property (nonatomic, strong) UIColor *trackTintColor; //UI_APPEARANCE_SELECTOR;
+
+/**
+ * @abstract A label to display some indications for the user.
+ * When the label text is set to nil it shows the progress value as a
+ * percentage. You can configure its font color, the font size, the text
+ * alignement, etc. as any other labels.
+ * @discussion By default the label text is set to nil and its text color
+ * change using the background color.
+ */
+@property (nonatomic, strong) UILabel *indicatorTextLabel;
+
+/**
+ * @abstract The display indicator text mode. It defines where the
+ * indicator text needs to display.
+ * @discussion The default value is set to
+ * `YLProgressBarIndicatorTextDisplayModeNone`.
+ */
+@property (nonatomic, assign) YLProgressBarIndicatorTextDisplayMode indicatorTextDisplayMode; //UI_APPEARANCE_SELECTOR;
+
+/**
+ * @abstract The type of the progress bar.
+ * @discussion The default value is set to `YLProgressBarTypeRounded`.
+ */
+@property (nonatomic, assign) YLProgressBarType type; //UI_APPEARANCE_SELECTOR;
+
+#pragma mark Configuring the Stripes
+/** @name Configuring the Stripes */
+
+/**
  * @abstract The animated vs. nonanimated stripes of the progress
  * bar.
  * @discussion If YES, the stripes over the progress bar is moving
@@ -235,47 +280,5 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
  * setting it to NO shows the stripes. The default value is NO.
  */
 @property (nonatomic, assign) BOOL hideStripes;
-
-/**
- * @abstract The colors shown for the portion of the progress bar
- * that is filled.
- * @discussion All the colors in the array are drawn as a gradient
- * visual of equal size.
- */
-@property (nonatomic, strong) NSArray *progressTintColors; //UI_APPEARANCE_SELECTOR;
-
-/**
- * @abstract The color shown for the portion of the progress bar that is filled.
- */
-@property (nonatomic, strong) UIColor *progressTintColor; //UI_APPEARANCE_SELECTOR;
-
-/**
- * @abstract The color shown for the portion of the progress bar that is not filled.
- */
-@property (nonatomic, strong) UIColor *trackTintColor; //UI_APPEARANCE_SELECTOR;
-
-/**
- * @abstract A label to display some indications for the user.
- * When the label text is set to nil it shows the progress value as a 
- * percentage. You can configure its font color, the font size, the text
- * alignement, etc. as any other labels.
- * @discussion By default the label text is set to nil and its text color
- * change using the background color.
- */
-@property (nonatomic, strong) UILabel *indicatorTextLabel;
-
-/**
- * @abstract The display indicator text mode. It defines where the 
- * indicator text needs to display.
- * @discussion The default value is set to 
- * `YLProgressBarIndicatorTextDisplayModeNone`.
- */
-@property (nonatomic, assign) YLProgressBarIndicatorTextDisplayMode indicatorTextDisplayMode; //UI_APPEARANCE_SELECTOR;
-
-/**
- * @abstract The type of the progress bar.
- * @discussion The default value is set to `YLProgressBarTypeRounded`.
- */
-@property (nonatomic, assign) YLProgressBarType type; //UI_APPEARANCE_SELECTOR;
 
 @end

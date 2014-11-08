@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 3.3.0
+
+- [ADD] `stripesDirection` property to change the stripes direction of their movement
+
 ### Version 3.2.0
 
 - [ADD] `hideGloss` property to manage the display of the gloss effect
