@@ -188,8 +188,10 @@
 - (void)initFlatAnimatedProgressBar
 {
     _progressBarFlatAnimated.progressTintColor  = [UIColor colorWithRed:232/255.0f green:132/255.0f blue:12/255.0f alpha:1.0f];
-    _progressBarFlatAnimated.type               = YLProgressBarTypeFlat;
-    _progressBarFlatAnimated.stripesOrientation = YLProgressBarStripesOrientationVertical;
+    _progressBarFlatAnimated.type                     = YLProgressBarTypeFlat;
+    _progressBarFlatAnimated.stripesOrientation       = YLProgressBarStripesOrientationVertical;
+    _progressBarFlatAnimated.stripesDirection         = YLProgressBarStripesDirectionLeft;
+    _progressBarFlatAnimated.stripesAnimationVelocity = 1.8f;
 }
 
 - (void)initRoundedSlimProgressBar
