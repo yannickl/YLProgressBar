@@ -28,7 +28,6 @@
 
 // Sizes
 const NSInteger YLProgressBarSizeInset    = 1; //px
-const NSInteger YLProgressBarStripesDelta = 8; //px
 
 // Animation times
 const NSTimeInterval YLProgressBarStripesAnimationTime = 1.0f / 30.0f; // s
@@ -326,6 +325,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     self.stripesDirection         = YLProgressBarStripesDirectionRight;
     self.stripesAnimationVelocity = 1;
     self.stripesWidth             = YLProgressBarDefaultStripeWidth;
+    self.stripesDelta             = YLProgressBarDefaultStripeDelta;
     self.backgroundColor          = [UIColor clearColor];
 }
 
@@ -340,13 +340,13 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     {
         case YLProgressBarStripesOrientationRight:
             [rect addLineToPoint:CGPointMake(origin.x + _stripesWidth, origin.y)];
-            [rect addLineToPoint:CGPointMake(origin.x + _stripesWidth - YLProgressBarStripesDelta, origin.y + height)];
-            [rect addLineToPoint:CGPointMake(origin.x - YLProgressBarStripesDelta, origin.y + height)];
+            [rect addLineToPoint:CGPointMake(origin.x + _stripesWidth - _stripesDelta, origin.y + height)];
+            [rect addLineToPoint:CGPointMake(origin.x - _stripesDelta, origin.y + height)];
             break;
         case YLProgressBarStripesOrientationLeft:
             [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth, origin.y)];
-            [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth + YLProgressBarStripesDelta, origin.y + height)];
-            [rect addLineToPoint:CGPointMake(origin.x + YLProgressBarStripesDelta, origin.y + height)];
+            [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth + _stripesDelta, origin.y + height)];
+            [rect addLineToPoint:CGPointMake(origin.x + _stripesDelta, origin.y + height)];
             break;
         default:
             [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth, origin.y)];
