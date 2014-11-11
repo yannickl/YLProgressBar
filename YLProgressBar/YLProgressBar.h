@@ -26,6 +26,7 @@
 
 // Global
 #define YLProgressBarDefaultStripeWidth 7 //px
+#define YLProgressBarDefaultStripeDelta 8 //px
 
 /**
  * The progress bar appearance.
@@ -288,5 +289,14 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
  * setting it to NO shows the stripes. The default value is NO.
  */
 @property (nonatomic, assign) BOOL hideStripes;
+
+
+/**
+ * @abstract The x-coordinate distance in pixels between the top point and
+ *  the bottom point of a slanted stripe.
+ * @discussion Default value is '8'. Positive integers are expected for correct effect.
+ * Has no effect when stripesOrientation property is 'YLProgressBarStripesOrientationVertical'
+ */
+@property (nonatomic, assign) NSInteger stripesDelta;
 
 @end
