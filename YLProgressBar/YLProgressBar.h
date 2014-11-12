@@ -133,8 +133,8 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
  *
  * <em>Note: The YLProgressBar is conform to the UIAppearance protocol, however,
  * because of the current version of the appledoc project, the 
- * UI_APPEARANCE_SELECTOR macros are not taken into account, that's why they are
- * commented.</em>
+ * UI_APPEARANCE_SELECTOR macros are not taken into account, that's why they 
+ * are commented.</em>
  */
 @interface YLProgressBar : UIView
 
@@ -147,8 +147,8 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
  * between 0.0 and 1.0, inclusive, where 1.0 indicates the completion of the 
  * task.
  *
- * The default value is 0.0. Values less than 0.0 and greater than 1.0 are pinned 
- * to those limits.
+ * The default value is 0.0. Values less than 0.0 and greater than 1.0 are 
+ * pinned to those limits.
  */
 @property (atomic, assign) CGFloat  progress;
 
@@ -159,9 +159,10 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
  * @param animated YES if the change should be animated, NO if the change should
  * happen immediately.
  * @discussion The current progress is represented by a floating-point value
- * between 0.0 and 1.0, inclusive, where 1.0 indicates the completion of the task.
- * The default value is 0.0. Values less than 0.0 and greater than 1.0 are pinned
- * to those limits.
+ * between 0.0 and 1.0, inclusive, where 1.0 indicates the completion of the 
+ * task.
+ * The default value is 0.0. Values less than 0.0 and greater than 1.0 are
+ * pinned to those limits.
  */
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 
@@ -186,8 +187,8 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
  * @abstract A Boolean value that determines whether the gloss effet is hidden.
  * @discussion Setting the value of this property to YES hides the gloss effect
  * and setting it to NO shows the gloss effect whatever the progress type
- * (`YLProgressBarTypeRounded` or `YLProgressBarTypeFlat`). The value is updated each
- * time the type change.
+ * (`YLProgressBarTypeRounded` or `YLProgressBarTypeFlat`). The value is updated
+ * each time the type change.
  */
 @property (nonatomic, assign) BOOL hideGloss;
 
@@ -205,7 +206,8 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
 @property (nonatomic, strong) UIColor *progressTintColor; //UI_APPEARANCE_SELECTOR;
 
 /**
- * @abstract The color shown for the portion of the progress bar that is not filled.
+ * @abstract The color shown for the portion of the progress bar that is not
+ * filled.
  */
 @property (nonatomic, strong) UIColor *trackTintColor; //UI_APPEARANCE_SELECTOR;
 
@@ -214,14 +216,14 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
  * When the label text is set to nil it shows the progress value as a
  * percentage. You can configure its font color, the font size, the text
  * alignement, etc. as any other labels.
- * @discussion By default the label text is set to nil and its text color
- * change using the background color.
+ * @discussion By default the label text is set to nil and its text color change 
+ * using the background color.
  */
 @property (nonatomic, strong) UILabel *indicatorTextLabel;
 
 /**
- * @abstract The display indicator text mode. It defines where the
- * indicator text needs to display.
+ * @abstract The display indicator text mode. It defines where the indicator
+ * text needs to display.
  * @discussion The default value is set to
  * `YLProgressBarIndicatorTextDisplayModeNone`.
  */
@@ -237,10 +239,9 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
 /** @name Configuring the Stripes */
 
 /**
- * @abstract The animated vs. nonanimated stripes of the progress
- * bar.
- * @discussion If YES, the stripes over the progress bar is moving
- * from the left to the right side.
+ * @abstract The animated vs. nonanimated stripes of the progress bar.
+ * @discussion If YES, the stripes over the progress bar is moving from the left
+ * to the right side.
  *
  * The default value for this property is YES.
  */
@@ -254,10 +255,10 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
 @property (nonatomic, assign) YLProgressBarStripesDirection stripesDirection; //UI_APPEARANCE_SELECTOR;
 
 /**
- * @abstract The velocity of the stripes during the animation. Higher is the value,
- * greater the distance traveled by the stripes during a frame is.
- * @discussion The absolute value of the property is taken into account. By default
- * the velocity is `1`.
+ * @abstract The velocity of the stripes during the animation. Higher is the
+ * value, greater the distance traveled by the stripes during a frame is.
+ * @discussion The absolute value of the property is taken into account. By
+ * default the velocity is `1`.
  */
 @property (nonatomic, assign) double stripesAnimationVelocity; //UI_APPEARANCE_SELECTOR;
 
@@ -284,19 +285,19 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
 @property (nonatomic, strong) UIColor *stripesColor; //UI_APPEARANCE_SELECTOR;
 
 /**
+ * @abstract The x-coordinate distance in pixels between the top point and
+ * the bottom point of a slanted stripe.
+ * @discussion Default value is `YLProgressBarDefaultStripeDelta`. Positive
+ * integers are expected for correct effect. Has no effect when
+ * stripesOrientation property is `YLProgressBarStripesOrientationVertical`.
+ */
+@property (nonatomic, assign) NSInteger stripesDelta; //UI_APPEARANCE_SELECTOR;
+
+/**
  * @abstract A Boolean value that determines whether the stripes are hidden.
  * @discussion Setting the value of this property to YES hides the stripes and
  * setting it to NO shows the stripes. The default value is NO.
  */
 @property (nonatomic, assign) BOOL hideStripes;
-
-
-/**
- * @abstract The x-coordinate distance in pixels between the top point and
- *  the bottom point of a slanted stripe.
- * @discussion Default value is '8'. Positive integers are expected for correct effect.
- * Has no effect when stripesOrientation property is 'YLProgressBarStripesOrientationVertical'
- */
-@property (nonatomic, assign) NSInteger stripesDelta;
 
 @end
