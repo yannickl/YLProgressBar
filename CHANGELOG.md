@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 3.4.0
+
+- [ADD] `stripesDelta` property to customise the distance between the top and the bottom point
+
 ### Version 3.3.0
 
 - [ADD] `stripesDirection` property to change the stripes direction of their movement
