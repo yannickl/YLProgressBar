@@ -1,4 +1,4 @@
-![](https://github.com/YannickL/YLProgressBar/raw/master/web/ylprogressbar_header.png)
+![YLProgressBar](https://github.com/YannickL/YLProgressBar/raw/master/web/ylprogressbar_header.png)
 
 The `YLProgressBar` is an UIProgressView replacement with an highly and fully customizable animated progress bar in pure Core Graphics
 
