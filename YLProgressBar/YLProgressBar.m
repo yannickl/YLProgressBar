@@ -410,10 +410,10 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
         CFArrayRef colorRefs  = (__bridge CFArrayRef)_colors;
         NSUInteger colorCount = [_colors count];
         
-        float delta      = 1.0f / [_colors count];
-        float semi_delta = delta / 2.0f;
+        CGFloat delta      = 1.0f / [_colors count];
+        CGFloat semi_delta = delta / 2.0f;
         CGFloat locations[colorCount];
-        for (int i = 0; i < colorCount; i++)
+        for (NSInteger i = 0; i < colorCount; i++)
         {
             locations[i] = delta * i + semi_delta;
         }
