@@ -2,6 +2,7 @@
 
 ### Version 3.5.0
 
+- [ADD] The `hideTrack` property to display/hide the background of the progress bar
 - [FIX] The `hideGloss` property now affects the inner gloss
 
 ### Version 3.4.0

@@ -302,7 +302,7 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
 @property (nonatomic, assign) BOOL hideStripes;
 
 /**
- * @abstract A Boolean value that determines whether the track are hidden.
+ * @abstract A Boolean value that determines whether the track is hidden.
  * @discussion Setting the value of this property to YES hides the track and
  * setting it to NO shows the track. The default value is NO.
  */
