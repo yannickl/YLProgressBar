@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 3.5.0
+
+- [FIX] The `hideGloss` property now affects the inner gloss
+
 ### Version 3.4.0
 
 - [ADD] `stripesDelta` property to customise the distance between the top and the bottom point
