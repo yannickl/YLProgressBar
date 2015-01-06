@@ -184,7 +184,8 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
 /** @name Configuring the Progress Bar */
 
 /**
- * @abstract A Boolean value that determines whether the gloss effet is hidden.
+ * @abstract A Boolean value that determines whether the gloss effet (outer and inner
+ * one) is hidden.
  * @discussion Setting the value of this property to YES hides the gloss effect
  * and setting it to NO shows the gloss effect whatever the progress type
  * (`YLProgressBarTypeRounded` or `YLProgressBarTypeFlat`). The value is updated
