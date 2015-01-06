@@ -115,8 +115,11 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     self.stripesOffset = (!_stripesAnimated || abs(self.stripesOffset) > 2 * _stripesWidth - 1) ? 0 : self.stripesDirection * abs(self.stripesAnimationVelocity) + self.stripesOffset;
     
     // Draw the background track
-    [self drawTrack:context withRect:rect];
-    
+    if (!_hideTrack)
+    {
+        [self drawTrack:context withRect:rect];
+    }
+
     // Draw the indicator text if necessary
     if (_indicatorTextDisplayMode == YLProgressBarIndicatorTextDisplayModeTrack)
     {
@@ -302,7 +305,8 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     _type         = YLProgressBarTypeRounded;
     _hideGloss    = NO;
     _progress     = 0.0f;
-    _hideStripes  =  NO;
+    _hideStripes  = NO;
+    _hideTrack    = NO;
     _behavior     = YLProgressBarBehaviorDefault;
     _stripesColor = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.28f];
     

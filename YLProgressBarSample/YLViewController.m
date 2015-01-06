@@ -174,6 +174,7 @@
     _progressBarFlatRainbow.type               = YLProgressBarTypeFlat;
     _progressBarFlatRainbow.progressTintColors = tintColors;
     _progressBarFlatRainbow.hideStripes        = YES;
+    _progressBarFlatRainbow.hideTrack          = YES;
     _progressBarFlatRainbow.behavior           = YLProgressBarBehaviorDefault;
 }
 
