@@ -374,11 +374,18 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     
     CGContextSaveGState(context);
     {
-        CGFloat trackHeight = (_type == YLProgressBarTypeRounded) ? CGRectGetHeight(rect) - 1 : CGRectGetHeight(rect);
+        CGFloat trackWidth  = CGRectGetWidth(rect);
+        CGFloat trackHeight = CGRectGetHeight(rect);
+      
+        if (_type == YLProgressBarTypeRounded && !_hideGloss)
+        {
+            trackHeight -= 1;
+            trackWidth  -= 1;
+        }
         
         // Draw the track
-        [self.trackTintColor set];
-        UIBezierPath* roundedRect = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, CGRectGetWidth(rect), trackHeight) cornerRadius:_cornerRadius];
+        UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, trackWidth, trackHeight) cornerRadius:_cornerRadius];
+        [_trackTintColor set];
         [roundedRect fill];
         
         if (_type == YLProgressBarTypeRounded)
@@ -386,11 +393,12 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
             // Draw the white shadow
             [[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.2] set];
             
-            UIBezierPath *shadow = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.5f, 0, CGRectGetWidth(rect) - 1, trackHeight)
+            UIBezierPath *shadow = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.5f, 0, trackWidth, trackHeight)
                                                               cornerRadius:_cornerRadius];
             [shadow stroke];
           
-          if (!_hideGloss) {
+          if (!_hideGloss)
+          {
             // Draw the inner glow
             [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4f] set];
             
@@ -419,12 +427,13 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
         CGFloat delta      = 1.0f / [_colors count];
         CGFloat semi_delta = delta / 2.0f;
         CGFloat locations[colorCount];
+      
         for (NSInteger i = 0; i < colorCount; i++)
         {
             locations[i] = delta * i + semi_delta;
         }
         
-        CGGradientRef gradient = CGGradientCreateWithColors (colorSpace, colorRefs, locations);
+        CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, colorRefs, locations);
         
         CGContextDrawLinearGradient(context, gradient, CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect)), CGPointMake(CGRectGetMinX(rect) + CGRectGetWidth(rect), CGRectGetMinY(rect)), (kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation));
         
@@ -507,6 +516,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
         NSInteger start = -_stripesWidth;
         NSInteger end   = rect.size.width / (2 * _stripesWidth) + (2 * _stripesWidth);
         CGFloat yOffset = (_type == YLProgressBarTypeRounded) ? YLProgressBarSizeInset : 0;
+      
         for (NSInteger i = start; i <= end; i++)
         {
             UIBezierPath *stripe = [self stripeWithOrigin:CGPointMake(i * 2 * _stripesWidth + _stripesOffset, yOffset)
