@@ -27,7 +27,7 @@
 #import "YLProgressBar.h"
 
 // Sizes
-const NSInteger YLProgressBarSizeInset    = 1; //px
+const NSInteger YLProgressBarSizeInset = 1; //px
 
 // Animation times
 const NSTimeInterval YLProgressBarStripesAnimationTime = 1.0f / 30.0f; // s
@@ -569,7 +569,7 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
             backgroundColor = _trackTintColor.CGColor ?: [UIColor blackColor].CGColor;
         } else
         {
-            backgroundColor =  (__bridge CGColorRef)[_colors lastObject];
+            backgroundColor = (__bridge CGColorRef)[_colors lastObject];
         }
         const CGFloat *components = CGColorGetComponents(backgroundColor);
         BOOL isLightBackground    = (components[0] + components[1] + components[2]) / 3.0f >= 0.5f;
