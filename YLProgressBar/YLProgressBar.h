@@ -24,6 +24,9 @@
  *
  */
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 // Global
 #define YLProgressBarDefaultStripeWidth 7 //px
 #define YLProgressBarDefaultStripeDelta 8 //px
