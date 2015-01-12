@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 3.5.1
+
+- [FIX] Minor glitches with the gloss display
+
 ### Version 3.5.0
 
 - [ADD] The `hideTrack` property to display/hide the background of the progress bar
