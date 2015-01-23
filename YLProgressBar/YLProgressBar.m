@@ -33,6 +33,9 @@ const NSInteger YLProgressBarSizeInset = 1; //px
 const NSTimeInterval YLProgressBarStripesAnimationTime = 1.0f / 30.0f; // s
 const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
 
+// Font name
+static NSString * YLProgressBarDefaultName = @"Arial-BoldMT";
+
 @interface YLProgressBar ()
 @property (nonatomic, assign) double  stripesOffset;
 @property (nonatomic, assign) CGFloat cornerRadius;
@@ -315,9 +318,10 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
     _indicatorTextLabel.backgroundColor           = [UIColor clearColor];
     _indicatorTextLabel.textAlignment             = NSTextAlignmentRight;
     _indicatorTextLabel.lineBreakMode             = NSLineBreakByTruncatingHead;
-    _indicatorTextLabel.font                      = [UIFont fontWithName:@"Arial-BoldMT" size:CGRectGetHeight(self.frame)];
+    _indicatorTextLabel.font                      = [UIFont fontWithName:YLProgressBarDefaultName size:CGRectGetHeight(self.frame) - 2];
     _indicatorTextLabel.textColor                 = [UIColor clearColor];
-    
+    _indicatorTextLabel.minimumFontSize           = CGRectGetHeight(self.frame) - 2;
+
     _indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeNone;
     
     self.trackTintColor           = [UIColor blackColor];
@@ -552,18 +556,32 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
         return;
     }
     
-    CGRect innerRect          = CGRectMake(CGRectGetMinX(rect) + 4, CGRectGetMinY(rect) + 1, CGRectGetWidth(rect) - 8, CGRectGetHeight(rect) - 2);
+    CGRect innerRect          = CGRectInset(rect, 4, 2);
     _indicatorTextLabel.frame = innerRect;
-    
-    if (CGRectGetWidth(innerRect) < CGRectGetHeight(innerRect) * 2.5)
+  
+    BOOL hasText = (_indicatorTextLabel.text != nil);
+  
+    if (!hasText)
+    {
+        _indicatorTextLabel.text = [NSString stringWithFormat:@"%.0f%%", (self.progress * 100)];
+    }
+  
+    CGRect textRect = [_indicatorTextLabel.text boundingRectWithSize:CGRectInset(innerRect, 20, 0).size
+                                                    options:NSStringDrawingUsesLineFragmentOrigin
+                                                 attributes:@{ NSFontAttributeName: _indicatorTextLabel.font }
+                                                    context:nil];
+
+    if (innerRect.size.width < textRect.size.width || innerRect.size.height + 4 < textRect.size.height)
     {
         return;
     }
-    
+  
     BOOL hasTextColor = ![_indicatorTextLabel.textColor isEqual:[UIColor clearColor]];
+  
     if (!hasTextColor)
     {
         CGColorRef backgroundColor = nil;
+      
         if (_indicatorTextDisplayMode == YLProgressBarIndicatorTextDisplayModeTrack)
         {
             backgroundColor = _trackTintColor.CGColor ?: [UIColor blackColor].CGColor;
@@ -571,18 +589,13 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
         {
             backgroundColor = (__bridge CGColorRef)[_colors lastObject];
         }
+      
         const CGFloat *components = CGColorGetComponents(backgroundColor);
         BOOL isLightBackground    = (components[0] + components[1] + components[2]) / 3.0f >= 0.5f;
         
         _indicatorTextLabel.textColor = (isLightBackground) ? [UIColor blackColor] : [UIColor whiteColor];
     }
-    
-    BOOL hasText = (_indicatorTextLabel.text != nil);
-    if (!hasText)
-    {
-        _indicatorTextLabel.text = [NSString stringWithFormat:@"%.0f%%", (self.progress * 100)];
-    }
-    
+  
     [_indicatorTextLabel drawTextInRect:innerRect];
     
     if (!hasTextColor)
