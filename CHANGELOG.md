@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 3.5.2
+
+- [UPDATE] Label display behavior
+
 ### Version 3.5.1
 
 - [FIX] Minor glitches with the gloss display
