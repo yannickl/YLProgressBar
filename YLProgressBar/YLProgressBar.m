@@ -36,6 +36,9 @@ const NSTimeInterval YLProgressBarProgressTime         = 0.25f;        // s
 // Font name
 static NSString * YLProgressBarDefaultName = @"Arial-BoldMT";
 
+// Default progress value
+const CGFloat YLProgressBarDefaultProgress = 0.3f;
+
 @interface YLProgressBar ()
 @property (nonatomic, assign) double  stripesOffset;
 @property (nonatomic, assign) CGFloat cornerRadius;
@@ -307,7 +310,7 @@ static NSString * YLProgressBarDefaultName = @"Arial-BoldMT";
     
     _type         = YLProgressBarTypeRounded;
     _hideGloss    = NO;
-    _progress     = 0.0f;
+    _progress     = YLProgressBarDefaultProgress;
     _hideStripes  = NO;
     _hideTrack    = NO;
     _behavior     = YLProgressBarBehaviorDefault;
