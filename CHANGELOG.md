@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 4.0.0
+
+- [ADD] IBDesignable/IBInspectable macros to work with interface builder more easily
+
 ### Version 3.5.2
 
 - [UPDATE] Label display behavior
