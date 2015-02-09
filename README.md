@@ -81,7 +81,7 @@ _progressBar.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModePro
 _progressBar.progressTintColors       = rainbowColors;
 ```
 
-You can also use the `UIAppearence` protocol to configure all the progress bar:
+You can also use the `UIAppearence` protocol to configure all the progress bar at once:
 
 ```objc
 [[YLProgressBar appearance] setType:YLProgressBarTypeFlat];
