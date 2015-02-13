@@ -27,7 +27,7 @@
 #import "YLProgressBar.h"
 
 // Sizes
-const NSInteger YLProgressBarSizeInset = 1; //px
+const NSInteger YLDefaultProgressBarSizeInset = 1; //px
 
 // Animation times
 const NSTimeInterval YLProgressBarStripesAnimationTime = 1.0f / 30.0f; // s
@@ -136,10 +136,10 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
     CGRect innerRect;
     if (_type == YLProgressBarTypeRounded)
     {
-        innerRect = CGRectMake(YLProgressBarSizeInset,
-                               YLProgressBarSizeInset,
-                               CGRectGetWidth(rect) * self.progress - 2 * YLProgressBarSizeInset,
-                               CGRectGetHeight(rect) - 2 * YLProgressBarSizeInset);
+        innerRect = CGRectMake(_progressBarInset,
+                               _progressBarInset,
+                               CGRectGetWidth(rect) * self.progress - 2 * _progressBarInset,
+                               CGRectGetHeight(rect) - 2 * _progressBarInset);
     } else
     {
         innerRect = CGRectMake(0, 0, CGRectGetWidth(rect) * self.progress, CGRectGetHeight(rect));
@@ -338,6 +338,7 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
     self.stripesWidth             = YLProgressBarDefaultStripeWidth;
     self.stripesDelta             = YLProgressBarDefaultStripeDelta;
     self.backgroundColor          = [UIColor clearColor];
+    self.progressBarInset         = YLDefaultProgressBarSizeInset;
 }
 
 - (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame orientation:(YLProgressBarStripesOrientation)orientation
@@ -522,7 +523,7 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
         
         NSInteger start = -_stripesWidth;
         NSInteger end   = rect.size.width / (2 * _stripesWidth) + (2 * _stripesWidth);
-        CGFloat yOffset = (_type == YLProgressBarTypeRounded) ? YLProgressBarSizeInset : 0;
+        CGFloat yOffset = (_type == YLProgressBarTypeRounded) ? _progressBarInset : 0;
       
         for (NSInteger i = start; i <= end; i++)
         {
