@@ -92,14 +92,14 @@ typedef NS_ENUM (NSUInteger, YLProgressBarBehavior)
      */
     YLProgressBarBehaviorDefault       = 0,
     /**
-     * The indeterminate behavior display the stripes when the progress value 
-     * is equal to 0 only. This mode is helpful when percentage is not yet 
-     * known, but will be known shortly.
+     * The indeterminate behavior display the stripes when the progress value is
+     * equal to 0 only. This mode is helpful when percentage is not yet known,
+     * but will be known shortly.
      */
     YLProgressBarBehaviorIndeterminate = 1,
     /**
-     * The waiting behavior display the stripes when the progress value is
-     * equal to 1 only.
+     * The waiting behavior display the stripes when the progress value is equal
+     * to 1 only.
      */
     YLProgressBarBehaviorWaiting       = 2,
 };
@@ -114,8 +114,8 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
      */
     YLProgressBarIndicatorTextDisplayModeNone     = 0,
     /**
-     * The indicator text is displayed over the track bar and below the
-     * progress bar.
+     * The indicator text is displayed over the track bar and below the progress
+     * bar.
      */
     YLProgressBarIndicatorTextDisplayModeTrack    = 1,
     /**
@@ -188,8 +188,8 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
 /** @name Configuring the Progress Bar */
 
 /**
- * @abstract A Boolean value that determines whether the gloss effet (outer and inner
- * one) is hidden.
+ * @abstract A Boolean value that determines whether the gloss effet (outer and 
+ * inner one) is hidden.
  * @discussion Setting the value of this property to YES hides the gloss effect
  * and setting it to NO shows the gloss effect whatever the progress type
  * (`YLProgressBarTypeRounded` or `YLProgressBarTypeFlat`). The value is updated
@@ -217,17 +217,17 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
 @property (nonatomic, strong) IBInspectable UIColor *trackTintColor; //UI_APPEARANCE_SELECTOR;
 
 /**
- * @abstract A CGFloat value that determines the inset between the track and
- * the progressBar for the rounded progress bar type.
+ * @abstract A CGFloat value that determines the inset between the track and the
+ * progressBar for the rounded progress bar type.
  * @discussion The default value is 1px.
  */
 @property (nonatomic, assign) IBInspectable CGFloat progressBarInset; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract A label to display some indications for the user.
- * When the label text is set to nil it shows the progress value as a
- * percentage. You can configure its font color, the font size, the text
- * alignement, etc. as any other labels.
+ * When the label text is set to nil it shows the progress value as a percentage
+ * You can configure its font color, the font size, the text alignement, etc. as
+ * any other labels.
  * @discussion By default the label text is set to nil and its text color change 
  * using the background color.
  */
@@ -283,8 +283,7 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
 
 /**
  * @abstract The width of the stripes drawn over the progress bar.
- * @discussion If the property is less or equal than 0 the sprites are
- * hidden.
+ * @discussion If the property is less or equal than 0 the sprites are hidden.
  *
  * The default value for this property is equal to the 
  * `YLProgressBarDefaultStripeWidth` value.
@@ -297,8 +296,8 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
 @property (nonatomic, strong) IBInspectable UIColor *stripesColor; //UI_APPEARANCE_SELECTOR;
 
 /**
- * @abstract The x-coordinate distance in pixels between the top point and
- * the bottom point of a slanted stripe.
+ * @abstract The x-coordinate distance in pixels between the top point and the
+ * bottom point of a slanted stripe.
  * @discussion Default value is `YLProgressBarDefaultStripeDelta`. Positive
  * integers are expected for correct effect. Has no effect when
  * stripesOrientation property is `YLProgressBarStripesOrientationVertical`.
