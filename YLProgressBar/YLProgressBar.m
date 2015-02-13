@@ -27,7 +27,7 @@
 #import "YLProgressBar.h"
 
 // Sizes
-const NSInteger YLDefaultProgressBarSizeInset = 1; //px
+const NSInteger YLProgressBarDefaultSizeInset = 1; //px
 
 // Animation times
 const NSTimeInterval YLProgressBarStripesAnimationTime = 1.0f / 30.0f; // s
@@ -337,8 +337,8 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
     self.stripesAnimationVelocity = 1;
     self.stripesWidth             = YLProgressBarDefaultStripeWidth;
     self.stripesDelta             = YLProgressBarDefaultStripeDelta;
+    self.progressBarInset         = YLProgressBarDefaultSizeInset;
     self.backgroundColor          = [UIColor clearColor];
-    self.progressBarInset         = YLDefaultProgressBarSizeInset;
 }
 
 - (UIBezierPath *)stripeWithOrigin:(CGPoint)origin bounds:(CGRect)frame orientation:(YLProgressBarStripesOrientation)orientation

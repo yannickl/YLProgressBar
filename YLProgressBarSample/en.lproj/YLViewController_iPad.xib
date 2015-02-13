@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6246"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YLViewController">
@@ -13,7 +13,6 @@
                 <outlet property="progressBarFlatWithIndicator" destination="g4I-GQ-jgW" id="K6C-L0-31w"/>
                 <outlet property="progressBarRoundedFat" destination="Aax-RT-dnT" id="VgD-8X-5ym"/>
                 <outlet property="progressBarRoundedSlim" destination="ctJ-xj-HKZ" id="F5Q-aM-yJ2"/>
-                <outlet property="progressBarRoundedSlimInsetless" destination="KWC-nM-MBU" id="rxv-Au-mEK"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
         </placeholder>
@@ -64,10 +63,6 @@
                         <action selector="percentageButtonTapped:" destination="-1" eventType="valueChanged" id="cEh-gp-II9"/>
                     </connections>
                 </segmentedControl>
-                <view contentMode="scaleToFill" id="KWC-nM-MBU" customClass="YLProgressBar">
-                    <rect key="frame" x="20" y="734" width="728" height="12"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                </view>
             </subviews>
             <color key="backgroundColor" red="0.43529411759999997" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>

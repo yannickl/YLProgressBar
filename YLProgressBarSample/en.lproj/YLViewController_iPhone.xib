@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6246"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YLViewController">
@@ -13,7 +13,6 @@
                 <outlet property="progressBarFlatWithIndicator" destination="Vka-3w-pJi" id="ofv-V3-lmW"/>
                 <outlet property="progressBarRoundedFat" destination="Z3Y-VD-3la" id="yu0-jx-heI"/>
                 <outlet property="progressBarRoundedSlim" destination="DRP-e9-Hpg" id="MoV-a2-VAC"/>
-                <outlet property="progressBarRoundedSlimInsetless" destination="QBh-7A-tSt" id="lpQ-vJ-g4Y"/>
                 <outlet property="view" destination="6" id="7"/>
             </connections>
         </placeholder>
@@ -45,11 +44,11 @@
                     </connections>
                 </segmentedControl>
                 <view contentMode="scaleToFill" id="FDt-Cn-iar" customClass="YLProgressBar">
-                    <rect key="frame" x="20" y="129" width="280" height="2"/>
+                    <rect key="frame" x="20" y="130" width="280" height="2"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </view>
                 <view contentMode="scaleToFill" id="Vka-3w-pJi" customClass="YLProgressBar">
-                    <rect key="frame" x="20" y="175" width="280" height="10"/>
+                    <rect key="frame" x="20" y="180" width="280" height="10"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="progress">
@@ -74,22 +73,21 @@
                         <userDefinedRuntimeAttribute type="number" keyPath="stripesDelta">
                             <integer key="value" value="-10"/>
                         </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="progressBarInset">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" id="M8H-xu-cxO" customClass="YLProgressBar">
-                    <rect key="frame" x="20" y="225" width="280" height="10"/>
+                    <rect key="frame" x="20" y="230" width="280" height="10"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </view>
                 <view contentMode="scaleToFill" id="DRP-e9-Hpg" customClass="YLProgressBar">
-                    <rect key="frame" x="20" y="274" width="280" height="12"/>
+                    <rect key="frame" x="20" y="280" width="280" height="12"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </view>
                 <view contentMode="scaleToFill" id="Z3Y-VD-3la" customClass="YLProgressBar">
-                    <rect key="frame" x="20" y="315" width="280" height="30"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                </view>
-                <view contentMode="scaleToFill" id="QBh-7A-tSt" customClass="YLProgressBar">
-                    <rect key="frame" x="20" y="371" width="280" height="12"/>
+                    <rect key="frame" x="20" y="330" width="280" height="30"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </view>
             </subviews>

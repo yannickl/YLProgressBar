@@ -217,6 +217,13 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
 @property (nonatomic, strong) IBInspectable UIColor *trackTintColor; //UI_APPEARANCE_SELECTOR;
 
 /**
+ * @abstract A CGFloat value that determines the inset between the track and
+ * the progressBar for the rounded progress bar type.
+ * @discussion The default value is 1px.
+ */
+@property (nonatomic, assign) IBInspectable CGFloat progressBarInset; //UI_APPEARANCE_SELECTOR;
+
+/**
  * @abstract A label to display some indications for the user.
  * When the label text is set to nil it shows the progress value as a
  * percentage. You can configure its font color, the font size, the text
@@ -311,12 +318,5 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
  * setting it to NO shows the track. The default value is NO.
  */
 @property (nonatomic, assign) IBInspectable BOOL hideTrack;
-
-/**
- * @abstract A CGFloat value that determines the inset between the track and 
- * the progressBar for the rounded progress bar type. The default value is 
- * 1px
- */
-@property (nonatomic, assign) CGFloat progressBarInset;
 
 @end
