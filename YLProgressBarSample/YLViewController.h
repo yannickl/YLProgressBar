@@ -17,6 +17,7 @@
 @property (nonatomic, strong) IBOutlet YLProgressBar      *progressBarFlatAnimated;
 @property (nonatomic, strong) IBOutlet YLProgressBar      *progressBarRoundedSlim;
 @property (nonatomic, strong) IBOutlet YLProgressBar      *progressBarRoundedFat;
+@property (nonatomic, strong) IBOutlet YLProgressBar      *progressBarRoundedSlimInsetless;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *colorsSegmented;
 
 #pragma mark Constructors - Initializers
