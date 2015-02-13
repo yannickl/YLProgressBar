@@ -21,6 +21,7 @@
 - (void)initFlatAnimatedProgressBar;
 - (void)initRoundedSlimProgressBar;
 - (void)initRoundedFatProgressBar;
+- (void)initInsetlessRoundedProgressBar;
 
 @end
 
@@ -37,16 +38,18 @@
     [self initFlatAnimatedProgressBar];
     [self initRoundedSlimProgressBar];
     [self initRoundedFatProgressBar];
+    [self initInsetlessRoundedProgressBar];
 }
 
 - (void)viewDidUnload
 {
-    self.progressBarFlatRainbow       = nil;
-    self.progressBarFlatWithIndicator = nil;
-    self.progressBarFlatAnimated      = nil;
-    self.progressBarRoundedSlim       = nil;
-    self.progressBarRoundedFat        = nil;
-    self.colorsSegmented              = nil;
+    self.progressBarFlatRainbow             = nil;
+    self.progressBarFlatWithIndicator       = nil;
+    self.progressBarFlatAnimated            = nil;
+    self.progressBarRoundedSlim             = nil;
+    self.progressBarRoundedFat              = nil;
+    self.progressBarRoundedSlimInsetless    = nil;
+    self.colorsSegmented                    = nil;
     
     [super viewDidUnload];
 }
@@ -155,6 +158,7 @@
     [_progressBarFlatAnimated setProgress:progress animated:animated];
     [_progressBarRoundedSlim setProgress:progress animated:animated];
     [_progressBarRoundedFat setProgress:progress animated:animated];
+    [_progressBarRoundedSlimInsetless setProgress:progress animated:animated];
 }
 
 - (void)initFlatRainbowProgressBar
@@ -220,6 +224,13 @@
     _progressBarRoundedFat.stripesOrientation       = YLProgressBarStripesOrientationLeft;
     _progressBarRoundedFat.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeProgress;
     _progressBarRoundedFat.indicatorTextLabel.font  = [UIFont fontWithName:@"Arial-BoldMT" size:20];
+}
+
+- (void)initInsetlessRoundedProgressBar
+{
+    _progressBarRoundedSlimInsetless.progressTintColor        = [UIColor colorWithRed:239/255.0f green:225/255.0f blue:13/255.0f alpha:1.0f];
+    _progressBarRoundedSlimInsetless.stripesColor             = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.36f];
+    _progressBarRoundedSlimInsetless.progressBarInset         = 0.f;
 }
 
 @end

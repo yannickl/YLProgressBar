@@ -312,4 +312,11 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
  */
 @property (nonatomic, assign) IBInspectable BOOL hideTrack;
 
+/**
+ * @abstract A CGFloat value that determines the inset between the track and 
+ * the progressBar for the rounded progress bar type. The default value is 
+ * 1px
+ */
+@property (nonatomic, assign) CGFloat progressBarInset;
+
 @end
