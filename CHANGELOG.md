@@ -4,6 +4,7 @@
 
 - [ADD] IBDesignable/IBInspectable macros to work with interface builder more easily
 - [ADD] `progressBarInset` property to determines the inset between the track and the track for the rounded progress bar type
+- [FIX] Cleaning deprecated apis
 
 ### Version 3.5.2
 
@@ -58,7 +59,7 @@
 
 ### Version 2.0.0
 
-- [ADD] Documentations
+- [ADD] Documentation with appledoc
 - [ADD] `progressStripeOrientation` property for the stripes orientation
 - [ADD] `progressStripeWidth` property for the stripes width
 - [UPDATE] `animated` property => `progressStripeAnimated`
