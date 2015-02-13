@@ -44,7 +44,7 @@ typedef NS_ENUM (NSUInteger, YLProgressBarType)
     /**
      * The progress bar has squared corners and no gloss.
      */
-    YLProgressBarTypeFlat = 1,
+    YLProgressBarTypeFlat    = 1,
 };
 
 /**
@@ -112,16 +112,16 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
     /**
      * The indicator text is not displayed.
      */
-    YLProgressBarIndicatorTextDisplayModeNone      = 0,
+    YLProgressBarIndicatorTextDisplayModeNone     = 0,
     /**
      * The indicator text is displayed over the track bar and below the
      * progress bar.
      */
-    YLProgressBarIndicatorTextDisplayModeTrack     = 1,
+    YLProgressBarIndicatorTextDisplayModeTrack    = 1,
     /**
      * The indicator text is diplayed over the progress bar.
      */
-    YLProgressBarIndicatorTextDisplayModeProgress  = 2,
+    YLProgressBarIndicatorTextDisplayModeProgress = 2,
 };
 
 /**
