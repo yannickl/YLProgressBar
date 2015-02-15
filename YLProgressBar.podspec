@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '5.0'
   s.license      = { :type => 'MIT', :file => 'LICENSE' } 
   s.summary      = 'UIProgressView replacement with an highly and fully customizable animated progress bar in pure Core Graphics'
-  s.homepage     = 'https://github.com/YannickL/YLProgressBar'
+  s.homepage     = 'https://github.com/yannickl/YLProgressBar'
   s.authors      = { 'Yannick Loriot' => 'http://yannickloriot.com' }
   s.source       = { :git => 'https://github.com/yannickl/YLProgressBar.git',
                      :tag => s.version.to_s }
