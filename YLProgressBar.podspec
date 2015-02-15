@@ -9,6 +9,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => 'https://github.com/yannickl/YLProgressBar.git',
                      :tag => s.version.to_s }
   s.source_files = ['YLProgressBar/YLProgressBar.{h,m}']
-  s.frameworks   = 'CoreGraphics'
+  s.frameworks   = 'UIKit', 'Foundation', 'CoreGraphics'
   s.requires_arc = true
 end
