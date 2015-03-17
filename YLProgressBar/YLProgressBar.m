@@ -186,11 +186,11 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
   
   switch (type) {
     case YLProgressBarTypeRounded:
-    _hideGloss = NO;
-    break;
+      _hideGloss = NO;
+      break;
     default:
-    _hideGloss = YES;
-    break;
+      _hideGloss = YES;
+      break;
   }
 }
 
@@ -351,20 +351,20 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
   switch (orientation)
   {
     case YLProgressBarStripesOrientationRight:
-    [rect addLineToPoint:CGPointMake(origin.x + _stripesWidth, origin.y)];
-    [rect addLineToPoint:CGPointMake(origin.x + _stripesWidth - _stripesDelta, origin.y + height)];
-    [rect addLineToPoint:CGPointMake(origin.x - _stripesDelta, origin.y + height)];
-    break;
+      [rect addLineToPoint:CGPointMake(origin.x + _stripesWidth, origin.y)];
+      [rect addLineToPoint:CGPointMake(origin.x + _stripesWidth - _stripesDelta, origin.y + height)];
+      [rect addLineToPoint:CGPointMake(origin.x - _stripesDelta, origin.y + height)];
+      break;
     case YLProgressBarStripesOrientationLeft:
-    [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth, origin.y)];
-    [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth + _stripesDelta, origin.y + height)];
-    [rect addLineToPoint:CGPointMake(origin.x + _stripesDelta, origin.y + height)];
-    break;
+      [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth, origin.y)];
+      [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth + _stripesDelta, origin.y + height)];
+      [rect addLineToPoint:CGPointMake(origin.x + _stripesDelta, origin.y + height)];
+      break;
     default:
-    [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth, origin.y)];
-    [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth, origin.y + height)];
-    [rect addLineToPoint:CGPointMake(origin.x, origin.y + height)];
-    break;
+      [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth, origin.y)];
+      [rect addLineToPoint:CGPointMake(origin.x - _stripesWidth, origin.y + height)];
+      [rect addLineToPoint:CGPointMake(origin.x, origin.y + height)];
+      break;
   }
   
   [rect addLineToPoint:origin];
@@ -563,22 +563,25 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
   CGRect innerRect          = CGRectInset(rect, 4, 2);
   _indicatorTextLabel.frame = innerRect;
   
-  BOOL hasText = (_indicatorTextLabel.text != nil);
+  NSString *indicatorText = _indicatorTextLabel.text;
+  BOOL hasText            = (_indicatorTextLabel.text != nil);
   
   if (!hasText)
   {
-    _indicatorTextLabel.text = [NSString stringWithFormat:@"%.0f%%", (self.progress * 100)];
+    indicatorText = [NSString stringWithFormat:@"%.0f%%", (self.progress * 100)];
   }
-  
-  CGRect textRect = [_indicatorTextLabel.text boundingRectWithSize:CGRectInset(innerRect, 20, 0).size
-                                                           options:NSStringDrawingUsesLineFragmentOrigin
-                                                        attributes:@{ NSFontAttributeName: _indicatorTextLabel.font }
-                                                           context:nil];
+
+  CGRect textRect = [indicatorText boundingRectWithSize:CGRectInset(innerRect, 20, 0).size
+                                                options:NSStringDrawingUsesLineFragmentOrigin
+                                             attributes:@{ NSFontAttributeName: _indicatorTextLabel.font }
+                                                context:nil];
   
   if (innerRect.size.width < textRect.size.width || innerRect.size.height + 4 < textRect.size.height)
   {
     return;
   }
+  
+  _indicatorTextLabel.text = indicatorText;
   
   BOOL hasTextColor = ![_indicatorTextLabel.textColor isEqual:[UIColor clearColor]];
   
