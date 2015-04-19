@@ -118,7 +118,7 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
   self.cornerRadius = (_type == YLProgressBarTypeRounded) ? rect.size.height / 2 : 0;
   
   // Compute the progressOffset for the stripe's animation
-  self.stripesOffset = (!_stripesAnimated || abs(self.stripesOffset) > 2 * _stripesWidth - 1) ? 0 : self.stripesDirection * abs(self.stripesAnimationVelocity) + self.stripesOffset;
+  self.stripesOffset = (!_stripesAnimated || fabs(self.stripesOffset) > 2 * _stripesWidth - 1) ? 0 : self.stripesDirection * fabs(self.stripesAnimationVelocity) + self.stripesOffset;
   
   // Draw the background track
   if (!_hideTrack)
