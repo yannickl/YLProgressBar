@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4766ABE16F5E3B4DD9535D64 /* libPods-YLProgressBarSample Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F15188879A2F6B2D00C64A8 /* libPods-YLProgressBarSample Tests.a */; };
 		C2C1E37514DEDD630047737B /* noise.png in Resources */ = {isa = PBXBuildFile; fileRef = C2C1E37414DEDD630047737B /* noise.png */; };
 		C2C1E37814DEDDB60047737B /* YLBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C1E37714DEDDB60047737B /* YLBackgroundView.m */; };
 		C2D59EFB14DED6B9009394A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2D59EFA14DED6B9009394A0 /* UIKit.framework */; };
@@ -35,8 +34,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B038C2E0569C62E3C6BAA48 /* Pods-YLProgressBarSample Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YLProgressBarSample Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YLProgressBarSample Tests/Pods-YLProgressBarSample Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		3F15188879A2F6B2D00C64A8 /* libPods-YLProgressBarSample Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YLProgressBarSample Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2C1E37414DEDD630047737B /* noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noise.png; sourceTree = "<group>"; };
 		C2C1E37614DEDDB60047737B /* YLBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLBackgroundView.h; sourceTree = "<group>"; };
 		C2C1E37714DEDDB60047737B /* YLBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLBackgroundView.m; sourceTree = "<group>"; };
@@ -60,7 +57,6 @@
 		F49F762D17988EF00035A8F1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F49F7636179896760035A8F1 /* YLProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLProgressBar.h; sourceTree = "<group>"; };
 		F49F7637179896760035A8F1 /* YLProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLProgressBar.m; sourceTree = "<group>"; };
-		F6813FCC1EF3757D19DB36B4 /* Pods-YLProgressBarSample Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YLProgressBarSample Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YLProgressBarSample Tests/Pods-YLProgressBarSample Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,22 +74,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4766ABE16F5E3B4DD9535D64 /* libPods-YLProgressBarSample Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		354A982DF5AB0F47CA908207 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				0B038C2E0569C62E3C6BAA48 /* Pods-YLProgressBarSample Tests.debug.xcconfig */,
-				F6813FCC1EF3757D19DB36B4 /* Pods-YLProgressBarSample Tests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		C2C1E36E14DEDB010047737B /* Roots */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,7 +138,6 @@
 				D9782CFD1AE295DA001B7F19 /* YLProgressBarSample Tests */,
 				C2D59EF914DED6B9009394A0 /* Frameworks */,
 				C2D59EF714DED6B9009394A0 /* Products */,
-				354A982DF5AB0F47CA908207 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -171,7 +156,6 @@
 				C2D59EFA14DED6B9009394A0 /* UIKit.framework */,
 				C2D59EFC14DED6B9009394A0 /* Foundation.framework */,
 				C2D59EFE14DED6B9009394A0 /* CoreGraphics.framework */,
-				3F15188879A2F6B2D00C64A8 /* libPods-YLProgressBarSample Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -246,11 +230,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9782D061AE295DA001B7F19 /* Build configuration list for PBXNativeTarget "YLProgressBarSample Tests" */;
 			buildPhases = (
-				0949343055BB6E7A9AC14570 /* Check Pods Manifest.lock */,
 				D9782CF81AE295DA001B7F19 /* Sources */,
 				D9782CF91AE295DA001B7F19 /* Frameworks */,
 				D9782CFA1AE295DA001B7F19 /* Resources */,
-				F99964D3B1646B615F38DBAC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -278,7 +260,7 @@
 				};
 			};
 			buildConfigurationList = C2D59EF014DED6B8009394A0 /* Build configuration list for PBXProject "YLProgressBarSample" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -316,39 +298,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0949343055BB6E7A9AC14570 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		F99964D3B1646B615F38DBAC /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YLProgressBarSample Tests/Pods-YLProgressBarSample Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C2D59EF214DED6B9009394A0 /* Sources */ = {
@@ -511,7 +460,6 @@
 		};
 		D9782D041AE295DA001B7F19 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0B038C2E0569C62E3C6BAA48 /* Pods-YLProgressBarSample Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -544,7 +492,6 @@
 		};
 		D9782D051AE295DA001B7F19 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F6813FCC1EF3757D19DB36B4 /* Pods-YLProgressBarSample Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
