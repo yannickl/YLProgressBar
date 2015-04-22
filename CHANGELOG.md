@@ -1,9 +1,10 @@
 ## Changelog
 
-### Version 4.0.0
+### Version 3.6.0
 
 - [ADD] IBDesignable/IBInspectable macros to work with interface builder more easily
 - [ADD] `progressBarInset` property to determines the inset between the track and the track for the rounded progress bar type
+- [ADD] Test project
 - [FIX] Cleaning deprecated apis
 - [FIX] Text not updating sometimes
 
