@@ -37,14 +37,14 @@
  */
 typedef NS_ENUM (NSUInteger, YLProgressBarType)
 {
-    /**
-     * The progress bar has rounded corners and the gloss effect by default.
-     */
-    YLProgressBarTypeRounded = 0,
-    /**
-     * The progress bar has squared corners and no gloss.
-     */
-    YLProgressBarTypeFlat    = 1,
+  /**
+   * The progress bar has rounded corners and the gloss effect by default.
+   */
+  YLProgressBarTypeRounded = 0,
+  /**
+   * The progress bar has squared corners and no gloss.
+   */
+  YLProgressBarTypeFlat    = 1,
 };
 
 /**
@@ -52,18 +52,18 @@ typedef NS_ENUM (NSUInteger, YLProgressBarType)
  */
 typedef NS_ENUM (NSUInteger, YLProgressBarStripesOrientation)
 {
-    /**
-     * The stripes are obliques in the north-west direction.
-     */
-    YLProgressBarStripesOrientationRight    = 0,
-    /**
-     * The stripes are obliques in the south-west direction.
-     */
-    YLProgressBarStripesOrientationLeft     = 1,
-    /**
-     * The stripes are verticals.
-     */
-    YLProgressBarStripesOrientationVertical = 2,
+  /**
+   * The stripes are obliques in the north-west direction.
+   */
+  YLProgressBarStripesOrientationRight    = 0,
+  /**
+   * The stripes are obliques in the south-west direction.
+   */
+  YLProgressBarStripesOrientationLeft     = 1,
+  /**
+   * The stripes are verticals.
+   */
+  YLProgressBarStripesOrientationVertical = 2,
 };
 
 /**
@@ -86,22 +86,22 @@ typedef NS_ENUM (NSInteger, YLProgressBarStripesDirection)
  */
 typedef NS_ENUM (NSUInteger, YLProgressBarBehavior)
 {
-    /**
-     * The default behavior of a progress bar. This mode is identical to the
-     * UIProgressView.
-     */
-    YLProgressBarBehaviorDefault       = 0,
-    /**
-     * The indeterminate behavior display the stripes when the progress value is
-     * equal to 0 only. This mode is helpful when percentage is not yet known,
-     * but will be known shortly.
-     */
-    YLProgressBarBehaviorIndeterminate = 1,
-    /**
-     * The waiting behavior display the stripes when the progress value is equal
-     * to 1 only.
-     */
-    YLProgressBarBehaviorWaiting       = 2,
+  /**
+   * The default behavior of a progress bar. This mode is identical to the
+   * UIProgressView.
+   */
+  YLProgressBarBehaviorDefault       = 0,
+  /**
+   * The indeterminate behavior display the stripes when the progress value is
+   * equal to 0 only. This mode is helpful when percentage is not yet known,
+   * but will be known shortly.
+   */
+  YLProgressBarBehaviorIndeterminate = 1,
+  /**
+   * The waiting behavior display the stripes when the progress value is equal
+   * to 1 only.
+   */
+  YLProgressBarBehaviorWaiting       = 2,
 };
 
 /**
@@ -109,23 +109,23 @@ typedef NS_ENUM (NSUInteger, YLProgressBarBehavior)
  */
 typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
 {
-    /**
-     * The indicator text is not displayed.
-     */
-    YLProgressBarIndicatorTextDisplayModeNone     = 0,
-    /**
-     * The indicator text is displayed over the track bar and below the progress
-     * bar.
-     */
-    YLProgressBarIndicatorTextDisplayModeTrack    = 1,
-    /**
-     * The indicator text is diplayed over the progress bar.
-     */
-    YLProgressBarIndicatorTextDisplayModeProgress = 2,
+  /**
+   * The indicator text is not displayed.
+   */
+  YLProgressBarIndicatorTextDisplayModeNone     = 0,
+  /**
+   * The indicator text is displayed over the track bar and below the progress
+   * bar.
+   */
+  YLProgressBarIndicatorTextDisplayModeTrack    = 1,
+  /**
+   * The indicator text is diplayed over the progress bar.
+   */
+  YLProgressBarIndicatorTextDisplayModeProgress = 2,
 };
 
 /**
- * The YLProgressBar is an UIProgressView replacement with an highly and fully 
+ * The YLProgressBar is an UIProgressView replacement with an highly and fully
  * customizable animated progress bar.
  *
  * The YLProgressBar class provides properties for managing the style of the
@@ -136,8 +136,8 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
  * indeterminate progress indicator thanks to its pre-made behaviors.
  *
  * <em>Note: The YLProgressBar is conform to the UIAppearance protocol, however,
- * because of the current version of the appledoc project, the 
- * UI_APPEARANCE_SELECTOR macros are not taken into account, that's why they 
+ * because of the current version of the appledoc project, the
+ * UI_APPEARANCE_SELECTOR macros are not taken into account, that's why they
  * are commented.</em>
  */
 IB_DESIGNABLE @interface YLProgressBar : UIView
@@ -148,10 +148,10 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
 /**
  * @abstract The current progress shown by the receiver.
  * @discussion The current progress is represented by a floating-point value
- * between 0.0 and 1.0, inclusive, where 1.0 indicates the completion of the 
+ * between 0.0 and 1.0, inclusive, where 1.0 indicates the completion of the
  * task.
  *
- * The default value is 0.3. Values less than 0.0 and greater than 1.0 are 
+ * The default value is 0.3. Values less than 0.0 and greater than 1.0 are
  * pinned to those limits.
  */
 @property (atomic, assign) IBInspectable CGFloat progress;
@@ -163,7 +163,7 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
  * @param animated YES if the change should be animated, NO if the change should
  * happen immediately.
  * @discussion The current progress is represented by a floating-point value
- * between 0.0 and 1.0, inclusive, where 1.0 indicates the completion of the 
+ * between 0.0 and 1.0, inclusive, where 1.0 indicates the completion of the
  * task.
  * The default value is 0.0. Values less than 0.0 and greater than 1.0 are
  * pinned to those limits.
@@ -188,7 +188,7 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
 /** @name Configuring the Progress Bar */
 
 /**
- * @abstract A Boolean value that determines whether the gloss effet (outer and 
+ * @abstract A Boolean value that determines whether the gloss effet (outer and
  * inner one) is hidden.
  * @discussion Setting the value of this property to YES hides the gloss effect
  * and setting it to NO shows the gloss effect whatever the progress type
@@ -228,7 +228,7 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
  * When the label text is set to nil it shows the progress value as a percentage
  * You can configure its font color, the font size, the text alignement, etc. as
  * any other labels.
- * @discussion By default the label text is set to nil and its text color change 
+ * @discussion By default the label text is set to nil and its text color change
  * using the background color.
  */
 @property (nonatomic, strong) UILabel *indicatorTextLabel;
@@ -276,7 +276,7 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
 
 /**
  * @abstract The orientation of the stripes.
- * @discussion The default value for this property is 
+ * @discussion The default value for this property is
  * `YLProgressBarStripesOrientationRight`.
  */
 @property (nonatomic, assign) IBInspectable YLProgressBarStripesOrientation stripesOrientation; //UI_APPEARANCE_SELECTOR;
@@ -285,7 +285,7 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
  * @abstract The width of the stripes drawn over the progress bar.
  * @discussion If the property is less or equal than 0 the sprites are hidden.
  *
- * The default value for this property is equal to the 
+ * The default value for this property is equal to the
  * `YLProgressBarDefaultStripeWidth` value.
  */
 @property (nonatomic, assign) IBInspectable NSInteger stripesWidth; //UI_APPEARANCE_SELECTOR;

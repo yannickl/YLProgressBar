@@ -31,7 +31,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
+
   [self initFlatRainbowProgressBar];
   [self initFlatWithIndicatorProgressBar];
   [self initFlatAnimatedProgressBar];
@@ -47,14 +47,14 @@
   self.progressBarRoundedSlim       = nil;
   self.progressBarRoundedFat        = nil;
   self.colorsSegmented              = nil;
-  
+
   [super viewDidUnload];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  
+
   [self percentageButtonTapped:_colorsSegmented];
 }
 
@@ -142,7 +142,7 @@
       [self setProgress:1.0f animated:YES];
     } break;
     default:
-    break;
+      break;
   }
 }
 
@@ -170,7 +170,7 @@
                           [UIColor colorWithRed:165/255.0f green:202/255.0f blue:60/255.0f alpha:1.0f],
                           [UIColor colorWithRed:202/255.0f green:217/255.0f blue:54/255.0f alpha:1.0f],
                           [UIColor colorWithRed:111/255.0f green:188/255.0f blue:84/255.0f alpha:1.0f]];
-  
+
   _progressBarFlatRainbow.type               = YLProgressBarTypeFlat;
   _progressBarFlatRainbow.progressTintColors = tintColors;
   _progressBarFlatRainbow.hideStripes        = YES;
@@ -215,7 +215,7 @@
                           [UIColor colorWithRed:165/255.0f green:202/255.0f blue:60/255.0f alpha:1.0f],
                           [UIColor colorWithRed:202/255.0f green:217/255.0f blue:54/255.0f alpha:1.0f],
                           [UIColor colorWithRed:111/255.0f green:188/255.0f blue:84/255.0f alpha:1.0f]];
-  
+
   _progressBarRoundedFat.progressTintColors       = tintColors;
   _progressBarRoundedFat.stripesOrientation       = YLProgressBarStripesOrientationLeft;
   _progressBarRoundedFat.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeProgress;
