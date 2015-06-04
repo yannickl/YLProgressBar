@@ -105,6 +105,13 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
   return self;
 }
 
+- (void)layoutSubviews {
+  [super layoutSubviews];
+
+  CGFloat height           = CGRectGetHeight(self.bounds) - CGRectGetHeight(self.bounds) / 3;
+  _indicatorTextLabel.font = [UIFont fontWithName:YLProgressBarDefaultName size: height];
+}
+
 - (void)drawRect:(CGRect)rect
 {
   if (self.isHidden)
@@ -321,7 +328,6 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
   _indicatorTextLabel.backgroundColor           = [UIColor clearColor];
   _indicatorTextLabel.textAlignment             = NSTextAlignmentRight;
   _indicatorTextLabel.lineBreakMode             = NSLineBreakByTruncatingHead;
-  _indicatorTextLabel.font                      = [UIFont fontWithName:YLProgressBarDefaultName size:CGRectGetHeight(self.frame) - 2];
   _indicatorTextLabel.textColor                 = [UIColor clearColor];
   _indicatorTextLabel.minimumScaleFactor        = 3;
 
