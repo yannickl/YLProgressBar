@@ -220,6 +220,7 @@
   _progressBarRoundedFat.stripesOrientation       = YLProgressBarStripesOrientationLeft;
   _progressBarRoundedFat.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeProgress;
   _progressBarRoundedFat.indicatorTextLabel.font  = [UIFont fontWithName:@"Arial-BoldMT" size:20];
+  _progressBarRoundedFat.isProgressStretch = NO;
 }
 
 @end

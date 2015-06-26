@@ -198,6 +198,23 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
 @property (nonatomic, assign) IBInspectable BOOL hideGloss;
 
 /**
+ * @abstract A Boolean value that determines whether the progress bar needs 
+ * stretch when the value change.
+ * @discussion Setting the value of this property to YES means that the colors
+ * of the `progressTintColors` is stretched.
+ *
+ * For example the `progressTintColors` is equal to `[blue, yellow, red]` and
+ * the `value` is set to 50%.
+ * If the progress bar is stretch the progress bar looks like that:
+ * `|-blue.yellow.red-----------|`
+ * Otherwise it should looks like that:
+ * `|-blue.....yellow------------|`
+ *
+ * The default value is set to YES.
+ */
+@property (nonatomic, assign) IBInspectable BOOL progressStretch;
+
+/**
  * @abstract The colors shown for the portion of the progress bar
  * that is filled.
  * @discussion All the colors in the array are drawn as a gradient

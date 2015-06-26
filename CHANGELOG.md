@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 3.7.0
+
+- [ADD] `progressStretch` property to change the gradient display behaviour (stretched or not)
+
 ### Version 3.6.0
 
 - [ADD] IBDesignable/IBInspectable macros to work with interface builder more easily
