@@ -27,7 +27,7 @@ $ touch Podfile
 $ edit Podfile
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios
-pod 'YLProgressBar', '~> 3.7.0'
+pod 'YLProgressBar', '~> 3.7.1'
 ```
 
 Install into your project:
@@ -79,6 +79,9 @@ _progressBar.type                     = YLProgressBarTypeFlat;
 _progressBar.hideStripes              = YES;
 _progressBar.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeProgress;
 _progressBar.progressTintColors       = rainbowColors;
+
+// To allow the gradient colors to fit the progress width
+_progressBar.progressStretch          = YES;
 ```
 
 You can also use the `UIAppearence` protocol to configure all the progress bar at once:
