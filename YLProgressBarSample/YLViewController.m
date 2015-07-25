@@ -127,7 +127,7 @@
     } break;
     case 1:
     {
-      [self setProgress:0.3f animated:YES];
+      [self setProgress:0.25f animated:YES];
     } break;
     case 2:
     {
@@ -135,7 +135,7 @@
     } break;
     case 3:
     {
-      [self setProgress:0.7f animated:YES];
+      [self setProgress:0.75f animated:YES];
     } break;
     case 4:
     {

@@ -41,7 +41,7 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
 
 @interface YLProgressBar ()
 @property (nonatomic, assign) double  stripesOffset;
-@property (nonatomic, assign) CGFloat cornerRadius;
+@property (nonatomic, assign) CGFloat internalCornerRadius;
 @property (nonatomic, strong) NSTimer *stripesTimer;
 @property (nonatomic, strong) NSArray *colors;
 @property (nonatomic, strong) NSTimer *progressTargetTimer;
@@ -122,7 +122,16 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
   CGContextRef context = UIGraphicsGetCurrentContext();
 
   // Refresh the corner radius value
-  self.cornerRadius = (_type == YLProgressBarTypeRounded) ? rect.size.height / 2 : 0;
+  self.internalCornerRadius = 0;
+
+  if (_type == YLProgressBarTypeRounded) {
+    if (_cornerRadius > 0) {
+      self.internalCornerRadius = _cornerRadius;
+    }
+    else {
+      self.internalCornerRadius = rect.size.height / 2;
+    }
+  }
 
   // Compute the progressOffset for the stripe's animation
   self.stripesOffset = (!_stripesAnimated || fabs(self.stripesOffset) > 2 * _stripesWidth - 1) ? 0 : self.stripesDirection * fabs(self.stripesAnimationVelocity) + self.stripesOffset;
@@ -323,6 +332,7 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
   _hideTrack       = NO;
   _behavior        = YLProgressBarBehaviorDefault;
   _stripesColor    = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.28f];
+  _cornerRadius    = 0;
 
   _indicatorTextLabel                           = [[UILabel alloc] initWithFrame:self.frame];
   _indicatorTextLabel.adjustsFontSizeToFitWidth = YES;
@@ -384,7 +394,7 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
 {
   // Define the progress bar pattern to clip all the content inside
   UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, CGRectGetWidth(rect), CGRectGetHeight(rect))
-                                                         cornerRadius:_cornerRadius];
+                                                         cornerRadius:_internalCornerRadius];
   [roundedRect addClip];
 
   CGContextSaveGState(context);
@@ -399,7 +409,7 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
     }
 
     // Draw the track
-    UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, trackWidth, trackHeight) cornerRadius:_cornerRadius];
+    UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, trackWidth, trackHeight) cornerRadius:_internalCornerRadius];
     [_trackTintColor set];
     [roundedRect fill];
 
@@ -409,7 +419,7 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
       [[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.2] set];
 
       UIBezierPath *shadow = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.5f, 0, trackWidth, trackHeight)
-                                                        cornerRadius:_cornerRadius];
+                                                        cornerRadius:_internalCornerRadius];
       [shadow stroke];
 
       if (!_hideGloss)
@@ -417,7 +427,7 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
         // Draw the inner glow
         [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4f] set];
 
-        UIBezierPath *glow = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(_cornerRadius, 0, CGRectGetWidth(rect) - _cornerRadius * 2, 1)
+        UIBezierPath *glow = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(_internalCornerRadius, 0, CGRectGetWidth(rect) - _internalCornerRadius * 2, 1)
                                                         cornerRadius:0];
         [glow stroke];
       }
@@ -434,7 +444,7 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
 
   CGContextSaveGState(context);
   {
-    UIBezierPath *progressBounds = [UIBezierPath bezierPathWithRoundedRect:innerRect cornerRadius:_cornerRadius];
+    UIBezierPath *progressBounds = [UIBezierPath bezierPathWithRoundedRect:innerRect cornerRadius:_internalCornerRadius];
     CGContextAddPath(context, [progressBounds CGPath]);
     CGContextClip(context);
 
@@ -507,7 +517,7 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
   // Draw progress bar glow
   CGContextSaveGState(context);
   {
-    UIBezierPath *progressBounds = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:_cornerRadius];
+    UIBezierPath *progressBounds = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:_internalCornerRadius];
     CGContextAddPath(context, [progressBounds CGPath]);
 
     const CGFloat progressBarGlowComponents[] = {1.0f, 1.0f, 1.0f, 0.16f};
@@ -543,7 +553,7 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
     }
 
     // Clip the progress frame
-    UIBezierPath *clipPath = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:_cornerRadius];
+    UIBezierPath *clipPath = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:_internalCornerRadius];
 
     CGContextAddPath(context, [clipPath CGPath]);
     CGContextClip(context);

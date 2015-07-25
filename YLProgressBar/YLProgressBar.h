@@ -241,6 +241,23 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
 @property (nonatomic, assign) IBInspectable CGFloat progressBarInset; //UI_APPEARANCE_SELECTOR;
 
 /**
+ * @abstract The type of the progress bar.
+ * @discussion The default value is set to `YLProgressBarTypeRounded`. The corner 
+ * radius can be configured through the `cornerRadius` property.
+ */
+@property (nonatomic, assign) IBInspectable YLProgressBarType type; //UI_APPEARANCE_SELECTOR;
+
+/**
+ * @abstract The corner radius of the progress bar.
+ * @discussion The default value is 0. It means that the corner radius is equal
+ * to the half of the height.
+ */
+@property (nonatomic, assign) IBInspectable CGFloat cornerRadius; //UI_APPEARANCE_SELECTOR;
+
+#pragma mark Displaying Text
+/** @name Displaying Text */
+
+/**
  * @abstract A label to display some indications for the user.
  * When the label text is set to nil it shows the progress value as a percentage
  * You can configure its font color, the font size, the text alignement, etc. as
@@ -257,12 +274,6 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
  * `YLProgressBarIndicatorTextDisplayModeNone`.
  */
 @property (nonatomic, assign) IBInspectable YLProgressBarIndicatorTextDisplayMode indicatorTextDisplayMode; //UI_APPEARANCE_SELECTOR;
-
-/**
- * @abstract The type of the progress bar.
- * @discussion The default value is set to `YLProgressBarTypeRounded`.
- */
-@property (nonatomic, assign) IBInspectable YLProgressBarType type; //UI_APPEARANCE_SELECTOR;
 
 #pragma mark Configuring the Stripes
 /** @name Configuring the Stripes */
