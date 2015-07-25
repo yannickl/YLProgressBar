@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 3.8.0
+
+- [ADD] Expose the `cornerRadius` property
+
 ### Version 3.7.0
 
 - [ADD] `progressStretch` property to change the gradient display behaviour (stretched or not)

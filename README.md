@@ -27,7 +27,7 @@ $ touch Podfile
 $ edit Podfile
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios
-pod 'YLProgressBar', '~> 3.7.1'
+pod 'YLProgressBar', '~> 3.8.0'
 ```
 
 Install into your project:
