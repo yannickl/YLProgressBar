@@ -119,6 +119,7 @@
 - (IBAction)percentageButtonTapped:(id)sender
 {
   UISegmentedControl *seg = (UISegmentedControl*)sender;
+  
   switch (seg.selectedSegmentIndex)
   {
     case 0:

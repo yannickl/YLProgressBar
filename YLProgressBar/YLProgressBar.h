@@ -208,7 +208,7 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
  * If the progress bar is stretch the progress bar looks like that:
  * `|-blue.yellow.red-----------|`
  * Otherwise it should looks like that:
- * `|-blue.....yellow------------|`
+ * `|-blue.....yellow-----------|`
  *
  * The default value is set to YES.
  */
