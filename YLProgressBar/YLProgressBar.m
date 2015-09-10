@@ -536,6 +536,10 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
 
 - (void)drawStripes:(CGContextRef)context withRect:(CGRect)rect
 {
+  if (_stripesWidth == 0) {
+    return;
+  }
+
   CGContextSaveGState(context);
   {
     UIBezierPath *allStripes = [UIBezierPath bezierPath];
