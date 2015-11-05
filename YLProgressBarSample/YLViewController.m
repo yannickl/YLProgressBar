@@ -7,8 +7,7 @@
 //
 
 #import "YLViewController.h"
-
-#import "YLProgressBar.h"
+#import <YLProgressBar/YLProgressBar.h>
 
 @interface YLViewController ()
 
@@ -84,7 +83,7 @@
   return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
   if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
   {
