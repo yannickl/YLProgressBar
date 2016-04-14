@@ -31,7 +31,7 @@ $ touch Podfile
 $ edit Podfile
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios
-pod 'YLProgressBar', '~> 3.8.0'
+pod 'YLProgressBar', '~> 3.8.1'
 ```
 
 Install into your project:
@@ -115,7 +115,7 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in<br />
 all copies or substantial portions of the Software.
- 
+
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR<br />
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,<br />
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE<br />
