@@ -594,10 +594,14 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
     indicatorText = [NSString stringWithFormat:@"%.0f%%", (self.progress * 100)];
   }
 
-  CGRect textRect = [indicatorText boundingRectWithSize:CGRectInset(innerRect, 20, 0).size
-                                                options:NSStringDrawingUsesLineFragmentOrigin
-                                             attributes:@{ NSFontAttributeName: _indicatorTextLabel.font }
-                                                context:nil];
+    CGRect textRect;
+    if ([indicatorText respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)])
+    {
+        textRect = [indicatorText boundingRectWithSize:CGRectInset(innerRect, 20, 0).size
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                            attributes:@{ NSFontAttributeName: _indicatorTextLabel.font }
+                                               context:nil];
+    }
 
   if (innerRect.size.width < textRect.size.width || innerRect.size.height + 4 < textRect.size.height)
   {
