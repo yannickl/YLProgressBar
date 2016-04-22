@@ -347,3 +347,9 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
 @property (nonatomic, assign) IBInspectable BOOL hideTrack;
 
 @end
+
+//! Project version number for YLProgressBar.
+FOUNDATION_EXPORT double YLProgressBarVersionNumber;
+
+//! Project version string for YLProgressBar.
+FOUNDATION_EXPORT const unsigned char YLProgressBarVersionString[];
