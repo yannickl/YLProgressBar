@@ -220,18 +220,18 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
  * @discussion All the colors in the array are drawn as a gradient
  * visual of equal size.
  */
-@property (nonatomic, strong) NSArray *progressTintColors; //UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong, nonnull) NSArray *progressTintColors; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The color shown for the portion of the progress bar that is filled.
  */
-@property (nonatomic, strong) IBInspectable UIColor *progressTintColor; //UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong, nonnull) IBInspectable UIColor *progressTintColor; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The color shown for the portion of the progress bar that is not
  * filled.
  */
-@property (nonatomic, strong) IBInspectable UIColor *trackTintColor; //UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong, nonnull) IBInspectable UIColor *trackTintColor; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract A CGFloat value that determines the inset between the track and the
@@ -265,7 +265,7 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
  * @discussion By default the label text is set to nil and its text color change
  * using the background color.
  */
-@property (nonatomic, strong) UILabel *indicatorTextLabel;
+@property (nonatomic, strong, nonnull) UILabel *indicatorTextLabel;
 
 /**
  * @abstract The display indicator text mode. It defines where the indicator
@@ -321,7 +321,7 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
 /**
  * @abstract The color show for the stripes over the progress bar.
  */
-@property (nonatomic, strong) IBInspectable UIColor *stripesColor; //UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong, nonnull) IBInspectable UIColor *stripesColor; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The x-coordinate distance in pixels between the top point and the

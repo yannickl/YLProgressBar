@@ -321,7 +321,7 @@
 		C2D59EED14DED6B8009394A0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Yannick Loriot";
 				TargetAttributes = {
 					343AB4411CC9A82500962943 = {
@@ -576,6 +576,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -643,6 +644,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "YLProgressBarSample/YLProgressBarSample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yannickloriot.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = YLProgressBarSample;
 				WRAPPER_EXTENSION = app;
 			};
@@ -657,6 +659,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "YLProgressBarSample/YLProgressBarSample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yannickloriot.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = YLProgressBarSample;
 				WRAPPER_EXTENSION = app;
 			};
@@ -690,6 +693,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yannickloriot.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YLProgressBarSample.app/YLProgressBarSample";
 			};
@@ -720,6 +724,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yannickloriot.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YLProgressBarSample.app/YLProgressBarSample";
 			};
@@ -735,6 +740,7 @@
 				343AB4481CC9A82500962943 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C2D59EF014DED6B8009394A0 /* Build configuration list for PBXProject "YLProgressBarSample" */ = {
 			isa = XCConfigurationList;
