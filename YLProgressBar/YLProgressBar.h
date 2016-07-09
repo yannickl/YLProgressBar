@@ -122,6 +122,11 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
    * The indicator text is diplayed over the progress bar.
    */
   YLProgressBarIndicatorTextDisplayModeProgress = 2,
+  /**
+   * The indicator text is displayed over the track bar and over the progress
+   * bar in the right.
+   */
+  YLProgressBarIndicatorTextDisplayModeFixedRight = 3
 };
 
 /**

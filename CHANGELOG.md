@@ -1,5 +1,10 @@
 ## Changelog
 
+### Version 3.9.0
+
+- [UPDATE] Supports Xcode 7.3
+- [ADD] `YLProgressBarIndicatorTextDisplayModeFixedRight` for the `indicatorTextDisplayMode`.
+
 ### Version 3.8.0
 
 - [ADD] Expose the `cornerRadius` property
@@ -86,4 +91,3 @@
 - [CocoaPods](http://cocoapods.org/) integration
 - `progressTintColor` property to change the progress color
 - `animated` property to enable/disable the stripes animation
-

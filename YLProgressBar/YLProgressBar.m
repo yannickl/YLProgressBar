@@ -193,6 +193,12 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
       [self drawText:context withRect:innerRect];
     }
   }
+
+  // Draw the indicator text if necessary
+  if (_indicatorTextDisplayMode == YLProgressBarIndicatorTextDisplayModeFixed)
+  {
+    [self drawText:context withRect:rect];
+  }
 }
 
 #pragma mark - Properties
