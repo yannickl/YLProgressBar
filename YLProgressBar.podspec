@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'YLProgressBar'
-  s.version          = '3.8.1'
+  s.version          = '3.9.0'
   s.platform         = :ios, '5.0'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.summary          = 'UIProgressView replacement with an highly and fully customizable animated progress bar in pure Core Graphics'

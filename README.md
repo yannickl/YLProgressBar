@@ -8,49 +8,9 @@ The `YLProgressBar` is an UIProgressView replacement with an highly and fully cu
 
 ![](https://github.com/YannickL/YLProgressBar/raw/master/web/YLProgressBar.gif)
 
-It has been implemented using the Core Graphics framework without any images. So it can be customize freely and independently the plateform.
+It has been implemented using the Core Graphics framework without any images. So it can be customize freely and independently the platform.
 
-Installation
-============
-
-The recommended approach to use the _YLProgressBar_ in your project is using the [CocoaPods](http://cocoapods.org/) package manager, as it provides flexible dependency management and dead simple installation.
-
-#### CocoaPods
-
-Install CocoaPods if not already available:
-
-``` bash
-$ [sudo] gem install cocoapods
-$ pod setup
-```
-Go to the directory of your Xcode project, and Create and Edit your Podfile and add YLProgressBar:
-
-``` bash
-$ cd /path/to/MyProject
-$ touch Podfile
-$ edit Podfile
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios
-pod 'YLProgressBar', '~> 3.8.1'
-```
-
-Install into your project:
-
-``` bash
-$ pod install
-```
-
-Open your project in Xcode from the .xcworkspace file (not the usual project file)
-
-``` bash
-$ open MyProject.xcworkspace
-```
-
-#### Manually
-
-[Download](https://github.com/YannickL/YLProgressBar/archive/master.zip) the project and copy the `YLProgressBar` folder into your project and then simply `#import "YLProgressBar.h"` in the file(s) you would like to use it in.
-
-# How To Use
+## Usage
 
 Here are some examples to show you how the `YLProgressBar` can be configured:
 
@@ -95,31 +55,69 @@ You can also use the `UIAppearence` protocol to configure all the progress bar a
 [[YLProgressBar appearance] setProgressTintColor:[UIColor blueColor]];
 ```
 
+## Installation
+
+The recommended approach to use the _YLProgressBar_ in your project is using the [CocoaPods](http://cocoapods.org/) package manager, as it provides flexible dependency management and dead simple installation.
+
+#### CocoaPods
+
+Install CocoaPods if not already available:
+
+``` bash
+$ [sudo] gem install cocoapods
+$ pod setup
+```
+Go to the directory of your Xcode project, and Create and Edit your Podfile and add YLProgressBar:
+
+``` bash
+$ cd /path/to/MyProject
+$ touch Podfile
+$ edit Podfile
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios
+pod 'YLProgressBar', '~> 3.9.0'
+```
+
+Install into your project:
+
+``` bash
+$ pod install
+```
+
+Open your project in Xcode from the .xcworkspace file (not the usual project file)
+
+``` bash
+$ open MyProject.xcworkspace
+```
+
+#### Manually
+
+[Download](https://github.com/YannickL/YLProgressBar/archive/master.zip) the project and copy the `YLProgressBar` folder into your project and then simply `#import "YLProgressBar.h"` in the file(s) you would like to use it in.
+
 ## Contact
 
 Yannick Loriot
  - [https://twitter.com/yannickloriot](https://twitter.com/yannickloriot)
  - [contact@yannickloriot.com](mailto:contact@yannickloriot.com)
 
-License
-====================
-Copyright 2012 - present, Yannick Loriot.<br />
+## License
+Copyright 2012 - present, Yannick Loriot.
 http://yannickloriot.com
 
-Permission is hereby granted, free of charge, to any person obtaining a copy<br />
-of this software and associated documentation files (the "Software"), to deal<br />
-in the Software without restriction, including without limitation the rights<br />
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell<br />
-copies of the Software, and to permit persons to whom the Software is<br />
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in<br />
+The above copyright notice and this permission notice shall be included in
 all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR<br />
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,<br />
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE<br />
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER<br />
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,<br />
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN<br />
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.

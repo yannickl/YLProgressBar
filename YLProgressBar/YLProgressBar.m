@@ -195,7 +195,7 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
   }
 
   // Draw the indicator text if necessary
-  if (_indicatorTextDisplayMode == YLProgressBarIndicatorTextDisplayModeFixed)
+  if (_indicatorTextDisplayMode == YLProgressBarIndicatorTextDisplayModeFixedRight)
   {
     [self drawText:context withRect:rect];
   }
