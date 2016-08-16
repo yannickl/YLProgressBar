@@ -236,16 +236,31 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
   [self setNeedsDisplay];
 }
 
+- (void)setUniformTintColor:(BOOL)isUniformTintColor
+{
+  _uniformTintColor = isUniformTintColor;
+
+  [self setProgressTintColor:_progressTintColor];
+}
+
 - (void)setProgressTintColor:(UIColor *)progressTintColor
 {
-  progressTintColor = (progressTintColor) ? progressTintColor : [UIColor blueColor];
+  progressTintColor  = (progressTintColor) ? progressTintColor : [UIColor blueColor];
+  _progressTintColor = progressTintColor;
 
-  const CGFloat *c    = CGColorGetComponents(progressTintColor.CGColor);
-  UIColor *leftColor  = [UIColor colorWithRed:(c[0] / 2.0f) green:(c[1] / 2.0f) blue:(c[2] / 2.0f) alpha:(c[3])];
-  UIColor *rightColor = progressTintColor;
-  NSArray *colors     = @[leftColor, rightColor];
+  if (_uniformTintColor)
+  {
+    [self setProgressTintColors:@[_progressTintColor, _progressTintColor]];
+  }
+  else
+  {
+    const CGFloat *c    = CGColorGetComponents(progressTintColor.CGColor);
+    UIColor *leftColor  = [UIColor colorWithRed:(c[0] / 2.0f) green:(c[1] / 2.0f) blue:(c[2] / 2.0f) alpha:(c[3])];
+    UIColor *rightColor = progressTintColor;
+    NSArray *colors     = @[leftColor, rightColor];
 
-  [self setProgressTintColors:colors];
+    [self setProgressTintColors:colors];
+  }
 }
 
 - (void)setProgressTintColors:(NSArray *)progressTintColors

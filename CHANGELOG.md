@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 3.10.0
+
+- [ADD] `uniformTintColor` property
+
 ### Version 3.9.0
 
 - [UPDATE] Supports Xcode 7.3

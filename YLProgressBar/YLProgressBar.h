@@ -220,6 +220,12 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
 @property (nonatomic, assign) IBInspectable BOOL progressStretch;
 
 /**
+ * @abstract Set whether the color shown for the portion of the progress bar that is uniform.
+ * @discussion The default value is NO.
+ */
+@property (nonatomic, assign) IBInspectable BOOL uniformTintColor; //UI_APPEARANCE_SELECTOR;
+
+/**
  * @abstract The colors shown for the portion of the progress bar
  * that is filled.
  * @discussion All the colors in the array are drawn as a gradient
