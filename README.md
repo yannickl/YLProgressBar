@@ -2,7 +2,7 @@
   <img src="https://github.com/YannickL/YLProgressBar/raw/master/web/ylprogressbar_header.png" alt="YLProgressBar" />
 </p>
 
-[![License](https://cocoapod-badges.herokuapp.com/l/YLProgressBar/badge.svg)](http://cocoadocs.org/docsets/YLProgressBar/) [![Supported Platforms](https://cocoapod-badges.herokuapp.com/p/YLProgressBar/badge.svg)](http://cocoadocs.org/docsets/YLProgressBar/) [![Version](https://cocoapod-badges.herokuapp.com/v/YLProgressBar/badge.svg)](http://cocoadocs.org/docsets/YLProgressBar/)
+[![Supported Platforms](https://cocoapod-badges.herokuapp.com/p/YLProgressBar/badge.svg)](http://cocoadocs.org/docsets/YLProgressBar/) [![Version](https://cocoapod-badges.herokuapp.com/v/YLProgressBar/badge.svg)](http://cocoadocs.org/docsets/YLProgressBar/)
 
 The `YLProgressBar` is an UIProgressView replacement with an highly and fully customizable animated progress bar in pure Core Graphics
 
