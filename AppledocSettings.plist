@@ -20,7 +20,7 @@
 	<key>--project-name</key>
 	<string>YLProgressBar</string>
 	<key>--project-version</key>
-	<string>3.10.0</string>
+	<string>3.10.1</string>
 	<key>--docset-feed-url</key>
 	<string>http://yannickloriot.com/library/ios/ylprogressbar/</string>
 	<key>--docset-package-url</key>
