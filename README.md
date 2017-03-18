@@ -98,6 +98,10 @@ $ open MyProject.xcworkspace
 
 [Download](https://github.com/YannickL/YLProgressBar/archive/master.zip) the project and copy the `YLProgressBar` folder into your project and then simply `#import "YLProgressBar.h"` in the file(s) you would like to use it in.
 
+## Contribution
+
+Contributions are welcomed and encouraged *♡*.
+
 ## Contact
 
 Yannick Loriot
