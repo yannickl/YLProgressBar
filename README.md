@@ -11,7 +11,7 @@ The `YLProgressBar` is an UIProgressView replacement with an highly and fully cu
 It has been implemented using the Core Graphics framework without any images. So it can be customize freely and independently the platform.
 
 <p align="center">
-    <a href="#usage">Usage</a> • <a href="#installation">Installation</a> • <a href="#contact">Contact</a> • <a href="#license-mit">License</a>
+    <a href="#usage">Usage</a> • <a href="#installation">Installation</a> • <a href="#contribution">Contribution</a> • <a href="#contact">Contact</a> • <a href="#license-mit">License</a>
 </p>
 
 ## Usage
