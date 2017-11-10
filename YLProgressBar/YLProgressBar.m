@@ -254,8 +254,9 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
   }
   else
   {
-    const CGFloat *c    = CGColorGetComponents(progressTintColor.CGColor);
-    UIColor *leftColor  = [UIColor colorWithRed:(c[0] / 2.0f) green:(c[1] / 2.0f) blue:(c[2] / 2.0f) alpha:(c[3])];
+    CGFloat red, green, blue, alpha;
+    [progressTintColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    UIColor *leftColor  = [UIColor colorWithRed:(red / 2.0f) green:(green / 2.0f) blue:(blue / 2.0f) alpha:alpha];
     UIColor *rightColor = progressTintColor;
     NSArray *colors     = @[leftColor, rightColor];
 
