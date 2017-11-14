@@ -7,11 +7,11 @@
   <a href="http://cocoadocs.org/docsets/YLProgressBar/"><img alt="Version" src="https://cocoapod-badges.herokuapp.com/v/YLProgressBar/badge.svg"/></a>
 </p>
 
-The **YLProgressBar** is an UIProgressView replacement with an highly and fully customizable animated progress bar in pure Core Graphics
+The **YLProgressBar** is an UIProgressView replacement with a highly and fully customizable animated progress bar in pure Core Graphics.
 
 ![](https://github.com/YannickL/YLProgressBar/raw/master/web/YLProgressBar.gif)
 
-It has been implemented using the Core Graphics framework without any images. So it can be customize freely and independently the platform.
+It has been implemented using the Core Graphics framework without any images. So it can be customized freely and independently on the platform.
 
 <p align="center">
     <a href="#usage">Usage</a> • <a href="#installation">Installation</a> • <a href="#contribution">Contribution</a> • <a href="#contact">Contact</a> • <a href="#license-mit">License</a>
@@ -55,7 +55,7 @@ _progressBar.progressTintColors       = rainbowColors;
 _progressBar.progressStretch          = YES;
 ```
 
-You can also use the `UIAppearence` protocol to configure all the progress bar at once:
+You can also use the `UIAppearence` protocol to configure all the progress bars at once:
 
 ```objc
 [[YLProgressBar appearance] setType:YLProgressBarTypeFlat];
