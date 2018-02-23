@@ -203,7 +203,16 @@ IB_DESIGNABLE @interface YLProgressBar : UIView
 @property (nonatomic, assign) IBInspectable BOOL hideGloss;
 
 /**
- * @abstract A Boolean value that determines whether the progress bar needs 
+ * @abstract A Boolean value that determines whether the white inner shadow is hidden.
+ * @discussion Setting the value of this property to YES hides the shadow effect
+ * and setting it to NO shows the shadow effect when the progress type is
+ * `YLProgressBarTypeRounded`.
+ * The default value is set to NO.
+ */
+@property (nonatomic, assign) IBInspectable BOOL hideInnerWhiteShadow;
+    
+/**
+ * @abstract A Boolean value that determines whether the progress bar needs
  * stretch when the value change.
  * @discussion Setting the value of this property to YES means that the colors
  * of the `progressTintColors` is stretched.
