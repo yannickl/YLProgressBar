@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 3.11.0
+
+- [ADD] `hideInnerWhiteShadow` property to hide the inner white shadow on rounded type (#62).
+
 ### Version 3.10.0
 
 - [ADD] `uniformTintColor` property
