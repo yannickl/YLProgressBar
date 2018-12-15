@@ -67,6 +67,9 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
 /** Callback for the setProgress:Animated: animation timer. */
 - (void)updateProgressWithTimer:(NSTimer *)timer;
 
+/** Manages the stripes timer life cycle. */
+- (void)updateStripesTimer;
+
 @end
 
 @implementation YLProgressBar
@@ -74,6 +77,7 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
 
 - (void)dealloc
 {
+  NSLog(@"dealloc !!!");
   if (_stripesTimer && [_stripesTimer isValid])
   {
     [_stripesTimer invalidate];
@@ -110,6 +114,25 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
 
   CGFloat height           = CGRectGetHeight(self.bounds) - CGRectGetHeight(self.bounds) / 3;
   _indicatorTextLabel.font = [UIFont fontWithName:YLProgressBarDefaultName size: height];
+}
+
+- (void)removeFromSuperview {
+  [super removeFromSuperview];
+
+  if (_stripesTimer && [_stripesTimer isValid])
+  {
+    [_stripesTimer invalidate];
+  }
+  if (_progressTargetTimer && [_progressTargetTimer isValid])
+  {
+    [_progressTargetTimer invalidate];
+  }
+}
+
+- (void)didMoveToSuperview {
+  [super didMoveToSuperview];
+
+  [self updateStripesTimer];
 }
 
 - (void)drawRect:(CGRect)rect
@@ -673,26 +696,30 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
 {
   if ([keyPath isEqualToString:@"hideStripes"] || [keyPath isEqualToString:@"stripesAnimated"])
   {
-    if (!_hideStripes && _stripesAnimated)
+    [self updateStripesTimer];
+  }
+}
+
+- (void)updateStripesTimer {
+  if (!_hideStripes && _stripesAnimated)
+  {
+    if (_stripesTimer == nil && [self superview] != nil)
     {
-      if (_stripesTimer == nil)
-      {
-        _stripesTimer= [NSTimer timerWithTimeInterval:YLProgressBarStripesAnimationTime
-                                               target:self
-                                             selector:@selector(setNeedsDisplay)
-                                             userInfo:nil
-                                              repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:_stripesTimer forMode:NSRunLoopCommonModes];
-      }
-    } else
-    {
-      if (_stripesTimer && [_stripesTimer isValid])
-      {
-        [_stripesTimer invalidate];
-      }
-      
-      self.stripesTimer = nil;
+      _stripesTimer = [NSTimer timerWithTimeInterval:YLProgressBarStripesAnimationTime
+                                              target:self
+                                            selector:@selector(setNeedsDisplay)
+                                            userInfo:nil
+                                             repeats:YES];
+      [[NSRunLoop currentRunLoop] addTimer:_stripesTimer forMode:NSRunLoopCommonModes];
     }
+  } else
+  {
+    if (_stripesTimer && [_stripesTimer isValid])
+    {
+      [_stripesTimer invalidate];
+    }
+
+    self.stripesTimer = nil;
   }
 }
 

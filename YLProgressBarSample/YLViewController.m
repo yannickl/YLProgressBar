@@ -39,18 +39,6 @@
   [self initRoundedFatProgressBar];
 }
 
-- (void)viewDidUnload
-{
-  self.progressBarFlatRainbow       = nil;
-  self.progressBarFlatWithIndicator = nil;
-  self.progressBarFlatAnimated      = nil;
-  self.progressBarRoundedSlim       = nil;
-  self.progressBarRoundedFat        = nil;
-  self.colorsSegmented              = nil;
-
-  [super viewDidUnload];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
@@ -100,26 +88,13 @@
   return UIInterfaceOrientationPortrait;
 }
 
-// For iOS5 and older
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-  // Return YES for supported orientations
-  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-  {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-  } else
-  {
-    return YES;
-  }
-}
-
 #pragma mark -
 #pragma mark YLViewController Public Methods
 
 - (IBAction)percentageButtonTapped:(id)sender
 {
   UISegmentedControl *seg = (UISegmentedControl*)sender;
-  
+
   switch (seg.selectedSegmentIndex)
   {
     case 0:
