@@ -327,8 +327,13 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
 
     if (animated)
     {
-      _progressTargetValue     = newProgress;
-      CGFloat incrementValue   = ((_progressTargetValue - _progress) * YLProgressBarStripesAnimationTime) / YLProgressBarProgressTime;
+      _progressTargetValue   = newProgress;
+      CGFloat incrementValue = ((_progressTargetValue - _progress) * YLProgressBarStripesAnimationTime) / YLProgressBarProgressTime;
+
+      if (incrementValue == 0) {
+        return;
+      }
+
       self.progressTargetTimer = [NSTimer timerWithTimeInterval:YLProgressBarStripesAnimationTime
                                                          target:self
                                                        selector:@selector(updateProgressWithTimer:)
