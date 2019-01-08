@@ -9,7 +9,9 @@
 
 The **YLProgressBar** is an UIProgressView replacement with a highly and fully customizable animated progress bar in pure Core Graphics.
 
-![](https://github.com/YannickL/YLProgressBar/raw/master/web/YLProgressBar.gif)
+<p align="center">
+  <img src="https://github.com/YannickL/YLProgressBar/raw/master/web/YLProgressBar.gif" alt="YLProgressBar" />
+</p>
 
 It has been implemented using the Core Graphics framework without any images. So it can be customized freely and independently on the platform.
 
